@@ -43,28 +43,30 @@ export default function HeroSection() {
 
   return (
     <section className="w-full min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
-      <motion.div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `url(${heroContents[currentIndex].background})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-        key={currentIndex}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 1 }}
-      />
+      <AnimatePresence>
+        <motion.div
+          key={currentIndex}
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url(${heroContents[currentIndex].background})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.1 }}
+          transition={{ duration: 1 }}
+        />
+      </AnimatePresence>
 
-      <div className="absolute inset-0 bg-black opacity-50" />
+      <div className="absolute inset-0 bg-black opacity-60" />
 
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between relative z-10">
         <motion.div
-          className="lg:w-1/2 text-white mb-8 lg:mb-0"
+          className="lg:w-1/2 text-white mb-8 lg:mb-0 space-y-4"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -74,62 +76,77 @@ export default function HeroSection() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="text-4xl lg:text-6xl font-bold mb-4">
+              <motion.h1
+                className="text-4xl lg:text-6xl font-bold mb-4"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
                 {heroContents[currentIndex].title}
-              </h1>
-              <p className="text-xl lg:text-2xl mb-8">
+              </motion.h1>
+              <motion.p
+                className="text-xl lg:text-2xl mb-8"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
                 {heroContents[currentIndex].description}
-              </p>
+              </motion.p>
             </motion.div>
           </AnimatePresence>
 
-          <button
+          <motion.button
             href="#_"
-            class="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-main transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group"
+            className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-main transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group"
+            whileHover={{ scale: 1.05, boxShadow: "0px 0px 15px rgba(255, 255, 255, 0.5)" }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
           >
-            <span class="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-main group-hover:h-full"></span>
-            <span class="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
+            <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-main group-hover:h-full"></span>
+            <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
               <svg
-                class="w-5 h-5 text-main"
+                className="w-5 h-5 text-main"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M14 5l7 7m0 0l-7 7m7-7H3"
                 ></path>
               </svg>
             </span>
-            <span class="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
+            <span className="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
               <svg
-                class="w-5 h-5 text-white"
+                className="w-5 h-5 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M14 5l7 7m0 0l-7 7m7-7H3"
                 ></path>
               </svg>
             </span>
-            <span class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">
-              Explore Now
+            <span className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">
+              Contact Now
             </span>
-          </button>
+          </motion.button>
         </motion.div>
+
         <motion.div
           className="lg:w-1/2 flex justify-center"
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -137,7 +154,8 @@ export default function HeroSection() {
               initial={{ opacity: 0, rotateY: -180 }}
               animate={{ opacity: 1, rotateY: 0 }}
               exit={{ opacity: 0, rotateY: 180 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6 }}
+              className="relative overflow-hidden mask-effect" // Add a mask-effect class for styling
             >
               <Image
                 src={heroContents[currentIndex].image}
@@ -150,6 +168,13 @@ export default function HeroSection() {
           </AnimatePresence>
         </motion.div>
       </div>
+
+      <style jsx>{`
+        .mask-effect {
+          mask-image: radial-gradient(circle, white 60%, transparent 100%);
+          -webkit-mask-image: radial-gradient(circle, white 60%, transparent 100%);
+        }
+      `}</style>
     </section>
   );
 }

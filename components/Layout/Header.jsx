@@ -25,6 +25,7 @@ const Navbar = () => {
   const { pathname } = router;
 
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const isActiveLink = (href) => pathname === href;
 
@@ -34,16 +35,17 @@ const Navbar = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
+    setIsLoaded(true);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
       className={`sticky top-0 z-50 transition-all duration-300 
-        ${isScrolled ? 'shadow-md py-3 px-4 lg:px-8 bg-gray-50' : 'py-4 px-4 lg:px-12 bg-gradient-to-r from-gray-100 to-white'}`}
+        ${isScrolled ? 'shadow-md py-3 px-4 lg:px-8 bg-gray-50' : 'py-4 px-4 lg:px-12 bg-gradient-to-r from-gray-100 to-white'}  ${
+          isLoaded ? "animate-navbar" : "opacity-0"
+        }`}
     >
       <div className="flex items-center justify-between">
         <Link href="/" className="font-bold text-lg">
