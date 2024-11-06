@@ -155,7 +155,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, rotateY: 0 }}
               exit={{ opacity: 0, rotateY: 180 }}
               transition={{ duration: 0.6 }}
-              className="relative overflow-hidden mask-effect" // Add a mask-effect class for styling
+              className="relative overflow-hidden mask-effect"
             >
               <Image
                 src={heroContents[currentIndex].image}
