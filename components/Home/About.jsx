@@ -1,36 +1,54 @@
-'use client'
+"use client";
 
-import { Fade, Zoom } from 'react-awesome-reveal'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Lightbulb, Shield, Zap } from 'lucide-react'
+import { Fade, Zoom } from "react-awesome-reveal";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Lightbulb, Shield, Zap } from "lucide-react";
 
 const ABOUT_CARDS = [
   {
     icon: <Zap className="mr-2" />,
     title: "Our Background",
-    description: "Founded in 1985, PowerSwitch Industries has led the industry in innovation for over three decades."
+    description:
+      "Founded in 1985, PowerSwitch Industries has led the industry in innovation for over three decades.",
   },
   {
     icon: <Shield className="mr-2" />,
     title: "Experience & Expertise",
-    description: "With over 35 years of experience, our skilled team is unmatched in the industry."
+    description:
+      "With over 35 years of experience, our skilled team is unmatched in the industry.",
   },
   {
     icon: <Lightbulb className="mr-2" />,
     title: "Innovation",
-    description: "Our R&D department pushes the boundaries, continuously enhancing power distribution solutions."
-  }
-]
+    description:
+      "Our R&D department pushes the boundaries, continuously enhancing power distribution solutions.",
+  },
+];
 
-const VALUES = ["Quality", "Innovation", "Safety", "Sustainability", "Customer-Centric", "Integrity"]
+const VALUES = [
+  "Quality",
+  "Innovation",
+  "Safety",
+  "Sustainability",
+  "Customer-Centric",
+  "Integrity",
+];
 
 export default function AboutUs() {
   return (
-    <div className="container mx-auto px-4 md:px-8 lg:px-12 py-16">
+    <div className="container mx-auto px-4 md:px-8 lg:px-12 pt-16 pb-4">
       <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
-        <header className="text-center mb-16">
-          <h1 className="text-5xl font-extrabold mb-4">About PowerSwitch Industries</h1>
+        <header className="text-center mb-12">
+          <h1 className="text-5xl font-extrabold mb-4">
+            About PowerSwitch Industries
+          </h1>
           <p className="text-2xl text-gray-600">
             Powering the Future with Innovative Switchgear Solutions
           </p>
@@ -96,5 +114,5 @@ export default function AboutUs() {
         </section>
       </Fade>
     </div>
-  )
+  );
 }

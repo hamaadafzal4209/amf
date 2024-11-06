@@ -4,10 +4,10 @@ import ProductShowcase from "@/components/Home/Products";
 
 export default function Home() {
   return (
-  <div>
-    <HeroSection/>
-    <AboutUs/>
-    <ProductShowcase/>
-  </div>
+    <div>
+      <HeroSection />
+      <AboutUs />
+      <ProductShowcase />
+    </div>
   );
 }
