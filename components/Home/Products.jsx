@@ -188,7 +188,7 @@ export default function ProductShowcase() {
                         </div>
                         <div className="flex flex-wrap gap-2">
                           {product.features.map((feature, index) => (
-                            <Badge key={index} variant="secondary">
+                            <Badge key={index} variant="secondary" className='bg-gray-100 hover:bg-main hover:text-white'>
                               {feature}
                             </Badge>
                           ))}

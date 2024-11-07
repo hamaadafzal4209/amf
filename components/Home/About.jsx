@@ -46,10 +46,10 @@ export default function AboutUs() {
     <div className="container mx-auto px-4 md:px-8 lg:px-12 pt-16 pb-4">
       <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
         <header className="text-center mb-12">
-          <h1 className="text-5xl font-extrabold mb-4">
+          <h1 className="text-3xl font-bold mb-4 text-center">
             About PowerSwitch Industries
           </h1>
-          <p className="text-2xl text-gray-600">
+          <p className="max-w-3xl mx-auto text-muted-foreground text-center mb-12">
             Powering the Future with Innovative Switchgear Solutions
           </p>
         </header>

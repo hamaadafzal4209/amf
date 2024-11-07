@@ -51,6 +51,7 @@ export default function HeroSection() {
             backgroundImage: `url(${heroContents[currentIndex].background})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
+            backgroundAttachment: 'fixed'
           }}
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
