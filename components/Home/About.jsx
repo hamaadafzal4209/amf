@@ -76,27 +76,6 @@ export default function AboutUs() {
         </Fade>
       </section>
 
-      <Zoom triggerOnce duration={1000}>
-        <section className="mb-8">
-          <Card className="hover:shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-2xl">Our Mission</CardTitle>
-              <CardDescription className="text-gray-500">
-                Empowering a brighter future through innovative power solutions
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="list-disc list-inside text-gray-600 space-y-2">
-                <li>Deliver reliable and efficient switchgear solutions</li>
-                <li>Prioritize safety in all our products and operations</li>
-                <li>Contribute to sustainable energy practices</li>
-                <li>Foster innovation in power distribution technology</li>
-              </ul>
-            </CardContent>
-          </Card>
-        </section>
-      </Zoom>
-
       <Fade triggerOnce direction="up" cascade damping={0.2}>
         <section className="mb-8">
           <h2 className="text-3xl font-bold mb-4">Our Values</h2>
