@@ -1,6 +1,6 @@
 "use client";
 
-import { Fade, Zoom } from "react-awesome-reveal";
+import { Fade } from "react-awesome-reveal";
 import {
   Card,
   CardContent,
@@ -13,22 +13,22 @@ import { Lightbulb, Shield, Zap } from "lucide-react";
 
 const ABOUT_CARDS = [
   {
-    icon: <Zap className="mr-2" />,
+    icon: <Zap className="mr-2 text-main" />,
     title: "Our Background",
     description:
-      "Founded in 1985, PowerSwitch Industries has led the industry in innovation for over three decades.",
+      "Founded in 1985, PowerSwitch Industries has led the industry in innovation for over three decades, focusing on groundbreaking solutions that drive the electrical industry forward.",
   },
   {
-    icon: <Shield className="mr-2" />,
+    icon: <Shield className="mr-2 text-main" />,
     title: "Experience & Expertise",
     description:
-      "With over 35 years of experience, our skilled team is unmatched in the industry.",
+      "With over 35 years of expertise, our skilled team brings an unmatched depth of knowledge, setting industry standards and leading with integrity and precision.",
   },
   {
-    icon: <Lightbulb className="mr-2" />,
+    icon: <Lightbulb className="mr-2 text-main" />,
     title: "Innovation",
     description:
-      "Our R&D department pushes the boundaries, continuously enhancing power distribution solutions.",
+      "Our R&D department consistently pushes boundaries, delivering state-of-the-art power distribution solutions designed to meet evolving industry demands with precision and efficiency.",
   },
 ];
 
@@ -46,10 +46,8 @@ export default function AboutUs() {
     <div className="container mx-auto px-4 md:px-8 lg:px-12 pt-16 pb-4">
       <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
         <header className="text-center mb-12">
-          <h1 className="text-3xl font-bold mb-4 text-center">
-            About PowerSwitch Industries
-          </h1>
-          <p className="max-w-3xl mx-auto text-muted-foreground text-center mb-12">
+          <h1 className="text-3xl font-bold mb-4 text-main">About PowerSwitch Industries</h1>
+          <p className="max-w-3xl mx-auto text-muted-foreground text-lg">
             Powering the Future with Innovative Switchgear Solutions
           </p>
         </header>
@@ -60,15 +58,15 @@ export default function AboutUs() {
           {ABOUT_CARDS.map((item, index) => (
             <Card
               key={index}
-              className="hover:shadow-xl transform transition duration-500 ease-in-out hover:-translate-y-2"
+              className="hover:shadow-2xl transform transition duration-500 ease-in-out hover:-translate-y-2 rounded-lg border border-gray-200 bg-white"
             >
               <CardHeader>
-                <CardTitle className="flex items-center text-xl pb-0">
+                <CardTitle className="flex items-center text-2xl font-semibold pb-0 text-gray-800">
                   {item.icon}
                   {item.title}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="text-gray-600">
+              <CardContent className="text-gray-600 text-lg">
                 {item.description}
               </CardContent>
             </Card>
@@ -78,13 +76,13 @@ export default function AboutUs() {
 
       <Fade triggerOnce direction="up" cascade damping={0.2}>
         <section className="mb-8">
-          <h2 className="text-3xl font-bold mb-4">Our Values</h2>
+          <h2 className="text-3xl font-bold mb-4 text-gray-800">Our Values</h2>
           <div className="flex flex-wrap gap-3">
             {VALUES.map((value, index) => (
               <Badge
                 key={index}
                 variant="secondary"
-                className="transition-transform bg-gray-100 duration-300 hover:bg-main hover:text-white"
+                className="transition-transform bg-gray-50 border border-main text-main px-4 py-2 rounded-full font-semibold shadow-sm hover:bg-main hover:text-white hover:shadow-lg transform hover:-translate-y-1 duration-300"
               >
                 {value}
               </Badge>

@@ -9,92 +9,81 @@ import { Fade } from 'react-awesome-reveal'
 const features = [
   {
     icon: Shield,
-    title: 'Enhanced Safety',
-    description: 'Our switchgear products are designed with advanced safety features to protect both equipment and personnel.',
+    title: 'Advanced Safety Standards',
+    description: 'Engineered to ensure safety for critical electrical systems and personnel.',
     benefits: [
-      'Arc flash mitigation technology',
-      'Insulated and segregated bus bars',
-      'Interlocking mechanisms to prevent operational errors',
-      'Remote operation capabilities for hazardous environments'
+      'Arc flash protection technology',
+      'Isolated bus compartments',
+      'Automatic safety interlocks',
+      'Remote operation in hazardous settings'
     ]
   },
   {
     icon: Zap,
-    title: 'Improved Efficiency',
-    description: 'Maximize your power distribution efficiency with our cutting-edge switchgear solutions.',
+    title: 'Optimized Efficiency',
+    description: 'Our switchgear is designed to maximize power distribution and energy efficiency.',
     benefits: [
-      'Low-loss components for reduced energy consumption',
-      'Smart monitoring for optimal load management',
-      'Power factor correction capabilities',
-      'Compact designs for space optimization'
+      'Low-loss components reduce waste',
+      'Real-time monitoring for optimized load balance',
+      'Integrated power factor correction',
+      'Compact, space-saving designs'
     ]
   },
   {
     icon: Clock,
-    title: 'Exceptional Durability',
-    description: 'Built to last, our switchgear products offer long-term reliability in demanding environments.',
+    title: 'Built for Longevity',
+    description: 'Reliable, high-quality materials ensure durability and extended equipment life.',
     benefits: [
-      'Corrosion-resistant materials for harsh conditions',
-      'Thermal management systems for extended component life',
-      'Robust mechanical designs for high short-circuit ratings',
-      'Minimal maintenance requirements for reduced downtime'
-    ]
-  },
-  {
-    icon: Award,
-    title: 'Industry Compliance',
-    description: 'Stay compliant with the latest industry standards and regulations with our certified switchgear products.',
-    benefits: [
-      'IEC 61439 compliance for low-voltage switchgear',
-      'IEEE C37 standards for medium-voltage equipment',
-      'UL 1558 listing for safety assurance',
-      'NEMA ratings for various environmental conditions'
+      'Corrosion-resistant enclosures',
+      'Effective thermal management systems',
+      'High mechanical resilience for intense usage',
+      'Minimal maintenance with high uptime'
     ]
   }
 ]
 
 export default function KeyFeaturesAndBenefits() {
   return (
-    <div className="container mx-auto px-4 md:px-8 lg:px-12 pb-12">
+    <div className="container mx-auto px-6 md:px-12 pb-16">
       <motion.h2 
-        className="text-3xl font-bold mb-4 text-center"
+        className="text-3xl font-bold mb-8 text-center text-main"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Key Features and Benefits
+        Key Features & Benefits
       </motion.h2>
       <motion.p 
-        className="max-w-3xl mx-auto text-muted-foreground text-center mb-12"
+        className="max-w-2xl mx-auto text-center text-gray-600 mb-12"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        Discover why our switchgear products are the preferred choice for industry leaders worldwide.
+        Discover the unmatched quality, safety, and efficiency our switchgear products bring to your power management needs.
       </motion.p>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {features.map((feature, index) => (
           <motion.div
             key={feature.title}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={{ duration: 0.4, delay: index * 0.15 }}
           >
-            <Card className="h-full flex flex-col">
+            <Card className="h-full flex flex-col shadow-md border border-gray-200 rounded-lg bg-white hover:shadow-lg transition-shadow duration-300">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <feature.icon className="h-6 w-6 text-primary" />
+                <CardTitle className="flex items-center gap-3 text-lg font-semibold text-gray-800">
+                  <feature.icon className="h-7 w-7 text-main" />
                   {feature.title}
                 </CardTitle>
-                <CardDescription>{feature.description}</CardDescription>
+                <CardDescription className="text-gray-700 mt-2">{feature.description}</CardDescription>
               </CardHeader>
               <CardContent className="flex-grow">
                 <Fade duration={500} distance="20px" triggerOnce>
-                  <ul className="space-y-2">
+                  <ul className="space-y-3 mt-4 text-gray-600">
                     {feature.benefits.map((benefit, benefitIndex) => (
                       <li key={benefitIndex} className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                        <CheckCircle className="h-5 w-5 text-main mr-3 flex-shrink-0" />
                         <span>{benefit}</span>
                       </li>
                     ))}
@@ -107,19 +96,19 @@ export default function KeyFeaturesAndBenefits() {
       </div>
 
       <motion.div 
-        className="mt-12 text-center"
+        className="mt-16 text-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.8 }}
       >
-        <h3 className="text-2xl font-semibold mb-4">Why Choose Our Switchgear?</h3>
-        <div className="flex flex-wrap justify-center gap-2">
-          <Badge variant="secondary" className="text-sm bg-gray-100 hover:bg-main hover:text-white">Reliable</Badge>
-          <Badge variant="secondary" className="text-sm bg-gray-100 hover:bg-main hover:text-white">Efficient</Badge>
-          <Badge variant="secondary" className="text-sm bg-gray-100 hover:bg-main hover:text-white">Safe</Badge>
-          <Badge variant="secondary" className="text-sm bg-gray-100 hover:bg-main hover:text-white">Durable</Badge>
-          <Badge variant="secondary" className="text-sm bg-gray-100 hover:bg-main hover:text-white">Compliant</Badge>
-          <Badge variant="secondary" className="text-sm bg-gray-100 hover:bg-main hover:text-white">Innovative</Badge>
+        <h3 className="text-2xl font-semibold text-gray-800 mb-6">Why Industry Leaders Choose Us</h3>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Badge variant="secondary" className="bg-gray-200 hover:bg-main hover:text-white transition-colors duration-300">Reliable</Badge>
+          <Badge variant="secondary" className="bg-gray-200 hover:bg-main hover:text-white transition-colors duration-300">Efficient</Badge>
+          <Badge variant="secondary" className="bg-gray-200 hover:bg-main hover:text-white transition-colors duration-300">Safe</Badge>
+          <Badge variant="secondary" className="bg-gray-200 hover:bg-main hover:text-white transition-colors duration-300">Durable</Badge>
+          <Badge variant="secondary" className="bg-gray-200 hover:bg-main hover:text-white transition-colors duration-300">Compliant</Badge>
+          <Badge variant="secondary" className="bg-gray-200 hover:bg-main hover:text-white transition-colors duration-300">Innovative</Badge>
         </div>
       </motion.div>
     </div>

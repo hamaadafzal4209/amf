@@ -96,3 +96,8 @@ body {
 .animate-navbar {
   animation: fadeInSlideDown 0.6s ease-out forwards;
 }
+
+::selection{
+  background-color: #da3a16;
+  color: white;
+}

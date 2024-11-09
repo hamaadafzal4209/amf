@@ -48,8 +48,14 @@ const Navbar = () => {
         }`}
     >
       <div className="flex items-center justify-between">
-        <Link href="/" className="font-bold text-lg">
-          Logo
+        <Link href="/">
+        <Image
+              src="https://www.amf-sa.com/frontend/images/logo.jpg"
+              alt="Almaram Alfaneyah Logo"
+              width={200}
+              height={60}
+              className="w-32"
+            />
         </Link>
 
         {/* Desktop Navigation */}

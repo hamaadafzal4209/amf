@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import { Cross, X } from "lucide-react";
+import { X } from "lucide-react";
 
 const categories = [
   {
@@ -24,29 +24,25 @@ const categories = [
         id: "mdb-1",
         name: "PowerMax MDB",
         description:
-          "High-capacity main distribution board for industrial applications.",
-        imageUrl:
-          "https://www.tsca.com.ph/wp-content/uploads/2021/05/Low-Voltage-Switchgear.jpg",
-        features: [
-          "Up to 6300A",
-          "IP54 Protection",
-          "Modular Design",
-          "Arc Flash Resistant",
-        ],
+          "High-capacity main distribution board designed for industrial-grade performance and durability.",
+        imageUrl: "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+        features: ["Up to 6300A", "IP54 Protection", "Modular Design", "Arc Flash Resistant"],
       },
       {
         id: "mdb-2",
         name: "CompactPro MDB",
         description:
-          "Space-saving main distribution board for commercial buildings.",
-        imageUrl:
-          "https://www.tsca.com.ph/wp-content/uploads/2021/05/Low-Voltage-Switchgear.jpg",
-        features: [
-          "Up to 4000A",
-          "IP42 Protection",
-          "Front Access",
-          "Energy Monitoring",
-        ],
+          "Efficient main distribution board with compact design for commercial and urban spaces.",
+        imageUrl: "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+        features: ["Up to 4000A", "IP42 Protection", "Front Access", "Energy Monitoring"],
+      },
+      {
+        id: "mdb-3",
+        name: "EcoShield MDB",
+        description:
+          "Eco-friendly distribution board designed to maximize energy savings and performance.",
+        imageUrl: "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+        features: ["Energy Efficient", "Reduced Footprint", "Eco-Friendly Materials", "LED Status Indicators"],
       },
     ],
   },
@@ -58,29 +54,25 @@ const categories = [
         id: "mcc-1",
         name: "SmartDrive MCC",
         description:
-          "Intelligent motor control center with advanced monitoring capabilities.",
-        imageUrl:
-          "https://www.tsca.com.ph/wp-content/uploads/2021/05/Low-Voltage-Switchgear.jpg",
-        features: [
-          "Smart Diagnostics",
-          "Remote Monitoring",
-          "Plug-in Units",
-          "Arc Resistant",
-        ],
+          "Intelligent motor control center with integrated IoT features for advanced monitoring.",
+        imageUrl: "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+        features: ["Smart Diagnostics", "Remote Monitoring", "Plug-in Units", "Arc Resistant"],
       },
       {
         id: "mcc-2",
         name: "CompactControl MCC",
         description:
-          "Space-efficient motor control center for small to medium industries.",
-        imageUrl:
-          "https://www.tsca.com.ph/wp-content/uploads/2021/05/Low-Voltage-Switchgear.jpg",
-        features: [
-          "Compact Design",
-          "Integrated PLC",
-          "Quick Installation",
-          "Energy Efficient",
-        ],
+          "Space-efficient motor control center, ideal for medium-sized industries and facilities.",
+        imageUrl: "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+        features: ["Compact Design", "Integrated PLC", "Quick Installation", "Energy Efficient"],
+      },
+      {
+        id: "mcc-3",
+        name: "PowerLink MCC",
+        description:
+          "Enhanced motor control center with advanced safety and power link features.",
+        imageUrl: "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+        features: ["High Safety Standards", "Interlocking System", "Dynamic Voltage Control", "Seamless Integration"],
       },
     ],
   },
@@ -92,29 +84,25 @@ const categories = [
         id: "pb-1",
         name: "FlexiPanel",
         description:
-          "Versatile panel board suitable for various commercial and light industrial applications.",
-        imageUrl:
-          "https://www.tsca.com.ph/wp-content/uploads/2021/05/Low-Voltage-Switchgear.jpg",
-        features: [
-          "Customizable",
-          "Easy Expansion",
-          "NEMA 1 or 3R Enclosure",
-          "Circuit Monitoring",
-        ],
+          "Versatile panel board that adapts to various configurations for diverse applications.",
+        imageUrl: "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+        features: ["Customizable", "Easy Expansion", "NEMA 1 or 3R Enclosure", "Circuit Monitoring"],
       },
       {
         id: "pb-2",
         name: "SafeGuard Panel",
         description:
-          "High-safety panel board designed for critical environments.",
-        imageUrl:
-          "https://www.tsca.com.ph/wp-content/uploads/2021/05/Low-Voltage-Switchgear.jpg",
-        features: [
-          "Finger-Safe Design",
-          "Surge Protection",
-          "EMI Shielding",
-          "Thermal Management",
-        ],
+          "High-safety panel board built to protect critical systems in sensitive environments.",
+        imageUrl: "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+        features: ["Finger-Safe Design", "Surge Protection", "EMI Shielding", "Thermal Management"],
+      },
+      {
+        id: "pb-3",
+        name: "EcoSafe Panel",
+        description:
+          "Environmentally-friendly panel board for energy-conscious commercial setups.",
+        imageUrl: "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+        features: ["Low Power Loss", "Sustainable Materials", "LED Indicators", "Automatic Load Balancing"],
       },
     ],
   },
@@ -131,7 +119,7 @@ export default function ProductShowcase() {
   return (
     <div className="container mx-auto px-4 md:px-8 lg:px-12 pb-16">
       <motion.h2
-        className="text-3xl font-bold mb-8 text-center"
+        className="text-3xl font-bold mb-8 text-center text-main"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -171,7 +159,7 @@ export default function ProductShowcase() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Card className="h-full flex flex-col">
+                    <Card className="h-full flex flex-col border border-gray-200 shadow-sm hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1">
                       <CardHeader>
                         <CardTitle>{product.name}</CardTitle>
                         <CardDescription>{product.description}</CardDescription>
@@ -188,7 +176,7 @@ export default function ProductShowcase() {
                         </div>
                         <div className="flex flex-wrap gap-2">
                           {product.features.map((feature, index) => (
-                            <Badge key={index} variant="secondary" className='bg-gray-100 hover:bg-main hover:text-white'>
+                            <Badge key={index} variant="secondary" className="bg-gray-100 hover:bg-main hover:text-white">
                               {feature}
                             </Badge>
                           ))}
