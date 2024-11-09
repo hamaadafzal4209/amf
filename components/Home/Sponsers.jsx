@@ -44,7 +44,7 @@ export function Sponser() {
         <h2 className="text-3xl font-bold text-main mb-4">
           Our Trusted Partners
         </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto px-4">
           Collaborating with industry leaders to drive innovation and
           excellence.
         </p>
