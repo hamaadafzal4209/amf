@@ -143,7 +143,6 @@ export default function ProductShowcase() {
         ))}
       </div>
 
-      {/* Tab Content */}
       <div>
         {categories.map(
           (category) =>
@@ -198,7 +197,6 @@ export default function ProductShowcase() {
         )}
       </div>
 
-      {/* Product Detail Modal */}
       <AnimatePresence>
         {selectedProduct && (
           <motion.div
