@@ -1,7 +1,9 @@
-"use client";
+'use client'
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react"
+import { gsap } from "gsap"
+import { Power2, Power3, Power4 } from "gsap"
+import Image from "next/image"
 
 const heroContents = [
   {
@@ -12,100 +14,124 @@ const heroContents = [
   {
     title: "Smart Home Solutions",
     description: "Transform your living space with IoT devices",
-    background:
-      "https://images.unsplash.com/photo-1517373116369-9bdb8cdc9f62?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZWxlY3RyaWMlMjBjaXJjdWl0fGVufDB8fDB8fHww",
+    background: "/assets/banner-2.jpg",
   },
   {
     title: "Powerful Gadgets",
     description: "Boost your productivity with our range of gadgets",
-    background:
-      "https://plus.unsplash.com/premium_photo-1682928136660-8cbeaf4941b2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZWxlY3RyaWMlMjBjaXJjdWl0fGVufDB8fDB8fHww",
+    background: "/assets/banner-3.jpg",
   },
-];
+]
 
 export default function HeroSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [nextIndex, setNextIndex] = useState(1)
+  const titleRef = useRef(null)
+  const descriptionRef = useRef(null)
+  const currentImageRef = useRef(null)
+  const nextImageRef = useRef(null)
+  const imageWrapperRef = useRef(null)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % heroContents.length);
-    }, 5000);
+      setNextIndex((prevIndex) => (prevIndex + 1) % heroContents.length)
+    }, 5000)
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
+    if (nextIndex !== currentIndex) {
+      const tl = gsap.timeline();
+
+      // Animate out current text
+      tl.to(titleRef.current, { opacity: 0, x: -50, duration: 0.5, ease: Power3.easeIn }, 0)
+        .to(descriptionRef.current, { opacity: 0, x: -50, duration: 0.5, ease: Power3.easeIn }, 0.1)
+
+      // Animate image slide
+      tl.to(imageWrapperRef.current, {
+        x: "-100%",
+        duration: 1.2,
+        ease: Power4.easeInOut,
+      }, 0)
+
+      // Fade out current image and fade in next image
+      tl.to(currentImageRef.current, { opacity: 0, duration: 0.8, ease: Power2.easeInOut }, 0)
+        .to(nextImageRef.current, { opacity: 1, duration: 0.8, ease: Power2.easeInOut }, 0.4)
+
+      // After a delay, update current index and animate in new text
+      tl.add(() => {
+        setCurrentIndex(nextIndex)
+      }, 1)
+
+      tl.fromTo(
+        titleRef.current,
+        { opacity: 0, x: 50 },
+        { opacity: 1, x: 0, duration: 0.5, ease: Power3.easeOut },
+        1.2
+      )
+      .fromTo(
+        descriptionRef.current,
+        { opacity: 0, x: 50 },
+        { opacity: 1, x: 0, duration: 0.5, ease: Power3.easeOut },
+        1.3
+      )
+
+      // Reset image wrapper position
+      tl.set(imageWrapperRef.current, { x: "0%" })
+        .set(currentImageRef.current, { x: "0%", opacity: 1 })
+        .set(nextImageRef.current, { x: "100%", opacity: 0 })
+    }
+  }, [nextIndex, currentIndex])
 
   return (
     <section className="w-full min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
-      <AnimatePresence>
-        <motion.div
-          key={currentIndex}
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url(${heroContents[currentIndex].background})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: 'fixed'
-          }}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.1 }}
-          transition={{ duration: 1 }}
-        />
-      </AnimatePresence>
+      <div ref={imageWrapperRef} className="absolute inset-0 flex">
+        <div ref={currentImageRef} className="w-full h-full flex-shrink-0 opacity-100">
+          <Image
+            src={heroContents[currentIndex].background}
+            alt={heroContents[currentIndex].title}
+            layout="fill"
+            objectFit="cover"
+            objectPosition="center"
+            priority
+          />
+        </div>
+        <div ref={nextImageRef} className="w-full h-full flex-shrink-0 opacity-0">
+          <Image
+            src={heroContents[nextIndex].background}
+            alt={heroContents[nextIndex].title}
+            layout="fill"
+            objectFit="cover"
+            objectPosition="center"
+            priority
+          />
+        </div>
+      </div>
 
       <div className="absolute inset-0 bg-black opacity-60" />
 
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between relative z-10">
-        <motion.div
-          className="lg:w-1/2 text-white mb-8 lg:mb-0 space-y-4"
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-            >
-              <motion.h1
-                className="text-4xl lg:text-6xl font-bold mb-4"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                {heroContents[currentIndex].title}
-              </motion.h1>
-              <motion.p
-                className="text-xl lg:text-2xl mb-8"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-              >
-                {heroContents[currentIndex].description}
-              </motion.p>
-            </motion.div>
-          </AnimatePresence>
+        <div className="lg:w-1/2 text-white mb-8 lg:mb-0 space-y-4">
+          <div>
+            <h1 ref={titleRef} className="text-4xl lg:text-6xl font-bold mb-4">
+              {heroContents[currentIndex].title}
+            </h1>
+            <p ref={descriptionRef} className="text-xl lg:text-2xl mb-8">
+              {heroContents[currentIndex].description}
+            </p>
+          </div>
 
-          <motion.button
-            className="group relative inline-flex items-center justify-start overflow-hidden rounded-full px-5 py-3 font-bold"
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.2)",
-            }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
+          <button className="group relative inline-flex items-center justify-start overflow-hidden rounded-full px-5 py-3 font-bold">
             <span className="absolute left-0 top-0 h-32 w-32 -translate-y-2 translate-x-12 rotate-45 bg-white opacity-[3%]"></span>
             <span className="absolute left-0 top-0 -mt-1 h-48 w-48 -translate-x-56 -translate-y-24 rotate-45 bg-main opacity-100 transition-all duration-500 ease-in-out group-hover:-translate-x-8"></span>
             <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
               Contact Now
             </span>
             <span className="absolute inset-0 rounded-full border-2 border-white hover:border-main"></span>
-          </motion.button>
-        </motion.div>
+          </button>
+        </div>
       </div>
     </section>
-  );
+  )
 }

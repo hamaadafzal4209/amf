@@ -6,7 +6,7 @@ import IndustriesServed from "@/components/Home/Industries";
 import ProductShowcase from "@/components/Home/Products";
 import Services from "@/components/Home/Services";
 import { Sponser } from "@/components/Home/Sponsers";
-import Testimonial from "@/components/Home/Testimonial";
+import { AnimatedTestimonialsComponent } from "@/components/Home/Testimonial";
 
 export default function Home() {
   return (
@@ -17,7 +17,7 @@ export default function Home() {
       {/* <IndustriesServed /> */}
       <KeyFeaturesAndBenefits />
       <Services/>
-      {/* <Testimonial /> */}
+      <AnimatedTestimonialsComponent/>
       <Sponser/>
       <ContactSection/>
     </div>

@@ -43,7 +43,7 @@ const Navbar = () => {
   return (
     <nav
       className={`sticky top-0 z-50 transition-all duration-300 
-        ${isScrolled ? 'shadow-md py-3 px-4 lg:px-8 bg-gray-50' : 'py-4 px-4 lg:px-12 bg-gradient-to-r from-gray-100 to-white'}  ${
+        ${isScrolled ? 'shadow-md py-3 px-4 lg:px-8 bg-gradient-to-r from-gray-100 to-white' : 'py-4 px-4 lg:px-12 bg-gradient-to-r from-gray-100 to-white '}  ${
           isLoaded ? "animate-navbar" : "opacity-0"
         }`}
     >
@@ -54,7 +54,7 @@ const Navbar = () => {
               alt="Almaram Alfaneyah Logo"
               width={200}
               height={60}
-              className="w-32"
+              className={`${isScrolled ? "w-24" : "w-32" }`}
             />
         </Link>
 
