@@ -94,7 +94,7 @@ const Navbar = () => {
             </DropdownMenuContent>
           </DropdownMenu>
           <Link
-            href="/"
+            href="/projects"
             className={`hover:text-main transition-colors duration-200 ${
               isActiveLink("/projects") ? "text-main" : ""
             }`}
@@ -202,7 +202,7 @@ const Navbar = () => {
                   </AccordionItem>
                 </Accordion>
                 <Link
-                  href="/"
+                  href="/projects"
                   className="block text-base font-semibold hover:text-main transition-colors duration-200"
                 >
                   Projects
