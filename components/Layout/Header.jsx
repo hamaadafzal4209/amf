@@ -43,25 +43,29 @@ const Navbar = () => {
   return (
     <nav
       className={`sticky top-0 z-50 transition-all duration-300 
-        ${isScrolled ? 'shadow-md py-3 px-4 lg:px-8 bg-gradient-to-r from-gray-100 to-white' : 'py-4 px-4 lg:px-12 bg-gradient-to-r from-gray-100 to-white '}  ${
-          isLoaded ? "animate-navbar" : "opacity-0"
-        }`}
+        ${
+          isScrolled
+            ? "shadow-md py-3 px-4 lg:px-8 bg-gradient-to-r from-gray-100 to-white"
+            : "py-4 px-4 lg:px-12 bg-gradient-to-r from-gray-100 to-white "
+        }  ${isLoaded ? "animate-navbar" : "opacity-0"}`}
     >
       <div className="flex items-center justify-between">
         <Link href="/">
-        <Image
-              src="https://www.amf-sa.com/frontend/images/logo.jpg"
-              alt="Almaram Alfaneyah Logo"
-              width={200}
-              height={60}
-              className={`${isScrolled ? "w-24" : "w-32" }`}
-            />
+          <Image
+            src="https://www.amf-sa.com/frontend/images/logo.jpg"
+            alt="Almaram Alfaneyah Logo"
+            width={200}
+            height={60}
+            className={`${isScrolled ? "w-24" : "w-32"}`}
+          />
         </Link>
 
         <div className="hidden md:flex md:items-center gap-6 font-semibold text-gray-700">
           <Link
             href="/"
-            className={`hover:text-main transition-colors duration-200 ${isActiveLink("/") ? "text-main" : ""}`}
+            className={`hover:text-main transition-colors duration-200 ${
+              isActiveLink("/") ? "text-main" : ""
+            }`}
           >
             Home
           </Link>
@@ -72,21 +76,40 @@ const Navbar = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="mt-2 bg-white text-gray-800 rounded-lg shadow-lg border border-gray-200">
               <DropdownMenuItem>
-                <Link href="/" className="w-full text-sm hover:text-main transition-colors duration-200">
+                <Link
+                  href="/"
+                  className="w-full text-sm hover:text-main transition-colors duration-200"
+                >
                   Quality Control
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href="/" className="w-full text-sm hover:text-main transition-colors duration-200">
+                <Link
+                  href="/"
+                  className="w-full text-sm hover:text-main transition-colors duration-200"
+                >
                   Certification
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Link href="/" className={`hover:text-main transition-colors duration-200 ${isActiveLink("/projects") ? "text-main" : ""}`}>
+          <Link
+            href="/"
+            className={`hover:text-main transition-colors duration-200 ${
+              isActiveLink("/projects") ? "text-main" : ""
+            }`}
+          >
             Projects
           </Link>
-          <DropdownMenu>
+          <Link
+            href="products/"
+            className={`hover:text-main transition-colors duration-200 ${
+              isActiveLink("/projects") ? "text-main" : ""
+            }`}
+          >
+            Products
+          </Link>
+          {/* <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center py-2 hover:text-main transition-colors duration-200">
               Products
               <ChevronDown className="ml-1 h-4 w-4 text-gray-700" />
@@ -110,11 +133,21 @@ const Navbar = () => {
                 ))}
               </div>
             </DropdownMenuContent>
-          </DropdownMenu>
-          <Link href="/services" className={`hover:text-main transition-colors duration-200 ${isActiveLink("/services") ? "text-main" : ""}`}>
+          </DropdownMenu> */}
+          <Link
+            href="/services"
+            className={`hover:text-main transition-colors duration-200 ${
+              isActiveLink("/services") ? "text-main" : ""
+            }`}
+          >
             Services
           </Link>
-          <Link href="/" className={`hover:text-main transition-colors duration-200 ${isActiveLink("/about") ? "text-main" : ""}`}>
+          <Link
+            href="/"
+            className={`hover:text-main transition-colors duration-200 ${
+              isActiveLink("/about") ? "text-main" : ""
+            }`}
+          >
             About Us
           </Link>
         </div>
@@ -132,30 +165,55 @@ const Navbar = () => {
               className="w-[300px] sm:w-[400px] min-h-screen overflow-y-auto no-scrollbar bg-white text-gray-800"
             >
               <nav className="flex flex-col mt-6 gap-2">
-                <Link href="/" className="block text-base font-semibold hover:text-main transition-colors duration-200">
+                <Link
+                  href="/"
+                  className="block text-base font-semibold hover:text-main transition-colors duration-200"
+                >
                   Home
                 </Link>
-                <Accordion className="border-none p-0 m-0" type="single" collapsible>
-                  <AccordionItem className="border-none p-0 m-0" value="company">
+                <Accordion
+                  className="border-none p-0 m-0"
+                  type="single"
+                  collapsible
+                >
+                  <AccordionItem
+                    className="border-none p-0 m-0"
+                    value="company"
+                  >
                     <AccordionTrigger className="text-base font-semibold hover:text-main transition-colors duration-200">
                       Company
                     </AccordionTrigger>
                     <AccordionContent className="p-0 m-0">
                       <div className="flex flex-col">
-                        <Link href="/" className="block px-3 py-1.5 hover:text-main transition-colors duration-200">
+                        <Link
+                          href="/"
+                          className="block px-3 py-1.5 hover:text-main transition-colors duration-200"
+                        >
                           Quality Control
                         </Link>
-                        <Link href="/" className="block px-3 py-1.5 hover:text-main transition-colors duration-200">
+                        <Link
+                          href="/"
+                          className="block px-3 py-1.5 hover:text-main transition-colors duration-200"
+                        >
                           Certification
                         </Link>
                       </div>
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
-                <Link href="/" className="block text-base font-semibold hover:text-main transition-colors duration-200">
+                <Link
+                  href="/"
+                  className="block text-base font-semibold hover:text-main transition-colors duration-200"
+                >
                   Projects
                 </Link>
-                <Accordion type="single" collapsible>
+                <Link
+                  href="/products"
+                  className="block text-base font-semibold hover:text-main transition-colors duration-200"
+                >
+                  Products
+                </Link>
+                {/* <Accordion type="single" collapsible>
                   <AccordionItem className="border-none" value="products">
                     <AccordionTrigger className="text-base font-semibold hover:text-main transition-colors duration-200 border-none">
                       Products
@@ -171,18 +229,28 @@ const Navbar = () => {
                           "Power Factor Improvement Panels",
                           "Cables and Bus Bar Trunking",
                         ].map((product, index) => (
-                          <Link key={index} href="/" className="block px-3 py-2 hover:text-main transition-colors duration-200">
+                          <Link
+                            key={index}
+                            href="/"
+                            className="block px-3 py-2 hover:text-main transition-colors duration-200"
+                          >
                             {product}
                           </Link>
                         ))}
                       </div>
                     </AccordionContent>
                   </AccordionItem>
-                </Accordion>
-                <Link href="/services" className="block text-base font-semibold hover:text-main transition-colors duration-200">
+                </Accordion> */}
+                <Link
+                  href="/services"
+                  className="block text-base font-semibold hover:text-main transition-colors duration-200"
+                >
                   Services
                 </Link>
-                <Link href="/" className="block text-base font-semibold hover:text-main transition-colors duration-200">
+                <Link
+                  href="/"
+                  className="block text-base font-semibold hover:text-main transition-colors duration-200"
+                >
                   About Us
                 </Link>
               </nav>
