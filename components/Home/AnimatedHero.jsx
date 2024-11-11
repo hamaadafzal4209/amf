@@ -9,12 +9,12 @@ const Slider = () => {
   const slidesRef = useRef([]);
   const textRefs = useRef([]);
   const descRefs = useRef([]);
-  
+
   const images = [
-    "url('https://images.unsplash.com/photo-1646330024721-d726c353e519?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bG93JTIwdm9sdGFnZXxlbnwwfHwwfHx8MA%3D%3D')",
-    "url('https://images.unsplash.com/photo-1646330024033-bb43085e2c19?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bG93JTIwdm9sdGFnZXxlbnwwfHwwfHx8MA%3D%3D')",
-    "url('https://images.unsplash.com/photo-1490717550892-b6599dd47aa8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGxvdyUyMHZvbHRhZ2V8ZW58MHx8MHx8fDA%3D')",
-    "url('https://images.unsplash.com/photo-1599575654473-4d9a1b766975?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGxvdyUyMHZvbHRhZ2V8ZW58MHx8MHx8fDA%3D')",
+    "url('/assets/banner-1.jpg')",
+    "url('/assets/banner-5.jpg')",
+    "url('/assets/banner-3.jpg')",
+    "url('/assets/banner-4.jpg')",
   ];
 
   const textContents = [
@@ -34,6 +34,9 @@ const Slider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTweening, setIsTweening] = useState(false);
 
+  // Define fixed directions for each slide
+  const slideDirections = ["left", "right", "top", "bottom"];
+
   useEffect(() => {
     slidesRef.current.forEach((slide, i) => {
       gsap.set(slide, {
@@ -41,10 +44,27 @@ const Slider = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       });
-      // Set initial positions for text and description
-      gsap.set([textRefs.current[i], descRefs.current[i]], {
-        y: "100%",
-        opacity: 0,
+
+      if (i === 0) {
+        gsap.set([textRefs.current[i], descRefs.current[i]], {
+          y: "0%",
+          opacity: 1,
+        });
+      } else {
+        gsap.set([textRefs.current[i], descRefs.current[i]], {
+          y: "100%",
+          opacity: 0,
+        });
+      }
+    });
+
+    gsap.delayedCall(0.1, () => {
+      gsap.to([textRefs.current[0], descRefs.current[0]], {
+        duration: 1,
+        y: "0%",
+        opacity: 1,
+        ease: "power1.out",
+        stagger: 0.2,
       });
     });
   }, []);
@@ -56,7 +76,8 @@ const Slider = () => {
     const currentText = textRefs.current[currentIndex];
     const currentDesc = descRefs.current[currentIndex];
 
-    const newIndex = currentIndex < slidesRef.current.length - 1 ? currentIndex + 1 : 0;
+    const newIndex =
+      currentIndex < slidesRef.current.length - 1 ? currentIndex + 1 : 0;
     const nextSlide = slidesRef.current[newIndex];
     const nextText = textRefs.current[newIndex];
     const nextDesc = descRefs.current[newIndex];
@@ -64,27 +85,54 @@ const Slider = () => {
     setCurrentIndex(newIndex);
     setIsTweening(true);
 
-    // Reset animation states before applying the new animation
     gsap.set([currentText, currentDesc], { y: "100%", opacity: 0 });
+
+    const direction = slideDirections[currentIndex];
+    const directionStyles = {
+      left: {
+        clipIn: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        clipOut: "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)",
+        x: "-100%",
+      },
+      right: {
+        clipIn: "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)",
+        clipOut: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        x: "100%",
+      },
+      top: {
+        clipIn: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        clipOut: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+        y: "-100%",
+      },
+      bottom: {
+        clipIn: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+        clipOut: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        y: "100%",
+      },
+    };
+
+    const { clipIn, clipOut, x, y } = directionStyles[direction];
 
     gsap.set(nextSlide, {
       zIndex: 2,
-      clipPath: "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)",
+      clipPath: clipOut,
+      x: x || "0%",
+      y: y || "0%",
     });
     gsap.set(currentSlide, { zIndex: 1 });
 
-    // Animate slide transition
     gsap.to(nextSlide, {
       duration: 1,
       ease: "power1.inOut",
-      clipPath: "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)",
+      clipPath: clipIn,
+      x: "0%",
+      y: "0%",
       onComplete: () => {
         setIsTweening(false);
         gsap.set(currentSlide, { clearProps: "z-index" });
       },
     });
 
-    // Animate text and description
     gsap.to([nextText, nextDesc], {
       duration: 1,
       y: "0%",
@@ -104,11 +152,21 @@ const Slider = () => {
     <div className="wrapper">
       <div className="slider" ref={sliderRef}>
         {textContents.map((text, i) => (
-          <div key={i} className="slide" ref={(el) => (slidesRef.current[i] = el)}>
-            <div className="slide-text" ref={(el) => (textRefs.current[i] = el)}>
+          <div
+            key={i}
+            className="slide"
+            ref={(el) => (slidesRef.current[i] = el)}
+          >
+            <div
+              className="slide-text"
+              ref={(el) => (textRefs.current[i] = el)}
+            >
               {text}
             </div>
-            <div className="slide-description" ref={(el) => (descRefs.current[i] = el)}>
+            <div
+              className="slide-description"
+              ref={(el) => (descRefs.current[i] = el)}
+            >
               {descriptionContents[i]}
             </div>
           </div>
