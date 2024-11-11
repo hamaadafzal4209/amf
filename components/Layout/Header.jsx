@@ -143,12 +143,20 @@ const Navbar = () => {
             Services
           </Link>
           <Link
-            href="/"
+            href="/about"
             className={`hover:text-main transition-colors duration-200 ${
               isActiveLink("/about") ? "text-main" : ""
             }`}
           >
             About Us
+          </Link>
+          <Link
+            href="/contact"
+            className={`hover:text-main transition-colors duration-200 ${
+              isActiveLink("/about") ? "text-main" : ""
+            }`}
+          >
+            Contact Us
           </Link>
         </div>
 
@@ -248,10 +256,16 @@ const Navbar = () => {
                   Services
                 </Link>
                 <Link
-                  href="/"
+                  href="/about"
                   className="block text-base font-semibold hover:text-main transition-colors duration-200"
                 >
                   About Us
+                </Link>
+                <Link
+                  href="/contact"
+                  className="block text-base font-semibold hover:text-main transition-colors duration-200"
+                >
+                  Contact Us
                 </Link>
               </nav>
             </SheetContent>
