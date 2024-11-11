@@ -197,7 +197,7 @@ export default function ProductShowcase() {
         )}
       </div>
 
-      <AnimatePresence>
+        <AnimatePresence>
         {selectedProduct && (
           <motion.div
             initial={{ opacity: 0 }}

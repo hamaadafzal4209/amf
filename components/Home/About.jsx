@@ -58,7 +58,7 @@ export default function AboutUs() {
           {ABOUT_CARDS.map((item, index) => (
             <Card
               key={index}
-              className="hover:shadow-2xl transform transition duration-500 ease-in-out hover:-translate-y-2 rounded-lg border border-gray-200 bg-white"
+              className="h-full flex flex-col shadow-md border border-gray-200 rounded-lg bg-white hover:shadow-lg transition-shadow duration-300"
             >
               <CardHeader>
                 <CardTitle className="flex items-center text-2xl font-semibold pb-0 text-gray-800">

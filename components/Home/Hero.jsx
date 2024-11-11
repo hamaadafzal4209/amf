@@ -44,22 +44,18 @@ export default function HeroSection() {
     if (nextIndex !== currentIndex) {
       const tl = gsap.timeline();
 
-      // Animate out current text
       tl.to(titleRef.current, { opacity: 0, x: -50, duration: 0.5, ease: Power3.easeIn }, 0)
         .to(descriptionRef.current, { opacity: 0, x: -50, duration: 0.5, ease: Power3.easeIn }, 0.1)
 
-      // Animate image slide
       tl.to(imageWrapperRef.current, {
         x: "-100%",
         duration: 1.2,
         ease: Power4.easeInOut,
       }, 0)
 
-      // Fade out current image and fade in next image
       tl.to(currentImageRef.current, { opacity: 0, duration: 0.8, ease: Power2.easeInOut }, 0)
         .to(nextImageRef.current, { opacity: 1, duration: 0.8, ease: Power2.easeInOut }, 0.4)
 
-      // After a delay, update current index and animate in new text
       tl.add(() => {
         setCurrentIndex(nextIndex)
       }, 1)
@@ -77,7 +73,6 @@ export default function HeroSection() {
         1.3
       )
 
-      // Reset image wrapper position
       tl.set(imageWrapperRef.current, { x: "0%" })
         .set(currentImageRef.current, { x: "0%", opacity: 1 })
         .set(nextImageRef.current, { x: "100%", opacity: 0 })
