@@ -1,4 +1,5 @@
 import AboutUs from "@/components/Home/About";
+import Slider from "@/components/Home/AnimatedHero";
 import KeyFeaturesAndBenefits from "@/components/Home/Benifits";
 import HeroSection from "@/components/Home/Hero";
 import ProductShowcase from "@/components/Home/Products";
@@ -9,13 +10,14 @@ import { AnimatedTestimonialsComponent } from "@/components/Home/Testimonial";
 export default function Home() {
   return (
     <div>
-      <HeroSection />
+      <Slider />
+      {/* <HeroSection /> */}
       <AboutUs />
       <ProductShowcase />
       <KeyFeaturesAndBenefits />
-      <Services/>
-      <AnimatedTestimonialsComponent/>
-      <Sponser/>
+      <Services />
+      <AnimatedTestimonialsComponent />
+      <Sponser />
     </div>
   );
 }
