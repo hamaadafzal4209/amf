@@ -1,6 +1,5 @@
 import AboutUs from "@/components/Home/About";
 import KeyFeaturesAndBenefits from "@/components/Home/Benifits";
-import ContactSection from "@/components/Home/Contact";
 import HeroSection from "@/components/Home/Hero";
 import ProductShowcase from "@/components/Home/Products";
 import Services from "@/components/Home/Services";
@@ -17,7 +16,6 @@ export default function Home() {
       <Services/>
       <AnimatedTestimonialsComponent/>
       <Sponser/>
-      <ContactSection/>
     </div>
   );
 }

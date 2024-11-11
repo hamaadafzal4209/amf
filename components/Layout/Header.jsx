@@ -58,7 +58,6 @@ const Navbar = () => {
             />
         </Link>
 
-        {/* Desktop Navigation */}
         <div className="hidden md:flex md:items-center gap-6 font-semibold text-gray-700">
           <Link
             href="/"
@@ -112,7 +111,7 @@ const Navbar = () => {
               </div>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Link href="/" className={`hover:text-main transition-colors duration-200 ${isActiveLink("/services") ? "text-main" : ""}`}>
+          <Link href="/services" className={`hover:text-main transition-colors duration-200 ${isActiveLink("/services") ? "text-main" : ""}`}>
             Services
           </Link>
           <Link href="/" className={`hover:text-main transition-colors duration-200 ${isActiveLink("/about") ? "text-main" : ""}`}>
@@ -120,7 +119,6 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Mobile Menu */}
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
@@ -181,7 +179,7 @@ const Navbar = () => {
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
-                <Link href="/" className="block text-base font-semibold hover:text-main transition-colors duration-200">
+                <Link href="/services" className="block text-base font-semibold hover:text-main transition-colors duration-200">
                   Services
                 </Link>
                 <Link href="/" className="block text-base font-semibold hover:text-main transition-colors duration-200">

@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
+import Marquee from "../ui/marquee";
 
 const testimonials = [
   {
@@ -86,45 +88,19 @@ const TestimonialCard = ({ testimonial }) => {
 };
 
 export function AnimatedTestimonialsComponent() {
-  const scrollRef = useRef(null);
-
-  useEffect(() => {
-    const scrollElement = scrollRef.current;
-    if (scrollElement) {
-      const scroll = () => {
-        scrollElement.scrollTo({
-          left: scrollElement.scrollLeft + 1,
-          behavior: "smooth",
-        });
-        if (scrollElement.scrollLeft >= scrollElement.scrollWidth / 2) {
-          scrollElement.scrollTo({ left: 0, behavior: "auto" });
-        }
-      };
-      const intervalId = setInterval(scroll, 50);
-      return () => clearInterval(intervalId);
-    }
-  }, []);
-
   return (
     <section className="pb-12 pt-4">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8 text-main">
           What Our Clients Say
         </h2>
-        <div
-          ref={scrollRef}
-          className="flex overflow-x-hidden overflow-y-hidden space-x-6 pb-4"
-          style={{
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent, black 20%, black 80%, transparent)",
-          }}
-        >
-          {[...testimonials, ...testimonials].map((testimonial, index) => (
+        <Marquee pauseOnHover className="[--duration:30s] flex gap-6">
+          {testimonials.map((testimonial, index) => (
             <div key={index} className="flex-none w-80">
               <TestimonialCard testimonial={testimonial} />
             </div>
           ))}
-        </div>
+        </Marquee>
       </div>
     </section>
   );
