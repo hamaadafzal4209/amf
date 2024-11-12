@@ -52,12 +52,12 @@ const Navbar = () => {
       <div className="flex items-center justify-between">
         <Link href="/">
           <Image
-            src="https://www.amf-sa.com/frontend/images/logo.jpg"
+            src="/assets/logo.png"
             alt="Almaram Alfaneyah Logo"
-            width={200}
-            height={60}
+            width={500}
+            height={500}
             className={`${
-              isScrolled ? "w-24 transition duration-300" : "w-32 transition duration-300"
+              isScrolled ? "w-40 transition duration-300" : "w-48 transition duration-300"
             }`}
           />
         </Link>

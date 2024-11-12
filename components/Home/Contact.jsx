@@ -25,7 +25,7 @@ export default function ContactSection() {
           {/* Left side */}
           <div className="md:w-1/2 space-y-8">
             <Image
-              src="https://www.amf-sa.com/frontend/images/logo.jpg"
+              src="/assets/logo.png"
               alt="Almaram Alfaneyah Logo"
               width={200}
               height={60}
@@ -55,7 +55,9 @@ export default function ContactSection() {
                       </a>
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent className="bg-gray-700 text-white p-2 rounded-md">Facebook</TooltipContent>
+                  <TooltipContent className="bg-gray-700 text-white p-2 rounded-md">
+                    Facebook
+                  </TooltipContent>
                 </Tooltip>
                 <Tooltip side="top" align="center">
                   <TooltipTrigger>
@@ -70,7 +72,9 @@ export default function ContactSection() {
                       </a>
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent className="bg-gray-700 text-white p-2 rounded-md">Instagram</TooltipContent>
+                  <TooltipContent className="bg-gray-700 text-white p-2 rounded-md">
+                    Instagram
+                  </TooltipContent>
                 </Tooltip>
                 <Tooltip side="top" align="center">
                   <TooltipTrigger>
@@ -85,7 +89,9 @@ export default function ContactSection() {
                       </a>
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent className="bg-gray-700 text-white p-2 rounded-md">LinkedIn</TooltipContent>
+                  <TooltipContent className="bg-gray-700 text-white p-2 rounded-md">
+                    LinkedIn
+                  </TooltipContent>
                 </Tooltip>
                 <Tooltip side="top" align="center">
                   <TooltipTrigger>
@@ -100,7 +106,9 @@ export default function ContactSection() {
                       </a>
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent className="bg-gray-700 text-white p-2 rounded-md">Twitter</TooltipContent>
+                  <TooltipContent className="bg-gray-700 text-white p-2 rounded-md">
+                    Twitter
+                  </TooltipContent>
                 </Tooltip>
                 <Tooltip side="top" align="center">
                   <TooltipTrigger>
@@ -115,7 +123,9 @@ export default function ContactSection() {
                       </a>
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent className="bg-gray-700 text-white p-2 rounded-md">WhatsApp</TooltipContent>
+                  <TooltipContent className="bg-gray-700 text-white p-2 rounded-md">
+                    WhatsApp
+                  </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </div>
