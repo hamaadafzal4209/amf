@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
@@ -57,12 +57,7 @@ export default function ProductShowcase() {
       </Fade>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {products.map((product, index) => (
-          <Fade
-            key={product.id}
-            direction="up"
-            delay={index * 100}
-            triggerOnce
-          >
+          <Fade key={product.id} direction="up" delay={index * 100} triggerOnce>
             <Card className="overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl rounded-xl border border-gray-200 bg-white">
               <CardContent className="p-0">
                 <div className="relative">

@@ -22,12 +22,12 @@ import {
 
 const Navbar = () => {
   const router = useRouter();
-  const { pathname } = router;
+  const { pathname = "" } = router;  // Default to an empty string
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const isActiveLink = (href) => pathname === href;
+  const isActiveLink = (href) => pathname && pathname.startsWith(href);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,7 +56,9 @@ const Navbar = () => {
             alt="Almaram Alfaneyah Logo"
             width={200}
             height={60}
-            className={`${isScrolled ? "w-24" : "w-32"}`}
+            className={`${
+              isScrolled ? "w-24 transition duration-300" : "w-32 transition duration-300"
+            }`}
           />
         </Link>
 
@@ -77,7 +79,7 @@ const Navbar = () => {
             <DropdownMenuContent className="mt-2 bg-white text-gray-800 rounded-lg shadow-lg border border-gray-200">
               <DropdownMenuItem>
                 <Link
-                  href="/"
+                  href="/quality-control"
                   className="w-full text-sm hover:text-main transition-colors duration-200"
                 >
                   Quality Control
@@ -85,7 +87,7 @@ const Navbar = () => {
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link
-                  href="/"
+                  href="/certification"
                   className="w-full text-sm hover:text-main transition-colors duration-200"
                 >
                   Certification
@@ -102,38 +104,13 @@ const Navbar = () => {
             Projects
           </Link>
           <Link
-            href="products/"
+            href="/products"
             className={`hover:text-main transition-colors duration-200 ${
-              isActiveLink("/projects") ? "text-main" : ""
+              isActiveLink("/products") ? "text-main" : ""
             }`}
           >
             Products
           </Link>
-          {/* <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center py-2 hover:text-main transition-colors duration-200">
-              Products
-              <ChevronDown className="ml-1 h-4 w-4 text-gray-700" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="mt-2 bg-white text-gray-800 rounded-lg shadow-lg border border-gray-200">
-              <div className="max-h-[70vh] w-[200px] no-scrollbar overflow-y-auto">
-                {[
-                  "Low Voltage Switchgear",
-                  "Motor Control Centers",
-                  "HVAC Control Panels",
-                  "Synchronizing Panels",
-                  "Automatic/Manual Transfer Switch Panels",
-                  "Power Factor Improvement Panels",
-                  "Cables and Bus Bar Trunking",
-                ].map((product, index) => (
-                  <DropdownMenuItem key={index}>
-                    <Link href="/" className="w-full text-sm hover:text-main transition-colors duration-200">
-                      {product}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </div>
-            </DropdownMenuContent>
-          </DropdownMenu> */}
           <Link
             href="/services"
             className={`hover:text-main transition-colors duration-200 ${
@@ -153,7 +130,7 @@ const Navbar = () => {
           <Link
             href="/contact"
             className={`hover:text-main transition-colors duration-200 ${
-              isActiveLink("/about") ? "text-main" : ""
+              isActiveLink("/contact") ? "text-main" : ""
             }`}
           >
             Contact Us
@@ -175,7 +152,9 @@ const Navbar = () => {
               <nav className="flex flex-col mt-6 gap-2">
                 <Link
                   href="/"
-                  className="block text-base font-semibold hover:text-main transition-colors duration-200"
+                  className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
+                    isActiveLink("/") ? "text-main" : ""
+                  }`}
                 >
                   Home
                 </Link>
@@ -194,13 +173,13 @@ const Navbar = () => {
                     <AccordionContent className="p-0 m-0">
                       <div className="flex flex-col">
                         <Link
-                          href="/"
+                          href="/quality-control"
                           className="block px-3 py-1.5 hover:text-main transition-colors duration-200"
                         >
                           Quality Control
                         </Link>
                         <Link
-                          href="/"
+                          href="/certification"
                           className="block px-3 py-1.5 hover:text-main transition-colors duration-200"
                         >
                           Certification
@@ -211,59 +190,41 @@ const Navbar = () => {
                 </Accordion>
                 <Link
                   href="/projects"
-                  className="block text-base font-semibold hover:text-main transition-colors duration-200"
+                  className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
+                    isActiveLink("/projects") ? "text-main" : ""
+                  }`}
                 >
                   Projects
                 </Link>
                 <Link
                   href="/products"
-                  className="block text-base font-semibold hover:text-main transition-colors duration-200"
+                  className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
+                    isActiveLink("/products") ? "text-main" : ""
+                  }`}
                 >
                   Products
                 </Link>
-                {/* <Accordion type="single" collapsible>
-                  <AccordionItem className="border-none" value="products">
-                    <AccordionTrigger className="text-base font-semibold hover:text-main transition-colors duration-200 border-none">
-                      Products
-                    </AccordionTrigger>
-                    <AccordionContent className="p-0">
-                      <div className="flex flex-col">
-                        {[
-                          "Low Voltage Switchgear",
-                          "Motor Control Centers",
-                          "HVAC Control Panels",
-                          "Synchronizing Panels",
-                          "Automatic/Manual Transfer Switch Panels",
-                          "Power Factor Improvement Panels",
-                          "Cables and Bus Bar Trunking",
-                        ].map((product, index) => (
-                          <Link
-                            key={index}
-                            href="/"
-                            className="block px-3 py-2 hover:text-main transition-colors duration-200"
-                          >
-                            {product}
-                          </Link>
-                        ))}
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion> */}
                 <Link
                   href="/services"
-                  className="block text-base font-semibold hover:text-main transition-colors duration-200"
+                  className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
+                    isActiveLink("/services") ? "text-main" : ""
+                  }`}
                 >
                   Services
                 </Link>
                 <Link
                   href="/about"
-                  className="block text-base font-semibold hover:text-main transition-colors duration-200"
+                  className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
+                    isActiveLink("/about") ? "text-main" : ""
+                  }`}
                 >
                   About Us
                 </Link>
                 <Link
                   href="/contact"
-                  className="block text-base font-semibold hover:text-main transition-colors duration-200"
+                  className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
+                    isActiveLink("/contact") ? "text-main" : ""
+                  }`}
                 >
                   Contact Us
                 </Link>
