@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
 
 const products = [
   {
@@ -57,7 +58,9 @@ export default function ProductShowcase() {
           >
             <CardContent className="p-0">
               <div className="relative">
-                <img
+                <Image
+                  width={1000}
+                  height={1000}
                   src={product.image}
                   alt={product.title}
                   className="w-full h-48 object-cover rounded-t-xl transition-opacity duration-200"
