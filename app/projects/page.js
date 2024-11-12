@@ -46,19 +46,27 @@ const products = [
 export default function ProductShowcase() {
   return (
     <div className="container mx-auto px-4 md:px-8 lg:px-12 py-12">
-      <h1 className="text-4xl font-bold mb-8 text-center">Our Products</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <h1 className="text-4xl font-bold mb-12 text-center text-main">
+        Our Products
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {products.map((product) => (
-          <Card key={product.id} className="overflow-hidden">
+          <Card
+            key={product.id}
+            className="overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl rounded-xl border border-gray-200 bg-white"
+          >
             <CardContent className="p-0">
-              <img
-                src={product.image}
-                alt={product.title}
-                className="w-full h-48 object-cover"
-              />
-              <h2 className="text-lg font-semibold p-4 text-center">
-                {product.title}
-              </h2>
+              <div className="relative">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="w-full h-48 object-cover rounded-t-xl transition-opacity duration-200"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black opacity-60 rounded-t-xl"></div>
+                <h2 className="absolute bottom-4 left-4 text-lg font-semibold text-white z-10">
+                  {product.title}
+                </h2>
+              </div>
             </CardContent>
           </Card>
         ))}
