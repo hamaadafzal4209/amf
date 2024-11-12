@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import { useState, useEffect, useRef } from "react"
-import { gsap } from "gsap"
-import { Power2, Power3, Power4 } from "gsap"
-import Image from "next/image"
+import { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { Power2, Power3, Power4 } from "gsap";
+import Image from "next/image";
 
 const heroContents = [
   {
@@ -21,68 +21,88 @@ const heroContents = [
     description: "Boost your productivity with our range of gadgets",
     background: "/assets/banner-3.jpg",
   },
-]
+];
 
 export default function HeroSection() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [nextIndex, setNextIndex] = useState(1)
-  const titleRef = useRef(null)
-  const descriptionRef = useRef(null)
-  const currentImageRef = useRef(null)
-  const nextImageRef = useRef(null)
-  const imageWrapperRef = useRef(null)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [nextIndex, setNextIndex] = useState(1);
+  const titleRef = useRef(null);
+  const descriptionRef = useRef(null);
+  const currentImageRef = useRef(null);
+  const nextImageRef = useRef(null);
+  const imageWrapperRef = useRef(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setNextIndex((prevIndex) => (prevIndex + 1) % heroContents.length)
-    }, 5000)
+      setNextIndex((prevIndex) => (prevIndex + 1) % heroContents.length);
+    }, 7000); // Increase interval duration for slower transitions
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (nextIndex !== currentIndex) {
       const tl = gsap.timeline();
 
-      tl.to(titleRef.current, { opacity: 0, x: -50, duration: 0.5, ease: Power3.easeIn }, 0)
-        .to(descriptionRef.current, { opacity: 0, x: -50, duration: 0.5, ease: Power3.easeIn }, 0.1)
+      tl.to(
+        titleRef.current,
+        { opacity: 0, x: -50, duration: 1, ease: Power3.easeIn },
+        0
+      ).to(
+        descriptionRef.current,
+        { opacity: 0, x: -50, duration: 1, ease: Power3.easeIn },
+        0.2
+      );
 
-      tl.to(imageWrapperRef.current, {
-        x: "-100%",
-        duration: 1.2,
-        ease: Power4.easeInOut,
-      }, 0)
+      tl.to(
+        imageWrapperRef.current,
+        {
+          x: "-100%",
+          duration: 1.8,
+          ease: Power4.easeInOut,
+        },
+        0
+      );
 
-      tl.to(currentImageRef.current, { opacity: 0, duration: 0.8, ease: Power2.easeInOut }, 0)
-        .to(nextImageRef.current, { opacity: 1, duration: 0.8, ease: Power2.easeInOut }, 0.4)
+      tl.to(
+        currentImageRef.current,
+        { opacity: 0, duration: 1.5, ease: Power2.easeInOut },
+        0
+      ).to(
+        nextImageRef.current,
+        { opacity: 1, duration: 1.5, ease: Power2.easeInOut },
+        0.6
+      );
 
       tl.add(() => {
-        setCurrentIndex(nextIndex)
-      }, 1)
+        setCurrentIndex(nextIndex);
+      }, 1.5);
 
       tl.fromTo(
         titleRef.current,
         { opacity: 0, x: 50 },
-        { opacity: 1, x: 0, duration: 0.5, ease: Power3.easeOut },
-        1.2
-      )
-      .fromTo(
+        { opacity: 1, x: 0, duration: 1, ease: Power3.easeOut },
+        1.8
+      ).fromTo(
         descriptionRef.current,
         { opacity: 0, x: 50 },
-        { opacity: 1, x: 0, duration: 0.5, ease: Power3.easeOut },
-        1.3
-      )
+        { opacity: 1, x: 0, duration: 1, ease: Power3.easeOut },
+        2
+      );
 
       tl.set(imageWrapperRef.current, { x: "0%" })
         .set(currentImageRef.current, { x: "0%", opacity: 1 })
-        .set(nextImageRef.current, { x: "100%", opacity: 0 })
+        .set(nextImageRef.current, { x: "100%", opacity: 0 });
     }
-  }, [nextIndex, currentIndex])
+  }, [nextIndex, currentIndex]);
 
   return (
     <section className="w-full min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
       <div ref={imageWrapperRef} className="absolute inset-0 flex">
-        <div ref={currentImageRef} className="w-full h-full flex-shrink-0 opacity-100">
+        <div
+          ref={currentImageRef}
+          className="w-full h-full flex-shrink-0 opacity-100"
+        >
           <Image
             src={heroContents[currentIndex].background}
             alt={heroContents[currentIndex].title}
@@ -92,7 +112,10 @@ export default function HeroSection() {
             priority
           />
         </div>
-        <div ref={nextImageRef} className="w-full h-full flex-shrink-0 opacity-0">
+        <div
+          ref={nextImageRef}
+          className="w-full h-full flex-shrink-0 opacity-0"
+        >
           <Image
             src={heroContents[nextIndex].background}
             alt={heroContents[nextIndex].title}
@@ -128,5 +151,5 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation"; // use usePathname instead
 import { ChevronDown, Menu } from "lucide-react";
 import {
   DropdownMenu,
@@ -21,8 +21,7 @@ import {
 } from "@/components/ui/accordion";
 
 const Navbar = () => {
-  const router = useRouter();
-  const { pathname = "" } = router;  // Default to an empty string
+  const pathname = usePathname();
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -57,7 +56,9 @@ const Navbar = () => {
             width={500}
             height={500}
             className={`${
-              isScrolled ? "w-40 transition duration-300" : "w-48 transition duration-300"
+              isScrolled
+                ? "w-40 transition duration-300"
+                : "w-48 transition duration-300"
             }`}
           />
         </Link>
@@ -66,7 +67,7 @@ const Navbar = () => {
           <Link
             href="/"
             className={`hover:text-main transition-colors duration-200 ${
-              isActiveLink("/") ? "text-main" : ""
+              pathname === "/" ? "text-main" : ""
             }`}
           >
             Home
