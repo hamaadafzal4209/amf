@@ -52,7 +52,7 @@ export default function ProductShowcase() {
     <div className="container mx-auto px-4 md:px-8 lg:px-12 py-12">
       <Fade direction="down" triggerOnce duration={800} cascade damping={0.2}>
         <h1 className="text-4xl font-bold mb-12 text-center text-main">
-          Our Products
+          Our Projects
         </h1>
       </Fade>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">

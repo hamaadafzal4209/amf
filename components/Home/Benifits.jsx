@@ -72,7 +72,7 @@ export default function KeyFeaturesAndBenefits() {
           >
             <Card className="h-full flex flex-col shadow-md border border-gray-200 rounded-lg bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 hover:shadow-lg transition-shadow duration-300">
               <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-lg font-semibold text-gray-800">
+                <CardTitle className="flex items-center gap-3 text-lg font-semibold text-main">
                   <feature.icon className="h-7 w-7 text-main" />
                   {feature.title}
                 </CardTitle>

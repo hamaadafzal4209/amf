@@ -169,7 +169,7 @@ export default function ProductShowcase() {
                   >
                     <Card className="h-full flex flex-col border border-gray-200 shadow-sm hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1">
                       <CardHeader>
-                        <CardTitle>{product.name}</CardTitle>
+                        <CardTitle className="text-main">{product.name}</CardTitle>
                         <CardDescription>{product.description}</CardDescription>
                       </CardHeader>
                       <CardContent className="flex-grow">
@@ -203,7 +203,7 @@ export default function ProductShowcase() {
                           {selectedProduct && selectedProduct.id === product.id && (
                             <DialogContent className="max-w-2xl bg-white">
                               <DialogHeader>
-                                <DialogTitle>{selectedProduct.name}</DialogTitle>
+                                <DialogTitle className="text-main">{selectedProduct.name}</DialogTitle>
                                 <DialogDescription>{selectedProduct.description}</DialogDescription>
                               </DialogHeader>
                               <ScrollArea className="max-h-[70vh] px-4 py-4"> {/* Add ScrollArea with a height limit */}
