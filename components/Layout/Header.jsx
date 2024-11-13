@@ -45,7 +45,7 @@ const Navbar = () => {
         ${
           isScrolled
             ? "shadow-md py-3 px-4 lg:px-8 bg-gradient-to-r from-gray-100 to-white"
-            : "py-4 px-4 lg:px-12 bg-gradient-to-r from-gray-100 to-white "
+            : "shadow py-4 px-4 lg:px-12 bg-gradient-to-r from-gray-100 to-white "
         }  ${isLoaded ? "animate-navbar" : "opacity-0"}`}
     >
       <div className="flex items-center justify-between">
@@ -72,6 +72,14 @@ const Navbar = () => {
           >
             Home
           </Link>
+          <Link
+            href="/about"
+            className={`hover:text-main transition-colors duration-200 ${
+              isActiveLink("/about") ? "text-main" : ""
+            }`}
+          >
+            About Us
+          </Link>
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center py-2 hover:text-main transition-colors duration-200">
               Company
@@ -97,14 +105,6 @@ const Navbar = () => {
             </DropdownMenuContent>
           </DropdownMenu>
           <Link
-            href="/projects"
-            className={`hover:text-main transition-colors duration-200 ${
-              isActiveLink("/projects") ? "text-main" : ""
-            }`}
-          >
-            Projects
-          </Link>
-          <Link
             href="/products"
             className={`hover:text-main transition-colors duration-200 ${
               isActiveLink("/products") ? "text-main" : ""
@@ -121,12 +121,12 @@ const Navbar = () => {
             Services
           </Link>
           <Link
-            href="/about"
+            href="/projects"
             className={`hover:text-main transition-colors duration-200 ${
-              isActiveLink("/about") ? "text-main" : ""
+              isActiveLink("/projects") ? "text-main" : ""
             }`}
           >
-            About Us
+            Projects
           </Link>
           <Link
             href="/contact"
