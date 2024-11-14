@@ -8,6 +8,7 @@ const nextConfig = {
       "source.unsplash.com",
       "www.essmetron.com",
       "www.amf-sa.com",
+      "cdn.prod.website-files.com",
     ],
   },
 };

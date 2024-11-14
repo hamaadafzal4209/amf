@@ -33,7 +33,7 @@ export const categories = [
           The IP42 protection rating ensures that CompactPro MDB can withstand moderate environmental challenges, making it a reliable choice for high-traffic or commercial settings.
         `,
         imageUrl:
-          "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+          "https://cdn.prod.website-files.com/6630e01961a932246ebda785/66b31b5d3c3eeb6ae3ae2c53_Customer%20Experience%20(CX)%20Design%20in%20Manufacturing.%20Examples%20%26%20Case%20Studies-p-1080.webp",
         features: [
           "Up to 4000A",
           "IP42 Protection",

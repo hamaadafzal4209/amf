@@ -77,7 +77,7 @@ const TestimonialCard = ({ testimonial }) => {
               </AvatarFallback>
             </Avatar>
             <div>
-              <p className="font-semibold">{testimonial.name}</p>
+              <p className="font-semibold text-main">{testimonial.name}</p>
               <p className="text-sm text-gray-500">{testimonial.role}</p>
             </div>
           </div>
