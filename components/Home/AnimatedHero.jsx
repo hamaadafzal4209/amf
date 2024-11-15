@@ -12,7 +12,7 @@ const Slider = () => {
 
   const images = [
     "url('/assets/banner-1.jpg')",
-    "url('/assets/banner-5.jpg')",
+    "url('/assets/banner-2.jpg')",
     "url('/assets/banner-3.jpg')",
     "url('/assets/banner-4.jpg')",
   ];
@@ -45,6 +45,7 @@ const Slider = () => {
         backgroundPosition: "center",
       });
 
+      // Set initial state of text and descriptions off-screen
       if (i === 0) {
         gsap.set([textRefs.current[i], descRefs.current[i]], {
           y: "0%",
@@ -58,13 +59,14 @@ const Slider = () => {
       }
     });
 
+    // Initial animation for the first slide's text and description
     gsap.delayedCall(0.1, () => {
       gsap.to([textRefs.current[0], descRefs.current[0]], {
-        duration: 1,
+        duration: 1.2,
         y: "0%",
         opacity: 1,
-        ease: "power1.out",
-        stagger: 0.2,
+        ease: "power2.out",
+        stagger: 0.3,
       });
     });
   }, []);
@@ -85,6 +87,7 @@ const Slider = () => {
     setCurrentIndex(newIndex);
     setIsTweening(true);
 
+    // Animate the current slide content off-screen
     gsap.set([currentText, currentDesc], { y: "100%", opacity: 0 });
 
     const direction = slideDirections[currentIndex];
@@ -113,17 +116,20 @@ const Slider = () => {
 
     const { clipIn, clipOut, x, y } = directionStyles[direction];
 
+    // Set next slide to be off-screen in the specified direction
     gsap.set(nextSlide, {
       zIndex: 2,
       clipPath: clipOut,
       x: x || "0%",
       y: y || "0%",
     });
+
     gsap.set(currentSlide, { zIndex: 1 });
 
+    // Animate the next slide to come in
     gsap.to(nextSlide, {
-      duration: 1,
-      ease: "power1.inOut",
+      duration: 1.5,
+      ease: "power2.inOut",
       clipPath: clipIn,
       x: "0%",
       y: "0%",
@@ -133,18 +139,19 @@ const Slider = () => {
       },
     });
 
+    // Animate text and description with a slight delay
     gsap.to([nextText, nextDesc], {
-      duration: 1,
+      duration: 1.5,
       y: "0%",
       opacity: 1,
-      ease: "power1.out",
-      stagger: 0.2,
-      delay: 0.3,
+      ease: "power2.out",
+      stagger: 0.3,
+      delay: 0.4, // Delay to sync with slide movement
     });
   };
 
   useEffect(() => {
-    const timer = setInterval(gotoNextSlide, 3000);
+    const timer = setInterval(gotoNextSlide, 4000); // Set interval to 4 seconds for a smoother transition
     return () => clearInterval(timer);
   }, [currentIndex, isTweening]);
 

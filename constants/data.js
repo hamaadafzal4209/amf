@@ -14,7 +14,7 @@ export const categories = [
           With arc flash resistance, this MDB prioritizes safety, reducing risks in high-power applications. PowerMax MDB is tailored for heavy industrial use, delivering peace of mind and lasting value to operators and facility managers.
         `,
         imageUrl:
-          "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+          "https://s.alicdn.com/@sc04/kf/H9b8b1a6402c34b96ac701f268a254d93m.jpg_720x720q50.jpg",
         features: [
           "Up to 6300A",
           "IP54 Protection",
@@ -77,7 +77,7 @@ export const categories = [
           Whether for new or existing setups, SmartDrive MCC integrates easily, ensuring that facilities can leverage its smart features without extensive modifications.
         `,
         imageUrl:
-          "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLvDWGeqShzYPkKeMm1Lex3dujtAEvhcZqDpzMjyYt10xcWZtjrTsMtO7HDj9XJD943lQ&usqp=CAUhttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLvDWGeqShzYPkKeMm1Lex3dujtAEvhcZqDpzMjyYt10xcWZtjrTsMtO7HDj9XJD943lQ&usqp=CAU",
         features: [
           "Smart Diagnostics",
           "Remote Monitoring",
@@ -96,7 +96,7 @@ export const categories = [
           CompactControl MCC's user-friendly design ensures minimal installation time, allowing facilities to improve motor control processes with minimal disruption.
         `,
         imageUrl:
-          "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8zXPtWh2MPwA8tka57ZYZkKHvTcdVBegEVX4jgshaPWF0ECbmSntKy492vnZqglctlSQ&usqp=CAU",
         features: [
           "Compact Design",
           "Integrated PLC",
@@ -115,7 +115,7 @@ export const categories = [
           PowerLink MCC is a reliable solution for facilities with critical control needs, combining advanced safety features with user-friendly controls.
         `,
         imageUrl:
-          "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+          "https://www.cearsistemi.it/wp-content/uploads/2021/12/motorcontrolcenter.jpg",
         features: [
           "High Safety Standards",
           "Interlocking System",
@@ -140,7 +140,7 @@ export const categories = [
           With FlexiPanel, facilities can maintain flexibility without compromising on durability or performance.
         `,
         imageUrl:
-          "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuyu56vgZcGfdWdpcBpwmQgjpkANI6u80RxUfbYjri7H8BbdhehF78MyfxOgBt50AyW3Y&usqp=CAU",
         features: [
           "Customizable",
           "Easy Expansion",
@@ -157,7 +157,7 @@ export const categories = [
           SafeGuard Panel is ideal for facilities requiring stringent safety measures, particularly in healthcare or industrial environments.
         `,
         imageUrl:
-          "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+          "https://www.anupamelectricalcontrols.com/wp-content/uploads/2018/09/mainlt.jpg",
         features: [
           "Finger-Safe Design",
           "Surge Protection",
@@ -174,7 +174,7 @@ export const categories = [
           EcoSafe Panel is an excellent choice for businesses committed to sustainable practices, offering both performance and responsibility.
         `,
         imageUrl:
-          "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmOwt3ntn6pnOCXoQtso4y0-ULoBbkMkVteA&s",
         features: [
           "Low Power Loss",
           "Sustainable Materials",

@@ -39,7 +39,7 @@ const PartnerCard = ({ logo, name }) => {
 
 export function Sponser() {
   return (
-    <div className="py-10 flex w-full flex-col items-center justify-center overflow-hidden bg-gray-50">
+    <div className="py-10 flex w-full flex-col items-center justify-center overflow-hidden ">
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-main mb-4">
           Our Trusted Partners

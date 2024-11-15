@@ -9,6 +9,10 @@ const nextConfig = {
       "www.essmetron.com",
       "www.amf-sa.com",
       "cdn.prod.website-files.com",
+      "encrypted-tbn0.gstatic.com",
+      "www.cearsistemi.it",
+      "s.alicdn.com",
+      "www.anupamelectricalcontrols.com"
     ],
   },
 };
