@@ -48,8 +48,8 @@ const Slider = () => {
       // Set initial state of text and descriptions off-screen
       if (i === 0) {
         gsap.set([textRefs.current[i], descRefs.current[i]], {
-          y: "0%",
-          opacity: 1,
+          y: "100%",
+          opacity: 0,
         });
       } else {
         gsap.set([textRefs.current[i], descRefs.current[i]], {
@@ -59,15 +59,21 @@ const Slider = () => {
       }
     });
 
-    // Initial animation for the first slide's text and description
-    gsap.delayedCall(0.1, () => {
-      gsap.to([textRefs.current[0], descRefs.current[0]], {
-        duration: 1.2,
-        y: "0%",
-        opacity: 1,
-        ease: "power2.out",
-        stagger: 0.3,
-      });
+    // Initial animation for the first slide and its text and description
+    gsap.to(slidesRef.current[0], {
+      duration: 1.5,
+      x: "0%",
+      opacity: 1,
+      ease: "power2.out",
+    });
+
+    gsap.to([textRefs.current[0], descRefs.current[0]], {
+      duration: 1.2,
+      y: "0%",
+      opacity: 1,
+      ease: "power2.out",
+      stagger: 0.3,
+      delay: 0.3, // Slight delay to sync with slide movement
     });
   }, []);
 

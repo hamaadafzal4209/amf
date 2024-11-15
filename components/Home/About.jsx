@@ -9,26 +9,26 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Lightbulb, Shield, Zap } from "lucide-react";
+import { Globe, Settings, MapPin } from "lucide-react";
 
 const ABOUT_CARDS = [
   {
-    icon: <Zap className="mr-2 text-main" />,
-    title: "Our Background",
+    icon: <Settings className="mr-2 text-main" />,
+    title: "Manufacturing Excellence",
     description:
-      "Founded in 1985, PowerSwitch Industries has led the industry in innovation for over three decades, focusing on groundbreaking solutions that drive the electrical industry forward.",
+      "Almaram Alfaneyah ManufacturingCo. is a certified channel partner of Schneider Electric, specializing in the manufacturing of LV switchgear panels in the Kingdom of Saudi Arabia. Adhering to IEC and ISO 9001 standards, we maintain the highest quality in all operations.",
   },
   {
-    icon: <Shield className="mr-2 text-main" />,
-    title: "Experience & Expertise",
+    icon: <MapPin className="mr-2 text-main" />,
+    title: "Expanding Reach",
     description:
-      "With over 35 years of expertise, our skilled team brings an unmatched depth of knowledge, setting industry standards and leading with integrity and precision.",
+      "With our head office in Jeddah, Almaram Alfaneyah envisions a network of branches across major Saudi cities, ensuring widespread access to our innovative LV switchgear solutions.",
   },
   {
-    icon: <Lightbulb className="mr-2 text-main" />,
-    title: "Innovation",
+    icon: <Globe className="mr-2 text-main" />,
+    title: "Global Standards",
     description:
-      "Our R&D department consistently pushes boundaries, delivering state-of-the-art power distribution solutions designed to meet evolving industry demands with precision and efficiency.",
+      "All products are designed and manufactured in state-of-the-art facilities and undergo stringent quality checks, reflecting our dedication to quality, safety, and performance.",
   },
 ];
 
@@ -46,9 +46,11 @@ export default function AboutUs() {
     <div className="container mx-auto px-4 md:px-8 lg:px-12 pt-16 pb-4">
       <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
         <header className="text-center mb-12">
-          <h1 className="text-3xl font-bold mb-4 text-main">About PowerSwitch Industries</h1>
+          <h1 className="text-3xl font-bold mb-4 text-main">
+            About Almaram Alfaneyah ManufacturingCo.
+          </h1>
           <p className="max-w-3xl mx-auto text-muted-foreground text-lg">
-            Powering the Future with Innovative Switchgear Solutions
+            Powering Cities with High-Quality LV Switchgear Solutions
           </p>
         </header>
       </Fade>
@@ -63,7 +65,7 @@ export default function AboutUs() {
               <CardHeader>
                 <CardTitle className="flex items-center text-2xl font-semibold pb-0 text-main">
                   {item.icon}
-                  {item.title}
+                  <p className="truncate">{item.title}</p>
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-gray-600 text-lg">
@@ -74,20 +76,15 @@ export default function AboutUs() {
         </Fade>
       </section>
 
-      <Fade triggerOnce direction="up" cascade damping={0.2}>
-        <section className="mb-8">
-          <h2 className="text-3xl font-bold mb-4 text-gray-800">Our Values</h2>
-          <div className="flex flex-wrap gap-3">
-            {VALUES.map((value, index) => (
-              <Badge
-                key={index}
-                variant="secondary"
-                className="transition-transform bg-gray-50 border border-main text-main px-4 py-2 rounded-full font-semibold shadow-sm hover:bg-main hover:text-white hover:shadow-lg transform hover:-translate-y-1 duration-300"
-              >
-                {value}
-              </Badge>
-            ))}
-          </div>
+      <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
+        <section className="text-center mt-12 pb-8">
+          <h2 className="text-3xl font-bold mb-4 text-main">Our Vision</h2>
+          <p className="max-w-2xl mx-auto text-lg text-muted-foreground">
+            To remain committed to our customers by providing complete solutions
+            with an innovative approach, utilizing the latest technology, and
+            building a skilled workforce dedicated to exploring and advancing in
+            the field of power distribution.
+          </p>
         </section>
       </Fade>
     </div>
