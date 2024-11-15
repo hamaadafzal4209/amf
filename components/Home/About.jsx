@@ -4,11 +4,9 @@ import { Fade } from "react-awesome-reveal";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Globe, Settings, MapPin } from "lucide-react";
 
 const ABOUT_CARDS = [
@@ -65,7 +63,7 @@ export default function AboutUs() {
               <CardHeader>
                 <CardTitle className="flex items-center text-2xl font-semibold pb-0 text-main">
                   {item.icon}
-                  <p className="truncate">{item.title}</p>
+                  <p className="sm:truncate">{item.title}</p>
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-gray-600 text-lg">

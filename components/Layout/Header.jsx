@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation"; // use usePathname instead
+import { usePathname } from "next/navigation";
 import { ChevronDown, Menu } from "lucide-react";
 import {
   DropdownMenu,
@@ -25,8 +25,9 @@ const Navbar = () => {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const isActiveLink = (href) => pathname && pathname.startsWith(href);
+  const isActiveLink = (href) => pathname === href;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,6 +39,10 @@ const Navbar = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleLinkClick = () => {
+    setIsSidebarOpen(false);
+  };
 
   return (
     <nav
@@ -67,7 +72,7 @@ const Navbar = () => {
           <Link
             href="/"
             className={`hover:text-main transition-colors duration-200 ${
-              pathname === "/" ? "text-main" : ""
+              isActiveLink("/") ? "text-main" : ""
             }`}
           >
             Home
@@ -90,6 +95,7 @@ const Navbar = () => {
                 <Link
                   href="/quality-control"
                   className="w-full text-sm hover:text-main transition-colors duration-200"
+                  onClick={handleLinkClick}
                 >
                   Quality Control
                 </Link>
@@ -98,6 +104,7 @@ const Navbar = () => {
                 <Link
                   href="/certification"
                   className="w-full text-sm hover:text-main transition-colors duration-200"
+                  onClick={handleLinkClick}
                 >
                   Certification
                 </Link>
@@ -109,6 +116,7 @@ const Navbar = () => {
             className={`hover:text-main transition-colors duration-200 ${
               isActiveLink("/products") ? "text-main" : ""
             }`}
+            onClick={handleLinkClick}
           >
             Products
           </Link>
@@ -117,6 +125,7 @@ const Navbar = () => {
             className={`hover:text-main transition-colors duration-200 ${
               isActiveLink("/services") ? "text-main" : ""
             }`}
+            onClick={handleLinkClick}
           >
             Services
           </Link>
@@ -125,6 +134,7 @@ const Navbar = () => {
             className={`hover:text-main transition-colors duration-200 ${
               isActiveLink("/projects") ? "text-main" : ""
             }`}
+            onClick={handleLinkClick}
           >
             Projects
           </Link>
@@ -133,13 +143,14 @@ const Navbar = () => {
             className={`hover:text-main transition-colors duration-200 ${
               isActiveLink("/contact") ? "text-main" : ""
             }`}
+            onClick={handleLinkClick}
           >
             Contact Us
           </Link>
         </div>
 
         <div className="md:hidden">
-          <Sheet>
+          <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">
                 <Menu className="h-6 w-6 text-gray-700" />
@@ -156,32 +167,31 @@ const Navbar = () => {
                   className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
                     isActiveLink("/") ? "text-main" : ""
                   }`}
+                  onClick={handleLinkClick}
                 >
                   Home
                 </Link>
-                <Accordion
-                  className="border-none p-0 m-0"
-                  type="single"
-                  collapsible
-                >
+                <Accordion className="m-0 p-0" type="single" collapsible>
                   <AccordionItem
-                    className="border-none p-0 m-0"
+                    className="m-0 p-0 border-none"
                     value="company"
                   >
-                    <AccordionTrigger className="text-base font-semibold hover:text-main transition-colors duration-200">
+                    <AccordionTrigger className="text-base font-semibold hover:text-main transition-colors duration-200 m-0 p-0">
                       Company
                     </AccordionTrigger>
-                    <AccordionContent className="p-0 m-0">
-                      <div className="flex flex-col">
+                    <AccordionContent className="m-0 p-0">
+                      <div className="flex flex-col m-0 p-0">
                         <Link
                           href="/quality-control"
                           className="block px-3 py-1.5 hover:text-main transition-colors duration-200"
+                          onClick={handleLinkClick}
                         >
                           Quality Control
                         </Link>
                         <Link
                           href="/certification"
                           className="block px-3 py-1.5 hover:text-main transition-colors duration-200"
+                          onClick={handleLinkClick}
                         >
                           Certification
                         </Link>
@@ -189,11 +199,13 @@ const Navbar = () => {
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
+
                 <Link
                   href="/projects"
                   className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
                     isActiveLink("/projects") ? "text-main" : ""
                   }`}
+                  onClick={handleLinkClick}
                 >
                   Projects
                 </Link>
@@ -202,6 +214,7 @@ const Navbar = () => {
                   className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
                     isActiveLink("/products") ? "text-main" : ""
                   }`}
+                  onClick={handleLinkClick}
                 >
                   Products
                 </Link>
@@ -210,6 +223,7 @@ const Navbar = () => {
                   className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
                     isActiveLink("/services") ? "text-main" : ""
                   }`}
+                  onClick={handleLinkClick}
                 >
                   Services
                 </Link>
@@ -218,6 +232,7 @@ const Navbar = () => {
                   className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
                     isActiveLink("/about") ? "text-main" : ""
                   }`}
+                  onClick={handleLinkClick}
                 >
                   About Us
                 </Link>
@@ -226,6 +241,7 @@ const Navbar = () => {
                   className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
                     isActiveLink("/contact") ? "text-main" : ""
                   }`}
+                  onClick={handleLinkClick}
                 >
                   Contact Us
                 </Link>
