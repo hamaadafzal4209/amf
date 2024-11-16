@@ -1,3 +1,4 @@
+import HeroBanner from "@/components/HeroBanner";
 import Image from "next/image";
 import React from "react";
 
@@ -16,29 +17,36 @@ const certificates = [
 
 const Page = () => {
   return (
-    <div className="container mx-auto px-4 md:px-8 lg:px-12 py-16">
-      <h2 className="text-4xl font-semibold text-center uppercase tracking-tight text-gray-800 mb-4
-      ">
-        Quality Control
-      </h2>
-      <p className="max-w-3xl mx-auto text-gray-7900 text-center text-balance mb-12">Almaram Alfaneyah has got certifications for ISO 9001.2015, ISO 14001:2015, ISO 45001:2018, ASO: OHSMS: 1/2020, ASO: CSAMS: 1/2021, ASO: QCMS: 1/2020, OHSAS: 18001.</p>
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
-        {certificates.map((cert, index) => (
-          <div
-            key={index}
-            className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transform transition-transform duration-300"
-          >
-            <Image
-              src={cert.src}
-              alt={cert.alt}
-              width={500}
-              height={500}
-              className="w-full h-auto object-cover rounded-lg"
-            />
-          </div>
-        ))}
+    <>
+      <HeroBanner
+        title={"Quality Control"}
+        backgroundImage={"/assets/quality-control-banner.jpg"}
+        subtitle={"quality control"}
+      />
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 py-16 pt-12">
+        <p className="max-w-3xl mx-auto text-gray-7900 text-center text-balance mb-12">
+          Almaram Alfaneyah has got certifications for ISO 9001.2015, ISO
+          14001:2015, ISO 45001:2018, ASO: OHSMS: 1/2020, ASO: CSAMS: 1/2021,
+          ASO: QCMS: 1/2020, OHSAS: 18001.
+        </p>
+        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
+          {certificates.map((cert, index) => (
+            <div
+              key={index}
+              className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transform transition-transform duration-300"
+            >
+              <Image
+                src={cert.src}
+                alt={cert.alt}
+                width={500}
+                height={500}
+                className="w-full h-auto object-cover rounded-lg"
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

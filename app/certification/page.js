@@ -1,3 +1,4 @@
+import HeroBanner from "@/components/HeroBanner";
 import Image from "next/image";
 import React from "react";
 
@@ -16,6 +17,8 @@ const certificates = [
 
 const Page = () => {
   return (
+    <>
+    <HeroBanner title={'Certification'} backgroundImage={'/assets/certification-banner.jpg'} subtitle={'certification'}/>
     <div className="container mx-auto px-4 md:px-8 lg:px-12 py-16">
       <h2 className="text-4xl font-semibold text-center uppercase tracking-tight text-gray-800 mb-4
       ">
@@ -39,6 +42,7 @@ const Page = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

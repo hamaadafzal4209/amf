@@ -61,7 +61,6 @@ export default function ProductShowcase() {
     <>
       <HeroBanner
         title={"Our Projects"}
-        subtitle={"projects"}
         backgroundImage={"/assets/banner-5.jpg"}
       />
       <div className="container mx-auto px-4 md:px-8 lg:px-12 py-12">
@@ -75,7 +74,7 @@ export default function ProductShowcase() {
             >
               <Dialog>
                 <DialogTrigger asChild>
-                  <Card className="overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl rounded-xl border border-gray-200 bg-white cursor-pointer">
+                  <Card className="overflow-hidden transition duration-300 hover:scale-105 hover:shadow-2xl rounded-xl border border-gray-200 bg-white cursor-pointer">
                     <CardContent className="p-0">
                       <div className="relative">
                         <Image
