@@ -17,42 +17,42 @@ const products = [
   {
     id: 1,
     title: "AL NAHDI WAREHOUSE",
-    image: "https://www.amf-sa.com/frontend/images/gallery/g1.jpg",
+    image: "/assets/projects/project1.jpg",
   },
   {
     id: 2,
     title: "MAKKAH HOSPITAL",
-    image: "https://www.amf-sa.com/frontend/images/gallery/g2.jpg",
+    image: "/assets/projects/project2.jpg",
   },
   {
     id: 3,
     title: "ZAHID BUSINESS PARK",
-    image: "https://www.amf-sa.com/frontend/images/gallery/g3.jpg",
+    image: "/assets/projects/project3.jpg",
   },
   {
     id: 4,
     title: "JAMJOOM PHARMACEUTICALS CO.",
-    image: "https://www.amf-sa.com/frontend/images/gallery/g4.jpg",
+    image: "/assets/projects/project4.jpg",
   },
   {
     id: 5,
     title: "NAJRAN TEACHING HOSPITAL",
-    image: "https://www.amf-sa.com/frontend/images/gallery/g5.jpg",
+    image: "/assets/projects/project5.jpg",
   },
   {
     id: 6,
     title: "LULU HYPERMARKET",
-    image: "https://www.amf-sa.com/frontend/images/gallery/g6.jpg",
+    image: "/assets/projects/project6.jpg",
   },
   {
     id: 7,
     title: "AL-SERAFI CITY",
-    image: "https://www.amf-sa.com/frontend/images/gallery/g7.jpg",
+    image: "/assets/projects/project7.jpg",
   },
   {
     id: 8,
     title: "AL-RAIDAH DIGITAL CITY",
-    image: "https://www.amf-sa.com/frontend/images/gallery/g8.jpg",
+    image: "/assets/projects/project8.jpg",
   },
 ];
 
