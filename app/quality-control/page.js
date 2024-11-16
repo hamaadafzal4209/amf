@@ -1,4 +1,5 @@
 import HeroBanner from "@/components/HeroBanner";
+import MainLayout from "@/components/Layout/MainLayout";
 import Image from "next/image";
 import React from "react";
 
@@ -17,7 +18,7 @@ const certificates = [
 
 const Page = () => {
   return (
-    <>
+    <MainLayout>
       <HeroBanner
         title={"Quality Control"}
         backgroundImage={"/assets/quality-control-banner.jpg"}
@@ -46,7 +47,7 @@ const Page = () => {
           ))}
         </div>
       </div>
-    </>
+    </MainLayout>
   );
 };
 

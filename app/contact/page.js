@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Fade } from "react-awesome-reveal";
 import HeroBanner from "@/components/HeroBanner";
+import MainLayout from "@/components/Layout/MainLayout";
 
 export default function ContactUs() {
   const { toast } = useToast();
@@ -45,8 +46,12 @@ export default function ContactUs() {
   };
 
   return (
-    <>
-      <HeroBanner title={'Contact Us'} subtitle={'contact'} backgroundImage={'/assets/contact-banner.jpg'} />
+    <MainLayout>
+      <HeroBanner
+        title={"Contact Us"}
+        subtitle={"contact"}
+        backgroundImage={"/assets/contact-banner.jpg"}
+      />
       <div className="container mx-auto px-4 md:px-8 lg:px-12 py-12">
         <Fade triggerOnce direction="up" duration={800}>
           <h1 className="text-3xl font-bold mb-12 text-main text-center">
@@ -217,6 +222,6 @@ export default function ContactUs() {
           </div>
         </Fade>
       </div>
-    </>
+    </MainLayout>
   );
 }

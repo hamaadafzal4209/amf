@@ -1,6 +1,7 @@
 "use client";
 
 import HeroBanner from "@/components/HeroBanner";
+import MainLayout from "@/components/Layout/MainLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Dialog,
@@ -58,7 +59,7 @@ const products = [
 
 export default function ProductShowcase() {
   return (
-    <>
+    <MainLayout>
       <HeroBanner
         title={"Our Projects"}
         backgroundImage={"/assets/banner-5.jpg"}
@@ -115,6 +116,6 @@ export default function ProductShowcase() {
           ))}
         </div>
       </div>
-    </>
+    </MainLayout>
   );
 }

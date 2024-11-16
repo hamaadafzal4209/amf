@@ -1,14 +1,19 @@
-import HeroBanner from '@/components/HeroBanner'
-import AboutUs from '@/components/Home/About'
-import React from 'react'
+import HeroBanner from "@/components/HeroBanner";
+import AboutUs from "@/components/Home/About";
+import MainLayout from "@/components/Layout/MainLayout";
+import React from "react";
 
 const page = () => {
   return (
-    <div>
-      <HeroBanner title={'About'} subtitle={'about us'} backgroundImage={'/assets/about-banner.jpg'}/>
-      <AboutUs/>
-    </div>
-  )
-}
+    <MainLayout>
+      <HeroBanner
+        title={"About"}
+        subtitle={"about us"}
+        backgroundImage={"/assets/about-banner.jpg"}
+      />
+      <AboutUs />
+    </MainLayout>
+  );
+};
 
-export default page
+export default page;

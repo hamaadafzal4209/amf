@@ -1,4 +1,5 @@
 import HeroBanner from "@/components/HeroBanner";
+import MainLayout from "@/components/Layout/MainLayout";
 import Image from "next/image";
 import React from "react";
 
@@ -17,32 +18,41 @@ const certificates = [
 
 const Page = () => {
   return (
-    <>
-    <HeroBanner title={'Certification'} backgroundImage={'/assets/certification-banner.jpg'} subtitle={'certification'}/>
-    <div className="container mx-auto px-4 md:px-8 lg:px-12 py-16">
-      <h2 className="text-4xl font-semibold text-center uppercase tracking-tight text-gray-800 mb-4
-      ">
-        Our Certifications
-      </h2>
-      <p className="max-w-3xl mx-auto text-gray-7900 text-center text-balance mb-12">Almaram Alfaneyah has been certified from Schneider Electric, ABB, Rittal, Rolaco, L&T, EPLAN.</p>
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
-        {certificates.map((cert, index) => (
-          <div
-            key={index}
-            className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transform transition-transform duration-300"
-          >
-            <Image
-              src={cert.src}
-              alt={cert.alt}
-              width={500}
-              height={500}
-              className="w-full h-auto object-cover rounded-lg"
-            />
-          </div>
-        ))}
+    <MainLayout>
+      <HeroBanner
+        title={"Certification"}
+        backgroundImage={"/assets/certification-banner.jpg"}
+        subtitle={"certification"}
+      />
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 py-16">
+        <h2
+          className="text-4xl font-semibold text-center uppercase tracking-tight text-gray-800 mb-4
+      "
+        >
+          Our Certifications
+        </h2>
+        <p className="max-w-3xl mx-auto text-gray-7900 text-center text-balance mb-12">
+          Almaram Alfaneyah has been certified from Schneider Electric, ABB,
+          Rittal, Rolaco, L&T, EPLAN.
+        </p>
+        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
+          {certificates.map((cert, index) => (
+            <div
+              key={index}
+              className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transform transition-transform duration-300"
+            >
+              <Image
+                src={cert.src}
+                alt={cert.alt}
+                width={500}
+                height={500}
+                className="w-full h-auto object-cover rounded-lg"
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-    </>
+    </MainLayout>
   );
 };
 

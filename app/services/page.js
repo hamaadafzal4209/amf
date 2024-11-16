@@ -1,10 +1,11 @@
 import React from "react";
 import Services from "@/components/Home/Services";
 import HeroBanner from "@/components/HeroBanner";
+import MainLayout from "@/components/Layout/MainLayout";
 
 const page = () => {
   return (
-    <div>
+    <MainLayout>
       <HeroBanner
         title={"Our Services"}
         subtitle={"Services"}
@@ -13,7 +14,7 @@ const page = () => {
       <div className="py-12">
         <Services />
       </div>
-    </div>
+    </MainLayout>
   );
 };
 
