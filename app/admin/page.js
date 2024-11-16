@@ -1,16 +1,10 @@
 "use client";
 
+import AllProducts from "@/components/admin/AllProducts";
 import CreateProduct from "@/components/admin/CreateProduct";
 import AdminNavbar from "@/components/admin/Navbar";
 import Sidebar from "@/components/admin/Sidebar";
 import React, { useState, useEffect } from "react";
-
-const AllProducts = () => (
-  <div>
-    <h2>All Products</h2>
-    <p>List of all your products...</p>
-  </div>
-);
 
 const Page = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);

@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { Menu } from 'lucide-react';
-import Image from 'next/image';
-import React from 'react';
+import { Menu } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 const AdminNavbar = ({ toggleSidebar }) => {
-    
   return (
     <div className="h-16 shadow-md bg-gradient-to-tr from-gray-100 to-white px-6 flex items-center justify-between">
       <div className="flex items-center gap-4">
@@ -15,7 +15,15 @@ const AdminNavbar = ({ toggleSidebar }) => {
         >
           <Menu className="text-main group-hover:text-white hover:text-white transition duration-200" />
         </div>
-        <Image width={500} height={500} src="/assets/logo.png" alt="Logo" className="w-40" />
+        <Link href={"/"}>
+          <Image
+            width={500}
+            height={500}
+            src="/assets/logo.png"
+            alt="Logo"
+            className="w-40"
+          />
+        </Link>
       </div>
     </div>
   );
