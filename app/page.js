@@ -23,7 +23,7 @@ export default function Home() {
         <ProductShowcase />
         <KeyFeaturesAndBenefits />
         <Services />
-        <AnimatedTestimonialsComponent />
+        <AnimatedTestimonialsComponent/>
         <Sponser />
       </MainLayout>
     </div>

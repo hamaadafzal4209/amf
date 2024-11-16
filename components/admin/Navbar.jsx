@@ -7,7 +7,7 @@ import React from "react";
 
 const AdminNavbar = ({ toggleSidebar }) => {
   return (
-    <div className="h-16 shadow-md bg-gradient-to-tr from-gray-100 to-white px-6 flex items-center justify-between">
+    <div className="sticky top-0 z-50 h-16 shadow-md bg-gradient-to-tr from-gray-100 to-white px-6 flex items-center justify-between">
       <div className="flex items-center gap-4">
         <div
           onClick={toggleSidebar}

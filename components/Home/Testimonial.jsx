@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { cn } from "@/lib/utils";
 import Marquee from "../ui/marquee";
 
 const testimonials = [

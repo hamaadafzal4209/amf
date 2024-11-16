@@ -18,10 +18,10 @@ const Slider = () => {
   ];
 
   const textContents = [
-    "High-Quality Low Voltage Switchgear - Reliable and Efficient Power Distribution Solutions",
-    "Cutting-Edge Technology - Industry-Leading Innovations in Electrical Safety and Performance",
-    "Tailored Solutions for Every Industry - Customized Panel Designs to Meet Your Needs",
-    "Sustainability and Safety Compliance - Committed to Environmental Responsibility",
+    "High-Quality Low Voltage Switchgear",
+    "Cutting-Edge Technology",
+    "Tailored Solutions for Every Industry",
+    "Sustainability and Safety Compliance",
   ];
 
   const descriptionContents = [

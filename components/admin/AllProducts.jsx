@@ -114,7 +114,7 @@ export default function ProductManagement() {
           </SelectContent>
         </Select>
       </div>
-      <div className="bg-white shadow-md rounded-lg overflow-hidden max-h-[55vh] md:max-h-[55vh] overflow-y-auto custom-scrollbar">
+      <div className="bg-white shadow-md rounded-lg overflow-hidden max-h-[80vh] overflow-y-auto custom-scrollbar">
         <Table>
           <TableHeader>
             <TableRow>

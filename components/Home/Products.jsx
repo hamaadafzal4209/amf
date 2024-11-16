@@ -78,7 +78,7 @@ export default function ProductShowcase() {
                         </CardDescription>
                       </CardHeader>
                       <CardContent className="flex-grow">
-                        <div className="relative h-48 mb-4">
+                        <div className="relative h-48">
                           <Image
                             src={product.imageUrl}
                             alt={product.name}
@@ -86,13 +86,6 @@ export default function ProductShowcase() {
                             objectFit="cover"
                             className="rounded-md"
                           />
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                          {product.features.map((feature, index) => (
-                            <Badge key={index} variant="secondary" className="bg-gray-100 hover:bg-main hover:text-white">
-                              {feature}
-                            </Badge>
-                          ))}
                         </div>
                       </CardContent>
                       <CardFooter>
