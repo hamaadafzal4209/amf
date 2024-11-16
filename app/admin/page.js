@@ -55,7 +55,7 @@ const Page = () => {
           handleTabClick={handleTabClick}
         />
         <div
-          className={`p-6 transition-all duration-300 ${
+          className={`w-full p-6 transition-all duration-300 ${
             sidebarOpen ? "md:ml-64" : "ml-0"
           }`}
         >
