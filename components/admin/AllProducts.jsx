@@ -1,6 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { Pencil, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -9,7 +19,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,102 +29,183 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-
-import { Edit, Trash2 } from "lucide-react";
 import Image from "next/image";
 
-const initialData = [
-  { id: 1, name: "John Doe", image: "/assets/banner-3.jpg" },
-  { id: 2, name: "Jane Smith", image: "/assets/banner-3.jpg" },
-  { id: 3, name: "Bob Johnson", image: "/assets/banner-3.jpg" },
-  { id: 4, name: "Alice Brown", image: "/assets/banner-3.jpg" },
-];
+// Mock data for products
+const initialProducts = Array.from({ length: 50 }, (_, i) => ({
+  id: i + 1,
+  name: `Product ${i + 1}`,
+  image: `http://localhost:3000/_next/image?url=https%3A%2F%2Fcdn.prod.website-files.com%2F6630e01961a932246ebda785%2F66b31b5d3c3eeb6ae3ae2c53_Customer%2520Experience%2520(CX)%2520Design%2520in%2520Manufacturing.%2520Examples%2520%2526%2520Case%2520Studies-p-1080.webp&w=1920&q=75`,
+}));
 
-export default function AllProducts() {
-  const [data, setData] = useState(initialData);
-  const [itemToDelete, setItemToDelete] = useState(null);
+export default function ProductManagement() {
+  const [products, setProducts] = useState(initialProducts);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(6);
+  const [deleteProductId, setDeleteProductId] = useState(null);
 
-  const handleDeleteClick = (item) => {
-    setItemToDelete(item);
+  // Filter products based on search term
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Calculate pagination
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+    setCurrentPage(1);
+  };
+
+  const handleProductsPerPageChange = (value) => {
+    setProductsPerPage(Number(value));
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleDelete = (id) => {
+    setDeleteProductId(id);
   };
 
   const confirmDelete = () => {
-    setData((prevData) =>
-      prevData.filter((item) => item.id !== itemToDelete.id)
-    );
-    setItemToDelete(null);
-  };
-
-  const cancelDelete = () => {
-    setItemToDelete(null);
+    if (deleteProductId) {
+      setProducts(products.filter((product) => product.id !== deleteProductId));
+      setDeleteProductId(null);
+    }
   };
 
   return (
     <div className="container mx-auto p-4 space-y-4">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>ID</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Image</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {data.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>{item.id}</TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  width={500}
-                  height={500}
-                  className="rounded-sm object-cover shadow-sm w-28 h-14 "
-                />
-              </TableCell>
-              <TableCell className="space-x-2">
-                <Button variant="ghost">
-                  <Edit className="w-4 h-4 text-gray-600" />
-                </Button>
-                <Button variant="ghost" onClick={() => handleDeleteClick(item)}>
-                  <Trash2 className="w-4 h-4 text-red-600" />
-                </Button>
-              </TableCell>
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+        <input
+          type="search"
+          placeholder="Search products..."
+          value={searchTerm}
+          onChange={handleSearch}
+          className="w-full sm:w-64 border-gray-300 px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none"
+        />
+        <Select
+          onValueChange={handleProductsPerPageChange}
+          value={productsPerPage.toString()}
+        >
+          <SelectTrigger className="w-full sm:w-[180px] bg-white hover:bg-gray-100 focus:ring-2 focus:ring-primary">
+            <SelectValue placeholder="Products per page" />
+          </SelectTrigger>
+          <SelectContent className="bg-white">
+            <SelectItem className="cursor-pointer" value="4">
+              4 per page
+            </SelectItem>
+            <SelectItem className="cursor-pointer" value="6">
+              6 per page
+            </SelectItem>
+            <SelectItem className="cursor-pointer" value="8">
+              8 per page
+            </SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+      <div className="bg-white shadow-md rounded-lg overflow-hidden max-h-[55vh] md:max-h-[55vh] overflow-y-auto custom-scrollbar">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[100px]">ID</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Image</TableHead>
+              <TableHead className="text-right">Actions</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-
-      {/* Delete Confirmation Popup */}
-      {itemToDelete && (
-        <AlertDialog open={!!itemToDelete} onOpenChange={cancelDelete}>
-          <AlertDialogContent className="bg-white">
-            <AlertDialogHeader>
-              <AlertDialogTitle>
-                Are you sure you want to delete?
-              </AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. The item{" "}
-                <strong>{itemToDelete.name}</strong> will be permanently
-                deleted.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel onClick={cancelDelete}>
-                Cancel
-              </AlertDialogCancel>
-              <AlertDialogAction
-                className="bg-red-600 hover:bg-red-700 text-white"
-                onClick={confirmDelete}
-              >
-                Delete
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      )}
+          </TableHeader>
+          <TableBody>
+            {currentProducts.map((product) => (
+              <TableRow key={product.id} className="hover:bg-gray-100">
+                <TableCell className="font-medium">{product.id}</TableCell>
+                <TableCell>{product.name}</TableCell>
+                <TableCell>
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    width={50}
+                    height={50}
+                    className="rounded-md"
+                  />
+                </TableCell>
+                <TableCell className="text-right">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-green-600 hover:text-green-700 hover:bg-green-100"
+                  >
+                    <Pencil className="h-4 w-4" />
+                    <span className="sr-only">Edit</span>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-red-600 hover:text-red-700 hover:bg-red-100"
+                    onClick={() => handleDelete(product.id)}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                    <span className="sr-only">Delete</span>
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+      <div className="flex justify-between items-center mt-4">
+        <Button
+          className="bg-main text-white hover:bg-[#da3a16]"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </Button>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <Button
+          className="bg-main text-white hover:bg-[#da3a16]"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </Button>
+      </div>
+      <AlertDialog
+        open={deleteProductId !== null}
+        onOpenChange={() => setDeleteProductId(null)}
+      >
+        <AlertDialogContent className="bg-white">
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Are you sure you want to delete this product?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete the
+              product from the database.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmDelete}
+              className="bg-red-600 hover:bg-red-700 text-white"
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

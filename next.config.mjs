@@ -12,6 +12,7 @@ const nextConfig = {
       "encrypted-tbn0.gstatic.com",
       "www.cearsistemi.it",
       "s.alicdn.com",
+      "localhost",
       "www.anupamelectricalcontrols.com"
     ],
   },

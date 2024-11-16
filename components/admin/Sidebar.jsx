@@ -4,7 +4,7 @@ import { PlusCircle, List } from "lucide-react";
 const Sidebar = ({ isOpen, activeTab, handleTabClick }) => {
   return (
     <div
-      className={`bg-white w-64 border-r-2 border-gray-200 fixed top-16 left-0 h-full transition-transform duration-300 ${
+      className={`bg-white z-50 w-64 border-r-2 border-gray-200 fixed top-16 left-0 h-full transition-transform duration-300 ${
         isOpen ? "transform-none" : "-translate-x-full"
       }`}
       style={{ height: "calc(100vh - 64px)" }}
