@@ -46,7 +46,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`sticky top-0 z-[50000] transition-all duration-300 
+      className={`sticky top-0 z-[9999] transition-all duration-300 
         ${
           isScrolled
             ? "shadow-md py-3 px-4 lg:px-8 bg-gradient-to-r from-gray-100 to-white"
@@ -67,7 +67,6 @@ const Navbar = () => {
             }`}
           />
         </Link>
-
         <div className="hidden md:flex md:items-center gap-6 font-semibold text-gray-700">
           <Link
             href="/"
@@ -159,7 +158,7 @@ const Navbar = () => {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[300px] sm:w-[400px] min-h-screen overflow-y-auto no-scrollbar bg-white text-gray-800"
+              className="w-[300px] z-[100000] sm:w-[400px] min-h-screen overflow-y-auto no-scrollbar bg-white text-gray-800"
             >
               <nav className="flex flex-col mt-6 gap-2">
                 <Link
