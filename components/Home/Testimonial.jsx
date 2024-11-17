@@ -41,9 +41,12 @@ export function Testimonial() {
   return (
     <div className="container mx-auto px-4 md:px-8 lg:px-12 pt-16 pb-4">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-main mb-4">What Our Clients Say</h2>
-        <p className="text-lg text-gray-600 dark:text-gray-300">
-          Hear from our satisfied customers who have experienced the impact of our services and solutions.
+        <h2 className="text-3xl font-bold text-main mb-4">
+          What Our Clients Say
+        </h2>
+        <p className="text-lg text-gray-600">
+          Hear from our satisfied customers who have experienced the impact of
+          our services and solutions.
         </p>
       </div>
 
