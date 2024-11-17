@@ -46,7 +46,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`sticky top-0 z-50 transition-all duration-300 
+      className={`sticky top-0 z-[50000] transition-all duration-300 
         ${
           isScrolled
             ? "shadow-md py-3 px-4 lg:px-8 bg-gradient-to-r from-gray-100 to-white"

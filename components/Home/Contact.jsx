@@ -19,18 +19,18 @@ import {
 
 export default function ContactSection() {
   return (
-    <section className="py-16 bg-gradient-to-r from-gray-50 to-gray-100">
+    <section className="py-16 bg-gray-800">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 xl:px-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-6">
             <Image
-              src="/assets/logo.png"
+              src="/assets/white-logo.png"
               alt="Almaram Alfaneyah Logo"
               width={200}
               height={60}
               className="mb-6"
             />
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-gray-400 text-lg leading-relaxed">
               Almaram Alfaneyah Manufacturing Co. is a certified channel partner
               of Schneider Electric, specializing in the manufacturing of LV
               switchgear panels in the Kingdom of Saudi Arabia. Based in Jeddah,
@@ -74,13 +74,13 @@ export default function ContactSection() {
                 <div className="flex items-center justify-center w-12 h-12 flex-shrink-0 bg-gray-200 rounded-full text-main">
                   <FaMapMarkerAlt className="text-xl" />
                 </div>
-                <span className="text-lg">Location: 108930, Jeddah 21351, K.S.A</span>
+                <span className="text-lg text-gray-400">Location: 108930, Jeddah 21351, K.S.A</span>
               </div>
               <div className="flex items-center gap-4">
                 <div className="flex items-center justify-center w-12 h-12 flex-shrink-0 bg-gray-200 rounded-full text-main">
                   <FaPhoneAlt className="text-xl" />
                 </div>
-                <span className="text-lg">Call Us: +966 56 910 5617</span>
+                <span className="text-lg text-gray-400">Call Us: +966 56 910 5617</span>
               </div>
             </div>
           </div>
