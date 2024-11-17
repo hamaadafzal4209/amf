@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import ContactSection from "@/components/Home/Contact";
+import { Toaster } from "react-hot-toast";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${poppins.variable} ${inter.variable} font-poppins antialiased`}
       >
+        <Toaster />
         {children}
       </body>
     </html>
