@@ -1,8 +1,5 @@
 import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Layout/Header";
-import Footer from "@/components/Layout/Footer";
-import ContactSection from "@/components/Home/Contact";
 import { Toaster } from "react-hot-toast";
 
 const poppins = Poppins({
