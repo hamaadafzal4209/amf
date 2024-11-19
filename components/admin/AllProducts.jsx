@@ -42,11 +42,14 @@ export default function ProductManagement() {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(6);
   const [deleteProductId, setDeleteProductId] = useState(null);
+  const [loading, setLoading] = useState(true);  
 
   useEffect(() => {
     const getProducts = async () => {
+      setLoading(true);  
       const data = await fetchProducts();
       setProducts(data);
+      setLoading(false); 
     };
 
     getProducts();
@@ -91,6 +94,7 @@ export default function ProductManagement() {
 
   return (
     <div className="container mx-auto p-4 space-y-4">
+      {/* Search and Products per page selection */}
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <input
           type="search"
@@ -119,55 +123,62 @@ export default function ProductManagement() {
           </SelectContent>
         </Select>
       </div>
-      <div className="bg-white shadow-md rounded-lg overflow-hidden max-h-[80vh] overflow-y-auto custom-scrollbar">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">ID</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Image</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {currentProducts.map((product) => (
-              <TableRow key={product._id} className="hover:bg-gray-100">
-                <TableCell className="font-medium">{product._id}</TableCell>
-                <TableCell>{product.title}</TableCell>
-                <TableCell>
-                  <Image
-                    src={product.images[0]}
-                    alt={product.title}
-                    width={500}
-                    height={500}
-                    className="rounded-md w-24 h-auto"
-                  />
-                </TableCell>
-                <TableCell className="text-right">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-green-600 hover:text-green-700 hover:bg-green-100"
-                  >
-                    <Pencil className="h-4 w-4" />
-                    <span className="sr-only">Edit</span>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-red-600 hover:text-red-700 hover:bg-red-100"
-                    onClick={() => handleDelete(product._id)}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                    <span className="sr-only">Delete</span>
-                  </Button>
-                </TableCell>
+
+      {loading ? (
+        <div className="flex justify-center items-center py-6 min-h-[50vh]">
+          <div className="border-gray-300 h-20 w-20 animate-spin rounded-full border-8 border-t-blue-600"></div>
+        </div>
+      ) : (
+        <div className="bg-white shadow-md rounded-lg overflow-hidden max-h-[80vh] overflow-y-auto custom-scrollbar">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">ID</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Image</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-      {/* Pagination Controls */}
+            </TableHeader>
+            <TableBody>
+              {currentProducts.map((product) => (
+                <TableRow key={product._id} className="hover:bg-gray-100">
+                  <TableCell className="font-medium">{product._id}</TableCell>
+                  <TableCell>{product.title}</TableCell>
+                  <TableCell>
+                    <Image
+                      src={product.images[0]}
+                      alt={product.title}
+                      width={500}
+                      height={500}
+                      className="rounded-md w-24 h-auto"
+                    />
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-green-600 hover:text-green-700 hover:bg-green-100"
+                    >
+                      <Pencil className="h-4 w-4" />
+                      <span className="sr-only">Edit</span>
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-red-600 hover:text-red-700 hover:bg-red-100"
+                      onClick={() => handleDelete(product._id)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                      <span className="sr-only">Delete</span>
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      )}
+
       <div className="flex justify-between items-center mt-4">
         <Button
           className="bg-main text-white hover:bg-[#da3a16]"
@@ -187,6 +198,7 @@ export default function ProductManagement() {
           Next
         </Button>
       </div>
+
       {/* Delete Confirmation Dialog */}
       <AlertDialog
         open={deleteProductId !== null}
