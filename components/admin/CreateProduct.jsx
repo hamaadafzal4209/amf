@@ -10,6 +10,27 @@ import { ScrollArea } from "../ui/scroll-area";
 export default function CreateProduct() {
   const [previewImages, setPreviewImages] = useState([]);
 
+  async function uploadImages(files) {
+    const uploads = files.map(async (file) => {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "al-maram");
+
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/dq2ljujxe/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await response.json();
+      return data.secure_url;
+    });
+
+    return Promise.all(uploads);
+  }
+
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -27,9 +48,31 @@ export default function CreateProduct() {
         .of(Yup.mixed())
         .required("At least one image is required"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
-      // Handle form submission here
+    onSubmit: async (values) => {
+      try {
+        const uploadedImages = await uploadImages(values.images);
+        const response = await fetch("/api/products/create", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ...values,
+            images: uploadedImages,
+          }),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          alert("Product created successfully!");
+          formik.resetForm();
+          setPreviewImages([]);
+        } else {
+          const error = await response.json();
+          alert("Failed to create product: " + error.message);
+        }
+      } catch (error) {
+        console.error("Error creating product:", error);
+        alert("An error occurred while creating the product.");
+      }
     },
   });
 
