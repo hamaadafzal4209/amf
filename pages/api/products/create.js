@@ -7,18 +7,33 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { title, description, images } = req.body;
+    const { title, description, images, category, features } = req.body;
 
-    if (!title || !description || !images || !images.length) {
+    if (
+      !title ||
+      !description ||
+      !images?.length ||
+      !category ||
+      !features?.length
+    ) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
     await connectToDatabase();
 
-    const newProduct = new Product({ title, description, images });
+    const newProduct = new Product({
+      title,
+      description,
+      images,
+      category,
+      features,
+    });
     await newProduct.save();
 
-    return res.status(201).json({ message: "Product created successfully", newProduct });
+    return res.status(201).json({
+      message: "Product created successfully",
+      product: newProduct,
+    });
   } catch (error) {
     console.error("Error creating product:", error);
     return res.status(500).json({ message: "Internal server error" });

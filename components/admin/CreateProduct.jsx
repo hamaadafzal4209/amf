@@ -3,13 +3,22 @@
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { AlertCircle, Upload, X } from "lucide-react";
+import { AlertCircle, Upload, X, Plus } from "lucide-react";
 import Image from "next/image";
 import { ScrollArea } from "../ui/scroll-area";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function CreateProduct() {
   const [previewImages, setPreviewImages] = useState([]);
+  const [features, setFeatures] = useState([]);
 
+  // Function to upload images to Cloudinary
   async function uploadImages(files) {
     const uploads = files.map(async (file) => {
       const formData = new FormData();
@@ -31,11 +40,14 @@ export default function CreateProduct() {
     return Promise.all(uploads);
   }
 
+  // Formik configuration
   const formik = useFormik({
     initialValues: {
       title: "",
       description: "",
       images: [],
+      features: [],
+      category: "",
     },
     validationSchema: Yup.object({
       title: Yup.string()
@@ -47,6 +59,10 @@ export default function CreateProduct() {
       images: Yup.array()
         .of(Yup.mixed())
         .required("At least one image is required"),
+      features: Yup.array()
+        .of(Yup.string().required("Feature cannot be empty"))
+        .min(1, "At least one feature is required"),
+      category: Yup.string().required("Category is required"),
     }),
     onSubmit: async (values) => {
       try {
@@ -61,10 +77,10 @@ export default function CreateProduct() {
         });
 
         if (response.ok) {
-          const result = await response.json();
           alert("Product created successfully!");
           formik.resetForm();
           setPreviewImages([]);
+          setFeatures([]);
         } else {
           const error = await response.json();
           alert("Failed to create product: " + error.message);
@@ -101,6 +117,29 @@ export default function CreateProduct() {
     formik.setFieldValue(
       "images",
       formik.values.images.filter((_, index) => index !== indexToRemove)
+    );
+  };
+
+  const handleAddFeature = () => {
+    setFeatures([...features, ""]);
+    formik.setFieldValue("features", [...formik.values.features, ""]);
+  };
+
+  const handleFeatureChange = (value, index) => {
+    const updatedFeatures = [...features];
+    updatedFeatures[index] = value;
+    setFeatures(updatedFeatures);
+    formik.setFieldValue("features", updatedFeatures);
+  };
+
+  const handleRemoveFeature = (indexToRemove) => {
+    const updatedFeatures = features.filter(
+      (_, index) => index !== indexToRemove
+    );
+    setFeatures(updatedFeatures);
+    formik.setFieldValue(
+      "features",
+      formik.values.features.filter((_, index) => index !== indexToRemove)
     );
   };
 
@@ -167,6 +206,83 @@ export default function CreateProduct() {
               <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
                 <AlertCircle className="w-4 h-4" />
                 {formik.errors.description}
+              </p>
+            )}
+          </div>
+
+          <div className="mx-0.5">
+            <label
+              htmlFor="category"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Product Category
+            </label>
+            <Select
+              onValueChange={(value) => formik.setFieldValue("category", value)}
+            >
+              <SelectTrigger
+                className={`w-full mt-1 ${
+                  formik.touched.category && formik.errors.category
+                    ? "border-red-500"
+                    : "border-gray-300"
+                }`}
+              >
+                <SelectValue placeholder="Select a category" />
+              </SelectTrigger>
+              <SelectContent className="bg-white">
+                <SelectItem value="Main Distribution Boards">
+                  Main Distribution Boards
+                </SelectItem>
+                <SelectItem value="Motor Control Centers">
+                  Motor Control Centers
+                </SelectItem>
+                <SelectItem value="Panel Boards">Panel Boards</SelectItem>
+              </SelectContent>
+            </Select>
+            {formik.touched.category && formik.errors.category && (
+              <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+                <AlertCircle className="w-4 h-4" />
+                {formik.errors.category}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label
+              htmlFor="features"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Product Features
+            </label>
+            {features.map((feature, index) => (
+              <div key={index} className="flex gap-4 items-center mt-2 ml-0.5">
+                <input
+                  type="text"
+                  value={feature}
+                  onChange={(e) => handleFeatureChange(e.target.value, index)}
+                  placeholder={`Feature ${index + 1}`}
+                  className="flex-1 px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none border-gray-300"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleRemoveFeature(index)}
+                  className="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={handleAddFeature}
+              className="mt-2 flex items-center gap-2 px-4 py-2 rounded-lg bg-[#E66F3D] text-white"
+            >
+              <Plus className="w-5 h-5" /> Add Feature
+            </button>
+            {formik.touched.features && formik.errors.features && (
+              <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+                <AlertCircle className="w-4 h-4" />
+                {formik.errors.features}
               </p>
             )}
           </div>

@@ -16,8 +16,22 @@ const productSchema = new mongoose.Schema(
       type: [String],
       required: true,
     },
+    category: {
+      type: String,
+      required: true,
+      enum: [
+        "Main Distribution Boards",
+        "Motor Control Centers",
+        "Panel Boards",
+      ],
+    },
+    features: {
+      type: [String],
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-export default mongoose.models.Product || mongoose.model("Product", productSchema);
+export default mongoose.models.Product ||
+  mongoose.model("Product", productSchema);
