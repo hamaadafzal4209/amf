@@ -18,7 +18,6 @@ export default function CreateProduct() {
   const [previewImages, setPreviewImages] = useState([]);
   const [features, setFeatures] = useState([]);
 
-  // Function to upload images to Cloudinary
   async function uploadImages(files) {
     const uploads = files.map(async (file) => {
       const formData = new FormData();
@@ -40,7 +39,6 @@ export default function CreateProduct() {
     return Promise.all(uploads);
   }
 
-  // Formik configuration
   const formik = useFormik({
     initialValues: {
       title: "",

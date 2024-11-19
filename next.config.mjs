@@ -13,7 +13,10 @@ const nextConfig = {
       "www.cearsistemi.it",
       "s.alicdn.com",
       "localhost",
-      "www.anupamelectricalcontrols.com"
+      "www.anupamelectricalcontrols.com",
+      "res.cloudinary.com",
+      "example.com",
+      "via.placeholder.com"
     ],
   },
 };

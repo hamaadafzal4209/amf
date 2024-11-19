@@ -1,6 +1,4 @@
-"use client";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,26 +29,33 @@ import {
 } from "@/components/ui/alert-dialog";
 import Image from "next/image";
 
-// Mock data for products
-const initialProducts = Array.from({ length: 50 }, (_, i) => ({
-  id: i + 1,
-  name: `Product ${i + 1}`,
-  image: `http://localhost:3000/_next/image?url=https%3A%2F%2Fcdn.prod.website-files.com%2F6630e01961a932246ebda785%2F66b31b5d3c3eeb6ae3ae2c53_Customer%2520Experience%2520(CX)%2520Design%2520in%2520Manufacturing.%2520Examples%2520%2526%2520Case%2520Studies-p-1080.webp&w=1920&q=75`,
-}));
+// Fetch products from API
+const fetchProducts = async () => {
+  const response = await fetch("/api/products/allProducts");
+  const data = await response.json();
+  return data.products;
+};
 
 export default function ProductManagement() {
-  const [products, setProducts] = useState(initialProducts);
+  const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(6);
   const [deleteProductId, setDeleteProductId] = useState(null);
 
-  // Filter products based on search term
+  useEffect(() => {
+    const getProducts = async () => {
+      const data = await fetchProducts();
+      setProducts(data);
+    };
+
+    getProducts();
+  }, []);
+
   const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Calculate pagination
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = filteredProducts.slice(
@@ -126,16 +131,16 @@ export default function ProductManagement() {
           </TableHeader>
           <TableBody>
             {currentProducts.map((product) => (
-              <TableRow key={product.id} className="hover:bg-gray-100">
-                <TableCell className="font-medium">{product.id}</TableCell>
-                <TableCell>{product.name}</TableCell>
+              <TableRow key={product._id} className="hover:bg-gray-100">
+                <TableCell className="font-medium">{product._id}</TableCell>
+                <TableCell>{product.title}</TableCell>
                 <TableCell>
                   <Image
-                    src={product.image}
-                    alt={product.name}
-                    width={50}
-                    height={50}
-                    className="rounded-md"
+                    src={product.images[0]}
+                    alt={product.title}
+                    width={500}
+                    height={500}
+                    className="rounded-md w-24 h-auto"
                   />
                 </TableCell>
                 <TableCell className="text-right">
@@ -151,7 +156,7 @@ export default function ProductManagement() {
                     variant="ghost"
                     size="icon"
                     className="text-red-600 hover:text-red-700 hover:bg-red-100"
-                    onClick={() => handleDelete(product.id)}
+                    onClick={() => handleDelete(product._id)}
                   >
                     <Trash2 className="h-4 w-4" />
                     <span className="sr-only">Delete</span>
@@ -162,6 +167,7 @@ export default function ProductManagement() {
           </TableBody>
         </Table>
       </div>
+      {/* Pagination Controls */}
       <div className="flex justify-between items-center mt-4">
         <Button
           className="bg-main text-white hover:bg-[#da3a16]"
@@ -181,6 +187,7 @@ export default function ProductManagement() {
           Next
         </Button>
       </div>
+      {/* Delete Confirmation Dialog */}
       <AlertDialog
         open={deleteProductId !== null}
         onOpenChange={() => setDeleteProductId(null)}
