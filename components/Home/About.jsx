@@ -48,7 +48,7 @@ export default function AboutUs() {
             About Almaram Alfaneyah ManufacturingCo.
           </h1>
           <p className="max-w-3xl mx-auto text-muted-foreground text-lg">
-            Powering Cities with High-Quality LV Switchgear Solutions
+          We specialize in designing and manufacturing high-quality electrical panel boards tailored to meet diverse industrial and commercial needs. Our commitment to precision, safety, and reliability ensures optimal performance and efficiency in every product.
           </p>
         </header>
       </Fade>
