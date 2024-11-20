@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
@@ -12,13 +12,50 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import ImageSlider from "./ImageSlider";
 import Image from "next/image";
-import { categories } from "@/constants/data";
 
 export default function ProductShowcase() {
   const router = useRouter();
-  const [selectedTab, setSelectedTab] = useState(categories[0].id);
+  const [categories, setCategories] = useState([]);
+  const [selectedTab, setSelectedTab] = useState("");
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await fetch("/api/products/allProducts");
+        const data = await response.json();
+
+        setProducts(data.products);
+
+        // Categorize products by category
+        const categorizedProducts = {};
+        data.products.forEach((product) => {
+          const category = product.category;
+          if (category) {
+            if (!categorizedProducts[category]) {
+              categorizedProducts[category] = [];
+            }
+            categorizedProducts[category].push(product);
+          }
+        });
+
+        const categoryArray = Object.keys(categorizedProducts).map((key) => ({
+          id: key,
+          name: key,
+          products: categorizedProducts[key],
+        }));
+
+        setCategories(categoryArray);
+        setSelectedTab(categoryArray[0]?.id || "");
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    }
+
+    fetchProducts();
+  }, []);
 
   const handleTabClick = (categoryId) => {
     setSelectedTab(categoryId);
@@ -39,6 +76,7 @@ export default function ProductShowcase() {
         Our Switchgear Products
       </motion.h2>
 
+      {/* Tabs for categories */}
       <div className="flex space-x-4 mb-8 overflow-x-auto no-scrollbar">
         {categories.map((category) => (
           <Button
@@ -55,6 +93,7 @@ export default function ProductShowcase() {
         ))}
       </div>
 
+      {/* Products display */}
       <div>
         {categories.map(
           (category) =>
@@ -65,7 +104,7 @@ export default function ProductShowcase() {
               >
                 {category.products.map((product) => (
                   <motion.div
-                    key={product.id}
+                    key={product._id}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3 }}
@@ -73,27 +112,29 @@ export default function ProductShowcase() {
                     <Card className="h-full flex flex-col border border-gray-200 shadow-sm hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1">
                       <CardHeader>
                         <CardTitle className="text-main">
-                          {product.name}
+                          {product.title}
                         </CardTitle>
                         <CardDescription className="line-clamp-3">
                           {product.description}
                         </CardDescription>
                       </CardHeader>
                       <CardContent className="flex-grow">
-                        <div className="relative h-48">
+                        {product.images.length > 1 ? (
+                          <ImageSlider slides={product.images} />
+                        ) : (
                           <Image
-                            src={product.imageUrl}
-                            alt={product.name}
-                            layout="fill"
-                            objectFit="cover"
-                            className="rounded-md"
+                            width={500}
+                            height={500}
+                            src={product.images[0]}
+                            alt={product.title}
+                            className="w-full h-48 rounded-md object-cover"
                           />
-                        </div>
+                        )}
                       </CardContent>
                       <CardFooter>
                         <Button
                           className="bg-main hover:bg-black text-white"
-                          onClick={() => handleLearnMoreClick(product.id)}
+                          onClick={() => handleLearnMoreClick(product._id)}
                         >
                           Learn More
                         </Button>
