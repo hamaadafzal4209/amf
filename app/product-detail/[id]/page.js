@@ -3,13 +3,11 @@
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import MainLayout from "@/components/Layout/MainLayout";
 
-// Dummy data for product details
 const dummyProduct = {
   id: "1",
   name: "Premium Switchgear",
@@ -38,7 +36,6 @@ export default function ProductDetailPage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        {/* Back Button */}
         <Button
           onClick={() => router.back()}
           className="mb-8 bg-main text-white hover:bg-black px-6 py-3 rounded-lg shadow-lg"
@@ -46,7 +43,6 @@ export default function ProductDetailPage() {
           Go Back
         </Button>
 
-        {/* Product Details Section */}
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Image Section */}
           <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
@@ -59,19 +55,14 @@ export default function ProductDetailPage() {
             />
           </div>
 
-          {/* Product Information */}
           <div>
-            {/* Product Title */}
             <h1 className="text-4xl font-semibold text-main mb-4">
               {product.name}
             </h1>
-
-            {/* Product Description */}
             <p className="text-lg text-gray-700 mb-6 leading-relaxed">
               {product.description}
             </p>
 
-            {/* Key Features Section */}
             <div>
               <h3 className="text-xl font-semibold mb-4 text-gray-800">
                 Key Features:
@@ -85,7 +76,6 @@ export default function ProductDetailPage() {
               </ul>
             </div>
 
-            {/* Contact Us Button */}
             <Link href="/contact">
               <Button className="bg-main hover:bg-black text-white py-3 px-6 rounded-lg shadow-lg transition-all duration-300">
                 Contact Us for More Details

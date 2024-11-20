@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   Card,
@@ -72,7 +72,9 @@ export default function ProductShowcase() {
                   >
                     <Card className="h-full flex flex-col border border-gray-200 shadow-sm hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1">
                       <CardHeader>
-                        <CardTitle className="text-main">{product.name}</CardTitle>
+                        <CardTitle className="text-main">
+                          {product.name}
+                        </CardTitle>
                         <CardDescription className="line-clamp-3">
                           {product.description}
                         </CardDescription>
