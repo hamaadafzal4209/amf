@@ -12,9 +12,9 @@ const Slider = () => {
 
   const images = [
     "url('/assets/banner-1.jpg')",
+    "url('/assets/banner-4.jpg')",
     "url('/assets/banner-2.jpg')",
     "url('/assets/banner-3.jpg')",
-    "url('/assets/banner-4.jpg')",
   ];
 
   const textContents = [
