@@ -1,34 +1,65 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation"; // Correct hook
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import MainLayout from "@/components/Layout/MainLayout";
 
-// Dummy data for product details
-const dummyProduct = {
-  id: "1",
-  name: "Premium Switchgear",
-  description:
-    "Our Premium Switchgear provides high-quality, reliable performance and cutting-edge technology for all your electrical needs. It offers robust protection, high-efficiency ratings, and is designed for ease of maintenance.",
-  imageUrl:
-    "https://www.essmetron.com/wp-content/uploads/2012/01/UL1558-switchgear.jpg",
-  features: [
-    "Advanced protection systems",
-    "Energy-efficient design",
-    "Modular and scalable",
-    "Easy to maintain",
-    "Durable and reliable",
-  ],
-};
-
 export default function ProductDetailPage() {
-  const router = useRouter();
-  const [product] = useState(dummyProduct);
+  const { id } = useParams(); // Get the product ID from the dynamic route
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`/api/products/${id}`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch product with ID ${id}`);
+        }
+        const data = await response.json();
+        setProduct(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <MainLayout>
+        <div className="container mx-auto text-center py-16">
+          <p>Loading product details...</p>
+        </div>
+      </MainLayout>
+    );
+  }
+
+  if (error || !product) {
+    return (
+      <MainLayout>
+        <div className="container mx-auto text-center py-16">
+          <p>Error: {error || "Product not found."}</p>
+          <Button
+            onClick={() => window.history.back()} // Adjusted navigation
+            className="mt-4 bg-main text-white px-6 py-3 rounded-lg shadow-lg"
+          >
+            Go Back
+          </Button>
+        </div>
+      </MainLayout>
+    );
+  }
 
   return (
     <MainLayout>
@@ -38,17 +69,14 @@ export default function ProductDetailPage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        {/* Back Button */}
         <Button
-          onClick={() => router.back()}
+          onClick={() => window.history.back()}
           className="mb-8 bg-main text-white hover:bg-black px-6 py-3 rounded-lg shadow-lg"
         >
           Go Back
         </Button>
 
-        {/* Product Details Section */}
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Image Section */}
           <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
             <Image
               src={product.imageUrl}
@@ -58,39 +86,25 @@ export default function ProductDetailPage() {
               className="transition-transform duration-500 ease-in-out transform hover:scale-105"
             />
           </div>
-
-          {/* Product Information */}
           <div>
-            {/* Product Title */}
-            <h1 className="text-4xl font-semibold text-main mb-4">
-              {product.name}
-            </h1>
-
-            {/* Product Description */}
-            <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-              {product.description}
-            </p>
-
-            {/* Key Features Section */}
+            <h1 className="text-4xl font-semibold text-main mb-4">{product.name}</h1>
+            <p className="text-lg text-gray-700 mb-6 leading-relaxed">{product.description}</p>
             <div>
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">
-                Key Features:
-              </h3>
+              <h3 className="text-xl font-semibold mb-4 text-gray-800">Key Features:</h3>
               <ul className="list-disc list-inside mb-6 text-gray-600">
-                {product.features.map((feature, index) => (
+                {product.features?.map((feature, index) => (
                   <li key={index} className="mb-2">
                     {feature}
                   </li>
                 ))}
               </ul>
             </div>
-
-            {/* Contact Us Button */}
-            <Link href="/contact">
-              <Button className="bg-main hover:bg-black text-white py-3 px-6 rounded-lg shadow-lg transition-all duration-300">
-                Contact Us for More Details
-              </Button>
-            </Link>
+            <Button
+              onClick={() => window.location.href = "/contact"}
+              className="bg-main hover:bg-black text-white py-3 px-6 rounded-lg shadow-lg transition-all duration-300"
+            >
+              Contact Us for More Details
+            </Button>
           </div>
         </div>
       </motion.div>
