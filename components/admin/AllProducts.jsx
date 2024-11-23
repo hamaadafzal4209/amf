@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -28,32 +28,26 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import Image from "next/image";
-
-// Fetch products from API
-const fetchProducts = async () => {
-  const response = await fetch("/api/products/allProducts");
-  const data = await response.json();
-  return data.products;
-};
+import { deleteProduct, fetchProducts } from "@/lib/productsSlice";
+import { useRouter } from "next/navigation";
 
 export default function ProductManagement() {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const {
+    products = [],
+    loading,
+    error,
+  } = useSelector((state) => state.products); // Default to empty array if no products
+
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(6);
   const [deleteProductId, setDeleteProductId] = useState(null);
-  const [loading, setLoading] = useState(true);  
 
   useEffect(() => {
-    const getProducts = async () => {
-      setLoading(true);  
-      const data = await fetchProducts();
-      setProducts(data);
-      setLoading(false); 
-    };
-
-    getProducts();
-  }, []);
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -81,52 +75,60 @@ export default function ProductManagement() {
     setCurrentPage(pageNumber);
   };
 
+  const handleEdit = (id) => {
+    router.push(`/product/edit/${id}`);
+  };
+
   const handleDelete = (id) => {
     setDeleteProductId(id);
   };
 
   const confirmDelete = () => {
     if (deleteProductId) {
-      setProducts(products.filter((product) => product.id !== deleteProductId));
+      dispatch(deleteProduct(deleteProductId));
       setDeleteProductId(null);
     }
   };
 
   return (
     <div className="container mx-auto p-4 space-y-4">
-      {/* Search and Products per page selection */}
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-        <input
-          type="search"
-          placeholder="Search products..."
-          value={searchTerm}
-          onChange={handleSearch}
-          className="w-full sm:w-64 border-gray-300 px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none"
-        />
-        <Select
-          onValueChange={handleProductsPerPageChange}
-          value={productsPerPage.toString()}
-        >
-          <SelectTrigger className="w-full sm:w-[180px] bg-white hover:bg-gray-100 focus:ring-2 focus:ring-primary">
-            <SelectValue placeholder="Products per page" />
-          </SelectTrigger>
-          <SelectContent className="bg-white">
-            <SelectItem className="cursor-pointer" value="4">
-              4 per page
-            </SelectItem>
-            <SelectItem className="cursor-pointer" value="6">
-              6 per page
-            </SelectItem>
-            <SelectItem className="cursor-pointer" value="8">
-              8 per page
-            </SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+      {filteredProducts.length > 0 && (
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <input
+            type="search"
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={handleSearch}
+            className="w-full sm:w-64 border-gray-300 px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none"
+          />
+          <Select
+            onValueChange={handleProductsPerPageChange}
+            value={productsPerPage.toString()}
+          >
+            <SelectTrigger className="w-full sm:w-[180px] bg-white hover:bg-gray-100 focus:ring-2 focus:ring-primary">
+              <SelectValue placeholder="Products per page" />
+            </SelectTrigger>
+            <SelectContent className="bg-white">
+              <SelectItem value="4">4 per page</SelectItem>
+              <SelectItem value="6">6 per page</SelectItem>
+              <SelectItem value="8">8 per page</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      )}
 
       {loading ? (
         <div className="flex justify-center items-center py-6 min-h-[50vh]">
-          <div className="border-gray-300 h-10 w-10 animate-spin rounded-full border-4 border-t-blue-600"></div>
+          <div className="loader"></div>
+        </div>
+      ) : error ? (
+        <div className="text-center text-red-600 py-6">{error}</div>
+      ) : filteredProducts.length === 0 ? (
+        <div className="text-center text-xl text-gray-600 py-6">
+          <p>No products found.</p>
+          <p className="text-lg text-gray-400">
+            Try adjusting your search or add new products.
+          </p>
         </div>
       ) : (
         <div className="bg-white shadow-md rounded-lg overflow-hidden max-h-[80vh] overflow-y-auto custom-scrollbar">
@@ -148,9 +150,9 @@ export default function ProductManagement() {
                     <Image
                       src={product.images[0]}
                       alt={product.title}
-                      width={500}
-                      height={500}
-                      className="rounded-md w-24 h-auto"
+                      width={1000}
+                      height={1000}
+                      className="w-32 h-32 aspect-square object-cover rounded-md"
                     />
                   </TableCell>
                   <TableCell className="text-right">
@@ -158,6 +160,7 @@ export default function ProductManagement() {
                       variant="ghost"
                       size="icon"
                       className="text-green-600 hover:text-green-700 hover:bg-green-100"
+                      onClick={() => handleEdit(product._id)}
                     >
                       <Pencil className="h-4 w-4" />
                       <span className="sr-only">Edit</span>
@@ -179,27 +182,28 @@ export default function ProductManagement() {
         </div>
       )}
 
-      <div className="flex justify-between items-center mt-4">
-        <Button
-          className="bg-main text-white hover:bg-[#da3a16]"
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </Button>
-        <span>
-          Page {currentPage} of {totalPages}
-        </span>
-        <Button
-          className="bg-main text-white hover:bg-[#da3a16]"
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </Button>
-      </div>
+      {filteredProducts.length > 0 && (
+        <div className="flex justify-between items-center mt-4">
+          <Button
+            className="bg-main text-white hover:bg-[#da3a16]"
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </Button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <Button
+            className="bg-main text-white hover:bg-[#da3a16]"
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </Button>
+        </div>
+      )}
 
-      {/* Delete Confirmation Dialog */}
       <AlertDialog
         open={deleteProductId !== null}
         onOpenChange={() => setDeleteProductId(null)}
@@ -210,8 +214,7 @@ export default function ProductManagement() {
               Are you sure you want to delete this product?
             </AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the
-              product from the database.
+              This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

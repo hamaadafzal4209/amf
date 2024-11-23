@@ -50,7 +50,7 @@ export default function ProductDetailPage() {
 
   if (loading) {
     return (
-        <div className="h-screen flex items-center justify-center">
+        <div className="h-screen w-full flex items-center justify-center">
           <div className="loader"></div>
         </div>
     );

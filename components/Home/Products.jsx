@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import {
   Card,
@@ -14,48 +15,45 @@ import {
 import { Button } from "@/components/ui/button";
 import ImageSlider from "./ImageSlider";
 import Image from "next/image";
+import { fetchProducts } from "@/lib/productsSlice";
 
 export default function ProductShowcase() {
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  const { products, loading, error } = useSelector((state) => state.products);
+
   const [categories, setCategories] = useState([]);
   const [selectedTab, setSelectedTab] = useState("");
-  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const response = await fetch("/api/products/allProducts");
-        const data = await response.json();
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
-        setProducts(data.products);
-
-        // Categorize products by category
-        const categorizedProducts = {};
-        data.products.forEach((product) => {
-          const category = product.category;
-          if (category) {
-            if (!categorizedProducts[category]) {
-              categorizedProducts[category] = [];
-            }
-            categorizedProducts[category].push(product);
+  useEffect(() => {
+    // Categorize products into tabs based on their categories
+    if (products.length > 0) {
+      const categorizedProducts = {};
+      products.forEach((product) => {
+        const category = product.category;
+        if (category) {
+          if (!categorizedProducts[category]) {
+            categorizedProducts[category] = [];
           }
-        });
+          categorizedProducts[category].push(product);
+        }
+      });
 
-        const categoryArray = Object.keys(categorizedProducts).map((key) => ({
-          id: key,
-          name: key,
-          products: categorizedProducts[key],
-        }));
+      const categoryArray = Object.keys(categorizedProducts).map((key) => ({
+        id: key,
+        name: key,
+        products: categorizedProducts[key],
+      }));
 
-        setCategories(categoryArray);
-        setSelectedTab(categoryArray[0]?.id || "");
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
+      setCategories(categoryArray);
+      setSelectedTab(categoryArray[0]?.id || "");
     }
-
-    fetchProducts();
-  }, []);
+  }, [products]);
 
   const handleTabClick = (categoryId) => {
     setSelectedTab(categoryId);
@@ -64,6 +62,22 @@ export default function ProductShowcase() {
   const handleLearnMoreClick = (productId) => {
     router.push(`/product-detail/${productId}`);
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center py-16">
+        <div className="border-gray-300 h-10 w-10 animate-spin rounded-full border-4 border-t-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-red-600 py-16">
+        Failed to load products: {error}
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 md:px-8 lg:px-12 pb-16">
@@ -109,7 +123,13 @@ export default function ProductShowcase() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Card className="h-full flex flex-col border border-gray-200 shadow-sm hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1">
+                    <Card
+                      style={{
+                        boxShadow:
+                          "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+                      }}
+                      className="h-full flex flex-col border border-gray-200 hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1"
+                    >
                       <CardHeader>
                         <CardTitle className="text-main">
                           {product.title}
@@ -127,7 +147,7 @@ export default function ProductShowcase() {
                             height={500}
                             src={product.images[0]}
                             alt={product.title}
-                            className="w-full h-48 rounded-md object-cover"
+                            className="w-full min-h-48 max-h-48 rounded-md object-cover"
                           />
                         )}
                       </CardContent>
