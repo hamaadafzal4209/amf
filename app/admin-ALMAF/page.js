@@ -18,7 +18,7 @@ const Page = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("all-products");
   const [isMobile, setIsMobile] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -37,6 +37,7 @@ const Page = () => {
 
   const handlePasswordSubmit = () => {
     if (password === correctPassword) {
+      localStorage.setItem("adminPassword", password);
       setIsModalOpen(false);
     } else {
       setError("Incorrect password. Please try again.");
@@ -44,6 +45,14 @@ const Page = () => {
   };
 
   useEffect(() => {
+    // Check if the password is already stored in localStorage
+    const savedPassword = localStorage.getItem("adminPassword");
+    if (savedPassword === correctPassword) {
+      setIsModalOpen(false);
+    } else {
+      setIsModalOpen(true);
+    }
+
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setIsMobile(true);

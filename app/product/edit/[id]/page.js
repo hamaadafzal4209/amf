@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
@@ -28,14 +28,23 @@ export default function EditProduct() {
   useEffect(() => {
     if (id) {
       const fetchProduct = async () => {
-        const response = await fetch(`/api/products/edit/${id}`);
-        if (response.ok) {
-          const data = await response.json();
-          setProduct(data.product);
-          setFeatures(data.product.features);
-          setPreviewImages(data.product.images);
-        } else {
-          toast.error("Failed to fetch product data.");
+        try {
+          const response = await fetch(`/api/products/edit/${id}`, {
+            method: "GET",
+          });
+          if (response.ok) {
+            const data = await response.json();
+            console.log("Fetched product:", data);
+            setProduct(data.product);
+            setFeatures(data.product.features);
+            setPreviewImages(data.product.images);
+          } else {
+            console.error("Failed to fetch product. Status:", response.status);
+            toast.error("Failed to fetch product data.");
+          }
+        } catch (error) {
+          console.error("Error fetching product:", error);
+          toast.error("An error occurred while fetching product data.");
         }
       };
       fetchProduct();
@@ -102,7 +111,7 @@ export default function EditProduct() {
 
         if (response.ok) {
           toast.success("Product updated successfully!");
-          router.push("/products"); // Redirect after successful update
+          router.push("/admin-ALMAF");
         } else {
           const error = await response.json();
           toast.error("Failed to update product: " + error.message);
@@ -168,10 +177,12 @@ export default function EditProduct() {
     );
   };
 
-  if (!product) return <div>Loading...</div>;
+  if (!product) return <div className="h-screen flex items-center justify-center">
+    <div className="loader"></div>
+  </div>;
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen px-4">
       <ScrollArea
         style={{
           boxShadow:
@@ -412,13 +423,19 @@ export default function EditProduct() {
                       fill="currentFill"
                     />
                   </svg>
-                  Loading...
+                  updating...
                 </Button>
               ) : (
                 <Button className="w-full py-2 rounded-lg text-white bg-main font-medium hover:bg-main">
                   Update Product
                 </Button>
               )}
+            </div>
+
+            <div>
+              <Button className="w-full py-2 rounded-lg text-white font-medium bg-gray-500 hover:bg-gray-600">
+                Cancel
+              </Button>
             </div>
           </form>
         </div>

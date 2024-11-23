@@ -66,7 +66,7 @@ export default function ProductShowcase() {
   if (loading) {
     return (
       <div className="flex justify-center items-center py-16">
-        <div className="border-gray-300 h-10 w-10 animate-spin rounded-full border-4 border-t-blue-600"></div>
+        <div className="loader"></div>
       </div>
     );
   }
