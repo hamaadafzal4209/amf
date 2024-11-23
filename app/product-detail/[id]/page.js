@@ -50,11 +50,9 @@ export default function ProductDetailPage() {
 
   if (loading) {
     return (
-      <MainLayout>
-        <div className="container mx-auto text-center py-16">
-          <p>Loading product details...</p>
+        <div className="h-screen flex items-center justify-center">
+          <div className="loader"></div>
         </div>
-      </MainLayout>
     );
   }
 
