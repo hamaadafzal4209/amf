@@ -50,7 +50,7 @@ const ImageSlider = ({ slides }) => {
             height={500}
             src={slide}
             alt={`Slide ${index + 1}`}
-            className="w-full h-48 rounded-md object-cover"
+            className="w-full h-full rounded-md object-cover"
           />
         </div>
       ))}
