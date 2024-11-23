@@ -107,7 +107,7 @@ export function Testimonial() {
         </h2>
         <div className="relative max-w-6xl mx-auto">
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex -ml-4">
+            <div className="flex -ml-2">
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}

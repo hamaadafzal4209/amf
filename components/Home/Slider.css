@@ -71,6 +71,12 @@
 }
 
 @media (max-width: 550px) {
+  .slide-text {
+    font-size: 1.6rem;
+  }
+  .slide-description{
+    font-size: 1rem;
+  }
   .wrapper{
     height: 50vh;
   }

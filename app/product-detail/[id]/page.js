@@ -50,9 +50,9 @@ export default function ProductDetailPage() {
 
   if (loading) {
     return (
-        <div className="h-screen w-full flex items-center justify-center">
-          <div className="loader"></div>
-        </div>
+      <div className="h-screen w-full flex items-center justify-center">
+        <div className="loader"></div>
+      </div>
     );
   }
 
@@ -87,8 +87,13 @@ export default function ProductDetailPage() {
           Go Back
         </Button>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
+        <div className="grid md:grid-cols-2 gap-12">
+          <div
+            className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg p-4"
+            style={{
+              boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+            }}
+          >
             {product.images.length > 1 ? (
               <ImageSlider slides={product.images} />
             ) : (

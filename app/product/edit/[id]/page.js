@@ -86,7 +86,7 @@ export default function EditProduct() {
         .max(100, "Title must be 100 characters or less"),
       description: Yup.string()
         .required("Description is required")
-        .max(500, "Description must be 500 characters or less"),
+        .max(1000, "Description must be 1000 characters or less"),
       images: Yup.array()
         .of(Yup.mixed())
         .required("At least one image is required"),
@@ -177,9 +177,12 @@ export default function EditProduct() {
     );
   };
 
-  if (!product) return <div className="h-screen flex items-center justify-center">
-    <div className="loader"></div>
-  </div>;
+  if (!product)
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <div className="loader"></div>
+      </div>
+    );
 
   return (
     <div className="flex items-center justify-center h-screen px-4">
@@ -431,13 +434,13 @@ export default function EditProduct() {
                 </Button>
               )}
             </div>
-
-            <div>
-              <Button className="w-full py-2 rounded-lg text-white font-medium bg-gray-500 hover:bg-gray-600">
-                Cancel
-              </Button>
-            </div>
           </form>
+          <Button
+            onClick={() => router.back()}
+            className="mt-4 w-full py-2 rounded-lg text-white font-medium bg-gray-500 hover:bg-gray-600"
+          >
+            Cancel
+          </Button>
         </div>
       </ScrollArea>
     </div>

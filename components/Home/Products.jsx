@@ -125,8 +125,7 @@ export default function ProductShowcase() {
                   >
                     <Card
                       style={{
-                        boxShadow:
-                          "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+                        boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
                       }}
                       className="h-full flex flex-col border border-gray-200 hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1"
                     >
@@ -138,16 +137,17 @@ export default function ProductShowcase() {
                           {product.description}
                         </CardDescription>
                       </CardHeader>
-                      <CardContent className="flex-grow">
+                      <CardContent className="">
                         {product.images.length > 1 ? (
                           <ImageSlider slides={product.images} />
                         ) : (
                           <Image
-                            width={500}
-                            height={500}
+                            width={1000}
+                            height={1000}
                             src={product.images[0]}
                             alt={product.title}
-                            className="w-full min-h-48 max-h-48 rounded-md object-cover"
+                            objectFit="cover"
+                            className="transition-transform duration-500 ease-in-out transform hover:scale-105"
                           />
                         )}
                       </CardContent>

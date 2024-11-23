@@ -56,7 +56,7 @@ export default function CreateProduct() {
         .max(100, "Title must be 100 characters or less"),
       description: Yup.string()
         .required("Description is required")
-        .max(500, "Description must be 500 characters or less"),
+        .max(1000, "Description must be 1000 characters or less"),
       images: Yup.array()
         .of(Yup.mixed())
         .required("At least one image is required"),
