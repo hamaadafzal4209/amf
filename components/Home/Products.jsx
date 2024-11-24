@@ -13,12 +13,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import ImageSlider from "./ImageSlider";
-import Image from "next/image";
 import { fetchProducts } from "@/lib/productsSlice";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 export default function ProductShowcase({ slice = false }) {
-  // Accept slice as a prop
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -33,35 +35,31 @@ export default function ProductShowcase({ slice = false }) {
 
   useEffect(() => {
     if (products.length > 0) {
-      const categorizedProducts = {};
-      products.forEach((product) => {
-        const category = product.category;
-        if (category) {
-          if (!categorizedProducts[category]) {
-            categorizedProducts[category] = [];
-          }
-          categorizedProducts[category].push(product);
+      const categorizedProducts = products.reduce((acc, product) => {
+        if (product.category) {
+          acc[product.category] = acc[product.category] || [];
+          acc[product.category].push(product);
         }
-      });
+        return acc;
+      }, {});
 
-      const categoryArray = Object.keys(categorizedProducts).map((key) => ({
-        id: key,
-        name: key,
-        products: categorizedProducts[key],
-      }));
+      const categoryArray = Object.entries(categorizedProducts).map(
+        ([key, value]) => ({
+          id: key,
+          name: key,
+          products: value,
+        })
+      );
 
       setCategories(categoryArray);
       setSelectedTab(categoryArray[0]?.id || "");
     }
   }, [products]);
 
-  const handleTabClick = (categoryId) => {
-    setSelectedTab(categoryId);
-  };
+  const handleTabClick = (categoryId) => setSelectedTab(categoryId);
 
-  const handleLearnMoreClick = (productId) => {
+  const handleLearnMoreClick = (productId) =>
     router.push(`/product-detail/${productId}`);
-  };
 
   if (loading) {
     return (
@@ -90,7 +88,7 @@ export default function ProductShowcase({ slice = false }) {
         Our Switchgear Products
       </motion.h2>
 
-      {/* Tabs for categories */}
+      {/* Category Tabs */}
       <div className="flex space-x-4 mb-8 overflow-x-auto no-scrollbar">
         {categories.map((category) => (
           <Button
@@ -107,6 +105,7 @@ export default function ProductShowcase({ slice = false }) {
         ))}
       </div>
 
+      {/* Product List */}
       <div>
         {categories.map(
           (category) =>
@@ -125,12 +124,7 @@ export default function ProductShowcase({ slice = false }) {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Card
-                      style={{
-                        boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
-                      }}
-                      className="h-full flex flex-col border border-gray-200 hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1"
-                    >
+                    <Card className="h-full flex flex-col border border-gray-200 hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1">
                       <CardHeader>
                         <CardTitle className="text-main">
                           {product.title}
@@ -140,19 +134,30 @@ export default function ProductShowcase({ slice = false }) {
                         </CardDescription>
                       </CardHeader>
                       <CardContent className="h-48">
-                        {product.images.length > 1 ? (
-                          <ImageSlider slides={product.images} />
-                        ) : (
-                          <Image
-                            width={1000}
-                            height={1000}
-                            src={product.images[0]}
-                            alt={product.title}
-                            className="transition-transform duration-500 h-44 ease-in-out object-cover transform hover:scale-105"
-                          />
-                        )}
+                        <Swiper
+                          navigation={false}
+                          autoplay={
+                            product.images.length > 1
+                              ? { delay: 3000, disableOnInteraction: false }
+                              : false
+                          }
+                          loop={product.images.length > 1}
+                          modules={[Autoplay]}
+                          className="rounded-lg h-full" // Ensure Swiper fills its container
+                        >
+                          {product.images.map((image, index) => (
+                            <SwiperSlide key={index}>
+                              <div
+                                className="h-full w-full bg-center bg-cover"
+                                style={{
+                                  backgroundImage: `url(${image})`,
+                                }}
+                              ></div>
+                            </SwiperSlide>
+                          ))}
+                        </Swiper>
                       </CardContent>
-                      <CardFooter className="mt-4">
+                      <CardFooter>
                         <Button
                           className="bg-main hover:bg-black text-white"
                           onClick={() => handleLearnMoreClick(product._id)}
