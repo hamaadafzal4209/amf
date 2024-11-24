@@ -97,10 +97,14 @@ export default function ProductDetailPage() {
         <div className="grid md:grid-cols-2 gap-12">
           <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
             <Swiper
-              onSwiper={(swiper) => (swiperRef.current = swiper)} // Store Swiper instance directly
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
               navigation={false}
-              autoplay={{ delay: 3000, disableOnInteraction: false }}
-              loop={true}
+              autoplay={
+                product.images.length > 1
+                  ? { delay: 3000, disableOnInteraction: false }
+                  : false
+              }
+              loop={product.images.length > 1}
               modules={[Navigation, Autoplay]}
               onSlideChange={handleSlideChange}
               className="rounded-lg"
@@ -119,18 +123,22 @@ export default function ProductDetailPage() {
               ))}
             </Swiper>
 
-            <div
-              className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-3xl cursor-pointer z-10 bg-black bg-opacity-50 p-2 rounded-full hover:bg-main transition-all"
-              onClick={() => swiperRef.current?.slidePrev()}
-            >
-              {"<"}
-            </div>
-            <div
-              className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-3xl cursor-pointer z-10 bg-black bg-opacity-50 p-2 rounded-full hover:bg-main transition-all"
-              onClick={() => swiperRef.current?.slideNext()}
-            >
-              {">"}
-            </div>
+            {product.images.length > 1 && (
+              <>
+                <div
+                  className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-3xl cursor-pointer z-10 bg-black bg-opacity-50 p-2 rounded-full hover:bg-main transition-all"
+                  onClick={() => swiperRef.current?.slidePrev()}
+                >
+                  {"<"}
+                </div>
+                <div
+                  className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-3xl cursor-pointer z-10 bg-black bg-opacity-50 p-2 rounded-full hover:bg-main transition-all"
+                  onClick={() => swiperRef.current?.slideNext()}
+                >
+                  {">"}
+                </div>
+              </>
+            )}
           </div>
 
           <div>
