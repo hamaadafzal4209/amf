@@ -118,55 +118,51 @@ export default function ProductShowcase({ slice = false }) {
                 {(slice
                   ? category.products.slice(0, 3)
                   : category.products
-                ).map(
-                  (
-                    product // Use slice prop here
-                  ) => (
-                    <motion.div
-                      key={product._id}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3 }}
+                ).map((product) => (
+                  <motion.div
+                    key={product._id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Card
+                      style={{
+                        boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+                      }}
+                      className="h-full flex flex-col border border-gray-200 hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1"
                     >
-                      <Card
-                        style={{
-                          boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
-                        }}
-                        className="h-full flex flex-col border border-gray-200 hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1"
-                      >
-                        <CardHeader>
-                          <CardTitle className="text-main">
-                            {product.title}
-                          </CardTitle>
-                          <CardDescription className="line-clamp-3">
-                            {product.description}
-                          </CardDescription>
-                        </CardHeader>
-                        <CardContent className="h-48">
-                          {product.images.length > 1 ? (
-                            <ImageSlider slides={product.images} />
-                          ) : (
-                            <Image
-                              width={1000}
-                              height={1000}
-                              src={product.images[0]}
-                              alt={product.title}
-                              className="transition-transform duration-500 h-44 ease-in-out object-cover transform hover:scale-105"
-                            />
-                          )}
-                        </CardContent>
-                        <CardFooter className="mt-4">
-                          <Button
-                            className="bg-main hover:bg-black text-white"
-                            onClick={() => handleLearnMoreClick(product._id)}
-                          >
-                            Learn More
-                          </Button>
-                        </CardFooter>
-                      </Card>
-                    </motion.div>
-                  )
-                )}
+                      <CardHeader>
+                        <CardTitle className="text-main">
+                          {product.title}
+                        </CardTitle>
+                        <CardDescription className="line-clamp-3">
+                          {product.description}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="h-48">
+                        {product.images.length > 1 ? (
+                          <ImageSlider slides={product.images} />
+                        ) : (
+                          <Image
+                            width={1000}
+                            height={1000}
+                            src={product.images[0]}
+                            alt={product.title}
+                            className="transition-transform duration-500 h-44 ease-in-out object-cover transform hover:scale-105"
+                          />
+                        )}
+                      </CardContent>
+                      <CardFooter className="mt-4">
+                        <Button
+                          className="bg-main hover:bg-black text-white"
+                          onClick={() => handleLearnMoreClick(product._id)}
+                        >
+                          Learn More
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  </motion.div>
+                ))}
               </div>
             )
         )}

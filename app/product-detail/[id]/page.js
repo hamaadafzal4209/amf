@@ -1,20 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation"; // For fetching the product ID from the route
+import { useEffect, useState, useRef } from "react";
+import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import MainLayout from "@/components/Layout/MainLayout";
-import ImageSlider from "@/components/Home/ImageSlider";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import RelatedProducts from "@/components/RelatedProducts";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [activeSlide, setActiveSlide] = useState(0);
 
-  // console.log("Product ID from useParams:", id);
+  const swiperRef = useRef(null);
 
   useEffect(() => {
     if (!id) {
@@ -27,7 +32,6 @@ export default function ProductDetailPage() {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        // console.log("Fetching product data for ID:", id);
         const response = await fetch(`/api/products/${id}`);
         if (!response.ok) {
           throw new Error(
@@ -35,7 +39,6 @@ export default function ProductDetailPage() {
           );
         }
         const data = await response.json();
-        // console.log("Fetched product data:", data);
         setProduct(data.product);
       } catch (err) {
         console.error("Error fetching product data:", err.message);
@@ -47,6 +50,10 @@ export default function ProductDetailPage() {
 
     fetchProduct();
   }, [id]);
+
+  const handleSlideChange = (swiper) => {
+    setActiveSlide(swiper.realIndex); // Ensure correct index is tracked
+  };
 
   if (loading) {
     return (
@@ -88,24 +95,42 @@ export default function ProductDetailPage() {
         </Button>
 
         <div className="grid md:grid-cols-2 gap-12">
-          <div
-            className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg p-4"
-            style={{
-              boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
-            }}
-          >
-            {product.images.length > 1 ? (
-              <ImageSlider slides={product.images} />
-            ) : (
-              <Image
-                width={1000}
-                height={1000}
-                src={product.images[0]}
-                alt={product.title}
-                objectFit="cover"
-                className="transition-transform duration-500 ease-in-out transform hover:scale-105"
-              />
-            )}
+          <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
+            <Swiper
+              onSwiper={(swiper) => (swiperRef.current = swiper)} // Store Swiper instance directly
+              navigation={false}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              loop={true}
+              modules={[Navigation, Autoplay]}
+              onSlideChange={handleSlideChange}
+              className="rounded-lg"
+            >
+              {product.images.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <div
+                    className="h-[400px] w-full"
+                    style={{
+                      backgroundImage: `url(${image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  ></div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
+            <div
+              className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-3xl cursor-pointer z-10 bg-black bg-opacity-50 p-2 rounded-full hover:bg-main transition-all"
+              onClick={() => swiperRef.current?.slidePrev()}
+            >
+              {"<"}
+            </div>
+            <div
+              className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-3xl cursor-pointer z-10 bg-black bg-opacity-50 p-2 rounded-full hover:bg-main transition-all"
+              onClick={() => swiperRef.current?.slideNext()}
+            >
+              {">"}
+            </div>
           </div>
 
           <div>
@@ -138,6 +163,11 @@ export default function ProductDetailPage() {
           </div>
         </div>
       </motion.div>
+
+      <RelatedProducts
+        currentProductId={product._id}
+        currentCategory={product.category}
+      />
     </MainLayout>
   );
 }
