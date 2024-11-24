@@ -20,7 +20,7 @@ export default function Home() {
       <MainLayout>
         <Slider />
         <AboutUs />
-        <ProductShowcase />
+        <ProductShowcase slice={true} />
         <KeyFeaturesAndBenefits />
         <Services />
         <Testimonial/>

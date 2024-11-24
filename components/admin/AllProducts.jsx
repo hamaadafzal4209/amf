@@ -145,12 +145,6 @@ export default function ProductManagement() {
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
-                      ID
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
                       Name
                     </th>
                     <th
@@ -173,15 +167,9 @@ export default function ProductManagement() {
                     </th>
                   </tr>
                 </thead>
-                {/* Table Body */}
                 <tbody className="bg-white divide-y divide-gray-200">
                   {currentProducts.map((product) => (
                     <tr key={product._id} className="hover:bg-gray-50">
-                      {/* Product ID */}
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {product._id.slice(0, 4)}
-                      </td>
-
                       <td
                         onClick={() => handleLearnMoreClick(product._id)}
                         className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer"

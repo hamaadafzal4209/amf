@@ -17,7 +17,8 @@ import ImageSlider from "./ImageSlider";
 import Image from "next/image";
 import { fetchProducts } from "@/lib/productsSlice";
 
-export default function ProductShowcase() {
+export default function ProductShowcase({ slice = false }) {
+  // Accept slice as a prop
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -31,7 +32,6 @@ export default function ProductShowcase() {
   }, [dispatch]);
 
   useEffect(() => {
-    // Categorize products into tabs based on their categories
     if (products.length > 0) {
       const categorizedProducts = {};
       products.forEach((product) => {
@@ -107,7 +107,6 @@ export default function ProductShowcase() {
         ))}
       </div>
 
-      {/* Products display */}
       <div>
         {categories.map(
           (category) =>
@@ -116,52 +115,58 @@ export default function ProductShowcase() {
                 key={category.id}
                 className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
               >
-                {category.products.map((product) => (
-                  <motion.div
-                    key={product._id}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Card
-                      style={{
-                        boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
-                      }}
-                      className="h-full flex flex-col border border-gray-200 hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1"
+                {(slice
+                  ? category.products.slice(0, 3)
+                  : category.products
+                ).map(
+                  (
+                    product // Use slice prop here
+                  ) => (
+                    <motion.div
+                      key={product._id}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3 }}
                     >
-                      <CardHeader>
-                        <CardTitle className="text-main">
-                          {product.title}
-                        </CardTitle>
-                        <CardDescription className="line-clamp-3">
-                          {product.description}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="">
-                        {product.images.length > 1 ? (
-                          <ImageSlider slides={product.images} />
-                        ) : (
-                          <Image
-                            width={1000}
-                            height={1000}
-                            src={product.images[0]}
-                            alt={product.title}
-                            objectFit="cover"
-                            className="transition-transform duration-500 ease-in-out transform hover:scale-105"
-                          />
-                        )}
-                      </CardContent>
-                      <CardFooter>
-                        <Button
-                          className="bg-main hover:bg-black text-white"
-                          onClick={() => handleLearnMoreClick(product._id)}
-                        >
-                          Learn More
-                        </Button>
-                      </CardFooter>
-                    </Card>
-                  </motion.div>
-                ))}
+                      <Card
+                        style={{
+                          boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+                        }}
+                        className="h-full flex flex-col border border-gray-200 hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1"
+                      >
+                        <CardHeader>
+                          <CardTitle className="text-main">
+                            {product.title}
+                          </CardTitle>
+                          <CardDescription className="line-clamp-3">
+                            {product.description}
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent className="h-48">
+                          {product.images.length > 1 ? (
+                            <ImageSlider slides={product.images} />
+                          ) : (
+                            <Image
+                              width={1000}
+                              height={1000}
+                              src={product.images[0]}
+                              alt={product.title}
+                              className="transition-transform duration-500 h-44 ease-in-out object-cover transform hover:scale-105"
+                            />
+                          )}
+                        </CardContent>
+                        <CardFooter className="mt-4">
+                          <Button
+                            className="bg-main hover:bg-black text-white"
+                            onClick={() => handleLearnMoreClick(product._id)}
+                          >
+                            Learn More
+                          </Button>
+                        </CardFooter>
+                      </Card>
+                    </motion.div>
+                  )
+                )}
               </div>
             )
         )}
