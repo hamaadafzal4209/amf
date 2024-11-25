@@ -3,7 +3,6 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import StoreProvider from "./StoreProvider";
 import NextTopLoader from "nextjs-toploader";
-import { BackToTop } from "@/components/Common/BackToTOp";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -31,7 +30,6 @@ export default function RootLayout({ children }) {
         <NextTopLoader color="#E66F3D" height={4} showSpinner={false} />
         <StoreProvider>
           <Toaster />
-          <BackToTop/>
           {children}
         </StoreProvider>
       </body>
