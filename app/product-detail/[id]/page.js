@@ -12,6 +12,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import RelatedProducts from "@/components/RelatedProducts";
+import Image from "next/image";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -197,7 +198,9 @@ export default function ProductDetailPage() {
             >
               {product.images.map((image, index) => (
                 <SwiperSlide key={index}>
-                  <img
+                  <Image
+                    width={1000}
+                    height={1000}
                     src={image}
                     alt={`Product Image ${index + 1}`}
                     className="object-contain h-full w-full"
