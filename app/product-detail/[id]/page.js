@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import MainLayout from "@/components/Layout/MainLayout";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
+import { ChevronLeft, ChevronRight, Maximize } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -18,6 +19,7 @@ export default function ProductDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false); // For fullscreen mode
 
   const swiperRef = useRef(null);
 
@@ -52,7 +54,11 @@ export default function ProductDetailPage() {
   }, [id]);
 
   const handleSlideChange = (swiper) => {
-    setActiveSlide(swiper.realIndex); // Ensure correct index is tracked
+    setActiveSlide(swiper.realIndex);
+  };
+
+  const toggleFullscreen = () => {
+    setIsFullscreen((prev) => !prev);
   };
 
   if (loading) {
@@ -126,19 +132,26 @@ export default function ProductDetailPage() {
             {product.images.length > 1 && (
               <>
                 <div
-                  className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-3xl cursor-pointer z-10 bg-black bg-opacity-50 p-2 rounded-full hover:bg-main transition-all"
+                  className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-3xl cursor-pointer z-10 bg-black bg-opacity-60 w-10 h-10 flex items-center justify-center rounded-full hover:bg-main transition-all"
                   onClick={() => swiperRef.current?.slidePrev()}
                 >
-                  {"<"}
+                  <ChevronLeft />
                 </div>
                 <div
-                  className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-3xl cursor-pointer z-10 bg-black bg-opacity-50 p-2 rounded-full hover:bg-main transition-all"
+                  className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-3xl cursor-pointer z-10 bg-black bg-opacity-60 w-10 h-10 flex items-center justify-center rounded-full hover:bg-main transition-all"
                   onClick={() => swiperRef.current?.slideNext()}
                 >
-                  {">"}
+                  <ChevronRight />
                 </div>
               </>
             )}
+
+            <div
+              className="absolute top-4 right-4 text-white text-2xl cursor-pointer z-10 bg-black bg-opacity-60 w-10 h-10 flex items-center justify-center rounded-full hover:bg-main transition-all"
+              onClick={toggleFullscreen}
+            >
+              <Maximize />
+            </div>
           </div>
 
           <div>
@@ -171,6 +184,37 @@ export default function ProductDetailPage() {
           </div>
         </div>
       </motion.div>
+
+      {isFullscreen && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center">
+          <div className="relative w-full h-full">
+            <Swiper
+              navigation
+              loop={true}
+              modules={[Navigation]}
+              onSlideChange={handleSlideChange}
+              className="h-full w-full"
+            >
+              {product.images.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <img
+                    src={image}
+                    alt={`Product Image ${index + 1}`}
+                    className="object-contain h-full w-full"
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <Button
+              onClick={toggleFullscreen}
+              className="absolute top-4 right-4 bg-white hover:bg-gray-300 text-black py-2 px-4 rounded-full"
+              style={{ zIndex: 1000 }}
+            >
+              Close
+            </Button>
+          </div>
+        </div>
+      )}
 
       <RelatedProducts
         currentProductId={product._id}
