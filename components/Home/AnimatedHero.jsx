@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import "./Slider.css";
 
@@ -33,51 +33,12 @@ const Slider = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTweening, setIsTweening] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false); // Track initialization
 
-  // Define fixed directions for each slide
   const slideDirections = ["left", "right", "top", "bottom"];
 
-  useEffect(() => {
-    slidesRef.current.forEach((slide, i) => {
-      gsap.set(slide, {
-        backgroundImage: images[i],
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      });
-
-      // Set initial state of text and descriptions off-screen
-      if (i === 0) {
-        gsap.set([textRefs.current[i], descRefs.current[i]], {
-          y: "100%",
-          opacity: 0,
-        });
-      } else {
-        gsap.set([textRefs.current[i], descRefs.current[i]], {
-          y: "100%",
-          opacity: 0,
-        });
-      }
-    });
-
-    // Initial animation for the first slide and its text and description
-    gsap.to(slidesRef.current[0], {
-      duration: 1.5,
-      x: "0%",
-      opacity: 1,
-      ease: "power2.out",
-    });
-
-    gsap.to([textRefs.current[0], descRefs.current[0]], {
-      duration: 1.2,
-      y: "0%",
-      opacity: 1,
-      ease: "power2.out",
-      stagger: 0.3,
-      delay: 0.3, // Slight delay to sync with slide movement
-    });
-  }, []);
-
-  const gotoNextSlide = () => {
+  // Callback for the slide transition
+  const gotoNextSlide = useCallback(() => {
     if (isTweening) return;
 
     const currentSlide = slidesRef.current[currentIndex];
@@ -94,35 +55,35 @@ const Slider = () => {
     setIsTweening(true);
 
     // Animate the current slide content off-screen
-    gsap.set([currentText, currentDesc], { y: "100%", opacity: 0 });
+    gsap.to([currentText, currentDesc], {
+      duration: 1,
+      y: "100%",
+      opacity: 0,
+      ease: "power2.in",
+    });
 
-    const direction = slideDirections[currentIndex];
+    const direction = slideDirections[currentIndex % slideDirections.length];
     const directionStyles = {
       left: {
-        clipIn: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
         clipOut: "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)",
         x: "-100%",
       },
       right: {
-        clipIn: "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)",
         clipOut: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
         x: "100%",
       },
       top: {
-        clipIn: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
         clipOut: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
         y: "-100%",
       },
       bottom: {
-        clipIn: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
         clipOut: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
         y: "100%",
       },
     };
 
-    const { clipIn, clipOut, x, y } = directionStyles[direction];
+    const { clipOut, x, y } = directionStyles[direction];
 
-    // Set next slide to be off-screen in the specified direction
     gsap.set(nextSlide, {
       zIndex: 2,
       clipPath: clipOut,
@@ -132,11 +93,10 @@ const Slider = () => {
 
     gsap.set(currentSlide, { zIndex: 1 });
 
-    // Animate the next slide to come in
     gsap.to(nextSlide, {
       duration: 1.5,
       ease: "power2.inOut",
-      clipPath: clipIn,
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
       x: "0%",
       y: "0%",
       onComplete: () => {
@@ -145,21 +105,50 @@ const Slider = () => {
       },
     });
 
-    // Animate text and description with a slight delay
     gsap.to([nextText, nextDesc], {
       duration: 1.5,
       y: "0%",
       opacity: 1,
       ease: "power2.out",
       stagger: 0.3,
-      delay: 0.4, // Delay to sync with slide movement
+      delay: 0.4,
     });
-  };
+  }, [currentIndex, isTweening, slideDirections]);
 
   useEffect(() => {
-    const timer = setInterval(gotoNextSlide, 4000); // Set interval to 4 seconds for a smoother transition
-    return () => clearInterval(timer);
-  }, [currentIndex, isTweening]);
+    slidesRef.current.forEach((slide, i) => {
+      gsap.set(slide, {
+        backgroundImage: images[i],
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      });
+
+      gsap.set([textRefs.current[i], descRefs.current[i]], {
+        y: "100%",
+        opacity: 0,
+      });
+    });
+
+    // Initialize first slide's animation
+    if (!isInitialized) {
+      gsap.to([textRefs.current[0], descRefs.current[0]], {
+        duration: 1.2,
+        y: "0%",
+        opacity: 1,
+        ease: "power2.out",
+        stagger: 0.3,
+        delay: 0.3,
+        onComplete: () => setIsInitialized(true),
+      });
+    }
+  }, [images, isInitialized]);
+
+  useEffect(() => {
+    if (isInitialized) {
+      const timer = setInterval(gotoNextSlide, 4000);
+      return () => clearInterval(timer);
+    }
+  }, [gotoNextSlide, isInitialized]);
 
   return (
     <div className="wrapper">
