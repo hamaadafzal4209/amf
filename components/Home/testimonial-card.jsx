@@ -30,7 +30,7 @@ export function TestimonialCard({
             </AvatarFallback>
           </Avatar>
           <blockquote className="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4 flex-grow">
-            "{content}"
+          &quot;{content}&quot;
           </blockquote>
           <cite className="not-italic mt-auto">
             <strong className="font-semibold text-main">{author}</strong>
