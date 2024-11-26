@@ -105,14 +105,13 @@ export default function ProductShowcase({ slice = false }) {
         ))}
       </div>
 
-      {/* Product List */}
       <div>
         {categories.map(
           (category) =>
             selectedTab === category.id && (
               <div
                 key={category.id}
-                className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+                className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
               >
                 {(slice
                   ? category.products.slice(0, 3)
