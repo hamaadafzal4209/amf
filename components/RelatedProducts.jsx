@@ -24,7 +24,6 @@ export default function RelatedProducts({ currentProductId, currentCategory }) {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
-    // Fetch products if Redux store is empty
     if (products.length === 0 && !loading) {
       dispatch(fetchProducts());
     }
@@ -66,7 +65,7 @@ export default function RelatedProducts({ currentProductId, currentCategory }) {
       <h3 className="text-2xl font-bold mb-6 text-center text-main">
         Related Products
       </h3>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {relatedProducts.map((product) => (
           <motion.div
             key={product._id}

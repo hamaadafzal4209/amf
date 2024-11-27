@@ -101,7 +101,7 @@ export default function ProductDetailPage() {
           Go Back
         </Button>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid sm:grid-cols-2 gap-12">
           <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
             <Swiper
               onSwiper={(swiper) => (swiperRef.current = swiper)}
