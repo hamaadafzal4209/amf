@@ -34,7 +34,7 @@ export default function ProductShowcase({ slice = false }) {
   }, [dispatch]);
 
   useEffect(() => {
-    if (products.length > 0) {
+    if (products?.length > 0) {
       const categorizedProducts = products.reduce((acc, product) => {
         if (product.category) {
           acc[product.category] = acc[product.category] || [];

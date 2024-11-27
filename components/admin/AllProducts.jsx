@@ -126,7 +126,7 @@ export default function ProductManagement() {
         </div>
       ) : error ? (
         <div className="text-center text-red-600 py-6">{error}</div>
-      ) : filteredProducts.length === 0 ? (
+      ) : filteredProducts?.length === 0 ? (
         <div className="select-none text-center text-xl text-gray-600 py-6">
           <p>No products found.</p>
           <p className="text-lg text-gray-400">

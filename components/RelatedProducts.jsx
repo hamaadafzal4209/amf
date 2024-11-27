@@ -30,7 +30,7 @@ export default function RelatedProducts({ currentProductId, currentCategory }) {
   }, [dispatch, products, loading]);
 
   useEffect(() => {
-    if (products.length > 0) {
+    if (products?.length > 0) {
       const filteredProducts = products.filter(
         (product) =>
           product.category === currentCategory &&
@@ -56,7 +56,7 @@ export default function RelatedProducts({ currentProductId, currentCategory }) {
     );
   }
 
-  if (relatedProducts.length === 0) {
+  if (relatedProducts?.length === 0) {
     return <div className="text-center py-8">No related products found.</div>;
   }
 
