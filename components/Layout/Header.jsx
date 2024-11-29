@@ -70,19 +70,29 @@ const Navbar = () => {
         <div className="hidden md:flex md:items-center gap-6 font-semibold text-gray-700">
           <Link
             href="/"
-            className={`hover:text-main transition-colors duration-200 ${
+            className={`relative group hover:text-main transition-colors duration-200 ${
               isActiveLink("/") ? "text-main" : ""
             }`}
           >
             Home
+            <span
+              className={`absolute left-0 -bottom-1 h-1 rounded-md bg-main block w-0 group-hover:w-3/4 transition-all duration-300 ${
+                isActiveLink("/") ? "w-3/4" : ""
+              }`}
+            ></span>
           </Link>
           <Link
             href="/about"
-            className={`hover:text-main transition-colors duration-200 ${
+            className={`relative group hover:text-main transition-colors duration-200 ${
               isActiveLink("/about") ? "text-main" : ""
             }`}
           >
             About Us
+            <span
+              className={`absolute left-0 -bottom-1 h-1 rounded-md bg-main block w-0 group-hover:w-3/4 transition-all duration-300 ${
+                isActiveLink("/about") ? "w-3/4" : ""
+              }`}
+            ></span>
           </Link>
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center py-2 hover:text-main transition-colors duration-200">
@@ -94,7 +104,6 @@ const Navbar = () => {
                 <Link
                   href="/quality-control"
                   className="w-full text-sm hover:text-main transition-colors duration-200"
-                  onClick={handleLinkClick}
                 >
                   Quality Control
                 </Link>
@@ -103,7 +112,6 @@ const Navbar = () => {
                 <Link
                   href="/certification"
                   className="w-full text-sm hover:text-main transition-colors duration-200"
-                  onClick={handleLinkClick}
                 >
                   Certification
                 </Link>
@@ -112,39 +120,55 @@ const Navbar = () => {
           </DropdownMenu>
           <Link
             href="/products"
-            className={`hover:text-main transition-colors duration-200 ${
+            className={`relative group hover:text-main transition-colors duration-200 ${
               isActiveLink("/products") ? "text-main" : ""
             }`}
-            onClick={handleLinkClick}
           >
             Products
+            <span
+              className={`absolute left-0 -bottom-1 h-1 rounded-md bg-main block w-0 group-hover:w-3/4 transition-all duration-300 ${
+                isActiveLink("/products") ? "w-3/4" : ""
+              }`}
+            ></span>
           </Link>
           <Link
             href="/services"
-            className={`hover:text-main transition-colors duration-200 ${
+            className={`relative group hover:text-main transition-colors duration-200 ${
               isActiveLink("/services") ? "text-main" : ""
             }`}
-            onClick={handleLinkClick}
           >
             Services
+            <span
+              className={`absolute left-0 -bottom-1 h-1 rounded-md bg-main block w-0 group-hover:w-3/4 transition-all duration-300 ${
+                isActiveLink("/services") ? "w-3/4" : ""
+              }`}
+            ></span>
           </Link>
           <Link
             href="/projects"
-            className={`hover:text-main transition-colors duration-200 ${
+            className={`relative group hover:text-main transition-colors duration-200 ${
               isActiveLink("/projects") ? "text-main" : ""
             }`}
-            onClick={handleLinkClick}
           >
             Projects
+            <span
+              className={`absolute left-0 -bottom-1 h-1 rounded-md bg-main block w-0 group-hover:w-3/4 transition-all duration-300 ${
+                isActiveLink("/projects") ? "w-3/4" : ""
+              }`}
+            ></span>
           </Link>
           <Link
             href="/contact"
-            className={`hover:text-main transition-colors duration-200 ${
+            className={`relative group hover:text-main transition-colors duration-200 ${
               isActiveLink("/contact") ? "text-main" : ""
             }`}
-            onClick={handleLinkClick}
           >
             Contact Us
+            <span
+              className={`absolute left-0 -bottom-1 h-1 rounded-md bg-main block w-0 group-hover:w-3/4 transition-all duration-300 ${
+                isActiveLink("/contact") ? "w-3/4" : ""
+              }`}
+            ></span>
           </Link>
         </div>
 
