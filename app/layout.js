@@ -3,6 +3,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import StoreProvider from "./StoreProvider";
 import NextTopLoader from "nextjs-toploader";
+import ScrollToTop from "@/components/Common/ScrollToTop";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -28,10 +29,9 @@ export default function RootLayout({ children }) {
         className={`${poppins.variable} ${inter.variable}  font-poppins antialiased`}
       >
         <NextTopLoader color="#E66F3D" height={4} showSpinner={false} />
-        <StoreProvider>
-          <Toaster />
-          {children}
-        </StoreProvider>
+        <ScrollToTop />
+        <Toaster />
+        <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
   );
