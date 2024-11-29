@@ -25,10 +25,13 @@ export default function CreateProduct() {
     const uploads = files.map(async (file) => {
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("upload_preset", "al-maram");
+      formData.append(
+        "upload_preset",
+        process.env.NEXT_PUBLIC_CLOUDINARY_PRESET
+      );
 
       const response = await fetch(
-        "https://api.cloudinary.com/v1_1/dq2ljujxe/image/upload",
+        process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL,
         {
           method: "POST",
           body: formData,
@@ -80,9 +83,9 @@ export default function CreateProduct() {
 
         if (response.ok) {
           toast.success("Product created successfully!");
-          formik.resetForm();
-          setPreviewImages([]);
-          setFeatures([]);
+          formik.resetForm(); // Reset all formik fields
+          setPreviewImages([]); // Clear image previews
+          setFeatures([]); // Clear features list
         } else {
           const error = await response.json();
           toast.error("Failed to create product: " + error.message);
@@ -222,6 +225,7 @@ export default function CreateProduct() {
               Product Category
             </label>
             <Select
+              value={formik.values.category}
               onValueChange={(value) => formik.setFieldValue("category", value)}
             >
               <SelectTrigger
@@ -243,6 +247,7 @@ export default function CreateProduct() {
                 <SelectItem value="Panel Boards">Panel Boards</SelectItem>
               </SelectContent>
             </Select>
+
             {formik.touched.category && formik.errors.category && (
               <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
                 <AlertCircle className="w-4 h-4" />
@@ -265,12 +270,12 @@ export default function CreateProduct() {
                   value={feature}
                   onChange={(e) => handleFeatureChange(e.target.value, index)}
                   placeholder={`Feature ${index + 1}`}
-                  className="flex-1 px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none border-gray-300"
+                  className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none border-gray-300"
                 />
                 <button
                   type="button"
                   onClick={() => handleRemoveFeature(index)}
-                  className="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center"
+                  className="bg-red-500 flex-shrink-0 text-white rounded-full w-8 h-8 flex items-center justify-center"
                 >
                   <X className="w-4 h-4" />
                 </button>

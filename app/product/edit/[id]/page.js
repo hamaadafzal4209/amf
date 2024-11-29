@@ -266,6 +266,7 @@ export default function EditProduct() {
                 Product Category
               </label>
               <Select
+                value={formik.values.category}
                 onValueChange={(value) =>
                   formik.setFieldValue("category", value)
                 }
@@ -277,7 +278,9 @@ export default function EditProduct() {
                       : "border-gray-300"
                   }`}
                 >
-                  <SelectValue placeholder="Select a category" />
+                  <SelectValue placeholder="Select a category">
+                    {formik.values.category || "Select a category"}
+                  </SelectValue>
                 </SelectTrigger>
                 <SelectContent className="bg-white">
                   <SelectItem value="Main Distribution Boards">
@@ -289,6 +292,7 @@ export default function EditProduct() {
                   <SelectItem value="Panel Boards">Panel Boards</SelectItem>
                 </SelectContent>
               </Select>
+
               {formik.touched.category && formik.errors.category && (
                 <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
                   <AlertCircle className="w-4 h-4" />

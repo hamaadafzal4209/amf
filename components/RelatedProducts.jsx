@@ -85,18 +85,18 @@ export default function RelatedProducts({ currentProductId, currentCategory }) {
                   {product.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="h-40">
+              <CardContent className="h-48 rounded-md">
                 {product.images.length > 0 && (
                   <Image
                     width={1000}
                     height={1000}
                     src={product.images[0]}
                     alt={product.title}
-                    className="transition-transform duration-500 h-full ease-in-out object-cover transform hover:scale-105"
+                    className="transition-transform rounded-md duration-500 h-full ease-in-out object-cover transform"
                   />
                 )}
               </CardContent>
-              <CardFooter className="mt-4">
+              <CardFooter>
                 <Button
                   className="bg-main hover:bg-black text-white"
                   onClick={() => handleLearnMoreClick(product._id)}
