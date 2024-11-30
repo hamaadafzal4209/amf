@@ -50,7 +50,7 @@ const Navbar = () => {
         ${
           isScrolled
             ? "shadow-md py-3 px-4 lg:px-8 bg-gradient-to-r from-gray-100 to-white"
-            : "shadow py-4 px-4 lg:px-12 bg-gradient-to-r from-gray-100 to-white "
+            : "shadow py-3 px-4 lg:px-12 bg-gradient-to-r from-gray-100 to-white "
         }  ${isLoaded ? "animate-navbar" : "opacity-0"}`}
     >
       <div className="flex items-center justify-between">

@@ -89,7 +89,7 @@ export default function ContactUs() {
         {/* Contact Info Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           <Fade triggerOnce direction="up" cascade damping={0.1}>
-            <Card className="shadow-lg rounded-lg border border-gray-200 bg-white">
+            <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
               <CardHeader className="flex flex-col items-center py-6">
                 <MapPin className="h-12 w-12 text-main mb-4" />
                 <CardTitle className="text-xl font-semibold text-center text-gray-900">
@@ -101,7 +101,7 @@ export default function ContactUs() {
               </CardContent>
             </Card>
 
-            <Card className="shadow-lg rounded-lg border border-gray-200 bg-white">
+            <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
               <CardHeader className="flex flex-col items-center py-6">
                 <Mail className="h-12 w-12 text-main mb-4" />
                 <CardTitle className="text-xl font-semibold text-center text-gray-900">
@@ -118,7 +118,7 @@ export default function ContactUs() {
               </CardContent>
             </Card>
 
-            <Card className="shadow-lg rounded-lg border border-gray-200 bg-white">
+            <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
               <CardHeader className="flex flex-col items-center py-6">
                 <Phone className="h-12 w-12 text-main mb-4" />
                 <CardTitle className="text-xl font-semibold text-center text-gray-900">
@@ -139,7 +139,7 @@ export default function ContactUs() {
 
         <Fade direction="up" triggerOnce delay={0.2}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="shadow-lg rounded-lg border border-gray-200 bg-white">
+            <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
               <CardHeader>
                 <CardTitle>Send Us a Message</CardTitle>
                 <CardDescription>
@@ -155,7 +155,7 @@ export default function ContactUs() {
                       <Label htmlFor="name" className="text-gray-600 mb-2">
                         Your Name
                       </Label>
-                      <Input
+                      <input
                         id="name"
                         name="name"
                         type="text"
@@ -163,7 +163,7 @@ export default function ContactUs() {
                         onChange={handleInputChange}
                         placeholder="Enter your name"
                         required
-                        className="border-gray-300 rounded-md"
+                        className="border-gray-300 w-full px-3 py-1.5 border rounded-md shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none"
                       />
                     </div>
 
@@ -171,7 +171,7 @@ export default function ContactUs() {
                       <Label htmlFor="email" className="text-gray-600 mb-2">
                         Your Email
                       </Label>
-                      <Input
+                      <input
                         id="email"
                         name="email"
                         type="email"
@@ -179,7 +179,7 @@ export default function ContactUs() {
                         onChange={handleInputChange}
                         placeholder="Enter your email"
                         required
-                        className="border-gray-300 rounded-md"
+                        className="border-gray-300 w-full mt-1 px-3 py-1.5 border rounded-md shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none"
                       />
                     </div>
 
@@ -187,14 +187,14 @@ export default function ContactUs() {
                       <Label htmlFor="message" className="text-gray-600 mb-2">
                         Your Message
                       </Label>
-                      <Textarea
+                      <textarea
                         id="message"
                         name="message"
                         value={formData.message}
                         onChange={handleInputChange}
                         placeholder="Write your message"
                         required
-                        className="border-gray-300 rounded-md min-h-40"
+                        className="border-gray-300 min-h-40 w-full mt-1 px-3 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none"
                       />
                     </div>
                   </div>
@@ -210,7 +210,7 @@ export default function ContactUs() {
                 </Button>
               </CardFooter>
             </Card>
-            <Card className="shadow-lg rounded-lg border border-gray-200 bg-white">
+            <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
               <CardHeader>
                 <CardTitle>Our Contact Information</CardTitle>
                 <CardDescription>
