@@ -35,14 +35,41 @@ export default function ContactUs() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    toast({
-      title: "Message Sent",
-      description: "We've received your message and will get back to you soon.",
-    });
-    setFormData({ name: "", email: "", message: "" });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Message Sent",
+          description:
+            "We've received your message and will get back to you soon.",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        const errorData = await response.json();
+        toast({
+          title: "Error",
+          description: `Failed to send message: ${errorData.message}`,
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive",
+      });
+      console.error("Failed to send message:", error);
+    }
   };
 
   return (
@@ -202,7 +229,7 @@ export default function ContactUs() {
                   </div>
                   <div className="flex items-center space-x-2 text-gray-600">
                     <Mail className="h-5 w-5 text-main" />
-                    <span>info@switchgearcompany.com</span>
+                    <span> info@amf-sa.com</span>
                   </div>
 
                   <div className="mt-6">
