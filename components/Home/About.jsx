@@ -24,7 +24,6 @@ export default function AboutUs() {
         }}
       />
       <div className="relative">
-        {/* Decorative Shape */}
         <Image
           src="/assets/about-one-shape-1.png"
           alt="Decorative Shape"
@@ -41,13 +40,13 @@ export default function AboutUs() {
           <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
             <div className="flex flex-col md:flex-row items-center md:items-stretch justify-between gap-12">
               <div className="flex-1 flex items-center justify-center">
-                <figure className="imageShineEffect w-full h-full">
+                <figure className="imageSHineEffect">
                   <Image
                     src="/assets/about-1.jpg"
                     alt="Manufacturing"
                     width={800}
                     height={600}
-                    className="w-full h-full rounded-lg object-cover"
+                    className="w-full rounded-lg object-cover"
                   />
                 </figure>
               </div>
@@ -72,15 +71,17 @@ export default function AboutUs() {
                 </p>
                 <ul className="list-none space-y-2 mt-4">
                   {ABOUT_LIST.map((item, index) => (
-                    <li key={index} className="flex items-baseline gap-3">
+                    <li key={index} className="flex items-center gap-3">
                       <Image
-                        src={"/assets/bullet.png"}
+                        src="/assets/bullet.png"
                         alt="Bullet"
-                        width={1000}
-                        height={1000}
-                        className="w-4 object-contain"
+                        width={16}
+                        height={16}
+                        className="w-4 h-4 object-contain flex-shrink-0"
                       />
-                      <p className="text-sm text-gray-600">{item}</p>
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        {item}
+                      </p>
                     </li>
                   ))}
                 </ul>
