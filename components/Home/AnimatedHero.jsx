@@ -33,11 +33,10 @@ const Slider = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTweening, setIsTweening] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false); // Track initialization
+  const [isInitialized, setIsInitialized] = useState(false);
 
   const slideDirections = ["left", "right", "top", "bottom"];
 
-  // Callback for the slide transition
   const gotoNextSlide = useCallback(() => {
     if (isTweening) return;
 
@@ -54,7 +53,6 @@ const Slider = () => {
     setCurrentIndex(newIndex);
     setIsTweening(true);
 
-    // Animate the current slide content off-screen
     gsap.to([currentText, currentDesc], {
       duration: 1,
       y: "100%",
@@ -129,7 +127,6 @@ const Slider = () => {
       });
     });
 
-    // Initialize first slide's animation
     if (!isInitialized) {
       gsap.to([textRefs.current[0], descRefs.current[0]], {
         duration: 1.2,

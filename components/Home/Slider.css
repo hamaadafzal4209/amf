@@ -26,6 +26,7 @@
   justify-content: center;
   align-items: center;
   clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+  background-attachment: fixed;
 }
 
 .slide:first-child {
@@ -74,13 +75,13 @@
   .slide-text {
     font-size: 1.6rem;
   }
-  .slide-description{
+  .slide-description {
     font-size: 1rem;
   }
-  .wrapper{
+  .wrapper {
     height: 50vh;
   }
-  .slider{
+  .slider {
     height: 50vh;
   }
 }
