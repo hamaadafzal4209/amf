@@ -39,19 +39,20 @@ export default function AboutUs() {
         />
         <div className="container mx-auto px-4 md:px-8 lg:px-12 pt-16 pb-4">
           <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-              <div className="flex-1">
-                <figure className="imageSHineEffect">
+            <div className="flex flex-col md:flex-row items-center md:items-stretch justify-between gap-12">
+              <div className="flex-1 flex items-center justify-center">
+                <figure className="imageShineEffect w-full h-full">
                   <Image
                     src="/assets/about-1.jpg"
                     alt="Manufacturing"
                     width={800}
                     height={600}
-                    className="w-full rounded-lg object-cover"
+                    className="w-full h-full rounded-lg object-cover"
                   />
                 </figure>
               </div>
-              <div className="flex-1">
+
+              <div className="flex-1 flex flex-col justify-center">
                 <Image
                   src={"/assets/energy.png"}
                   alt="Bullet"
@@ -62,36 +63,33 @@ export default function AboutUs() {
                 <h1 className="text-4xl font-semibold mb-4 text-main">
                   About Almaram Alfaneyah ManufacturingCo.
                 </h1>
-                <p className="max-w-3xl text-base text-balance leading-relaxed">
+                <p className="max-w-3xl text-base text-gray-400 text-balance leading-relaxed">
                   We specialize in designing and manufacturing high-quality
                   electrical panel boards tailored to meet diverse industrial
                   and commercial needs. Our commitment to precision, safety, and
                   reliability ensures optimal performance and efficiency in
                   every product.
                 </p>
-                <Fade triggerOnce direction="up" cascade damping={0.3}>
-                  <ul className="list-none space-y-2 mt-4">
-                    {ABOUT_LIST.map((item, index) => (
-                      <li key={index} className="flex gap-3">
-                        <Image
-                          src={"/assets/bullet.png"}
-                          alt="Bullet"
-                          width={1000}
-                          height={1000}
-                          className="w-4 object-contain"
-                        />
-                        <p className="text-sm text-gray-800"> {item}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </Fade>
+                <ul className="list-none space-y-2 mt-4">
+                  {ABOUT_LIST.map((item, index) => (
+                    <li key={index} className="flex items-baseline gap-3">
+                      <Image
+                        src={"/assets/bullet.png"}
+                        alt="Bullet"
+                        width={1000}
+                        height={1000}
+                        className="w-4 object-contain"
+                      />
+                      <p className="text-sm text-gray-600">{item}</p>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </Fade>
 
-          {/* Vision Section */}
           <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
-            <section className="flex flex-col lg:flex-row items-center justify-between gap-12 mt-16 pb-8">
+            <section className="flex flex-col md:flex-row items-center justify-between gap-12 mt-16 pb-8">
               <div className="flex-1">
                 <h2 className="text-3xl font-semibold mb-6 text-main">
                   Our Vision
@@ -104,7 +102,7 @@ export default function AboutUs() {
                 </p>
               </div>
               <div className="flex-1">
-              <figure className="imageSHineEffect">
+                <figure className="imageSHineEffect">
                   <Image
                     src="/assets/about-2.jpg"
                     alt="Manufacturing"
