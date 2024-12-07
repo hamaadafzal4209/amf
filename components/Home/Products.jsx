@@ -20,7 +20,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-export default function ProductShowcase({ slice = false }) {
+export default function ProductShowcase({ slice = false, showSearchBar = false }) {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -28,6 +28,8 @@ export default function ProductShowcase({ slice = false }) {
 
   const [categories, setCategories] = useState([]);
   const [selectedTab, setSelectedTab] = useState("");
+  const [searchTerm, setSearchTerm] = useState(""); // State for search term
+  const [filteredProducts, setFilteredProducts] = useState(products); // Filtered products state
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -56,10 +58,25 @@ export default function ProductShowcase({ slice = false }) {
     }
   }, [products]);
 
+  useEffect(() => {
+    if (searchTerm) {
+      const lowercasedSearchTerm = searchTerm.toLowerCase();
+      const filtered = products.filter((product) =>
+        product.title.toLowerCase().includes(lowercasedSearchTerm) ||
+        product.description.toLowerCase().includes(lowercasedSearchTerm)
+      );
+      setFilteredProducts(filtered);
+    } else {
+      setFilteredProducts(products); // Show all products when search is cleared
+    }
+  }, [searchTerm, products]);
+
   const handleTabClick = (categoryId) => setSelectedTab(categoryId);
 
   const handleLearnMoreClick = (productId) =>
     router.push(`/product-detail/${productId}`);
+
+  const handleSearchChange = (event) => setSearchTerm(event.target.value);
 
   if (loading) {
     return (
@@ -87,6 +104,19 @@ export default function ProductShowcase({ slice = false }) {
       >
         Our Switchgear Products
       </motion.h2>
+
+      {/* Conditionally Render Search Bar */}
+      {showSearchBar && (
+        <div className="mb-8">
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main"
+          />
+        </div>
+      )}
 
       {/* Category Tabs */}
       <div className="flex space-x-4 mb-8 overflow-x-auto no-scrollbar">
@@ -116,57 +146,61 @@ export default function ProductShowcase({ slice = false }) {
                 {(slice
                   ? category.products.slice(0, 3)
                   : category.products
-                ).map((product) => (
-                  <motion.div
-                    key={product._id}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Card className="h-full flex flex-col border border-gray-200 hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1">
-                      <CardHeader>
-                        <CardTitle className="text-main">
-                          {product.title}
-                        </CardTitle>
-                        <CardDescription className="line-clamp-3">
-                          {product.description}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="h-48">
-                        <Swiper
-                          navigation={false}
-                          autoplay={
-                            product.images.length > 1
-                              ? { delay: 3000, disableOnInteraction: false }
-                              : false
-                          }
-                          loop={product.images.length > 1}
-                          modules={[Autoplay]}
-                          className="rounded-lg h-full" // Ensure Swiper fills its container
-                        >
-                          {product.images.map((image, index) => (
-                            <SwiperSlide key={index}>
-                              <div
-                                className="h-full w-full bg-center bg-cover"
-                                style={{
-                                  backgroundImage: `url(${image})`,
-                                }}
-                              ></div>
-                            </SwiperSlide>
-                          ))}
-                        </Swiper>
-                      </CardContent>
-                      <CardFooter>
-                        <Button
-                          className="bg-main hover:bg-black text-white"
-                          onClick={() => handleLearnMoreClick(product._id)}
-                        >
-                          Learn More
-                        </Button>
-                      </CardFooter>
-                    </Card>
-                  </motion.div>
-                ))}
+                )
+                  .filter((product) =>
+                    filteredProducts.includes(product)
+                  )
+                  .map((product) => (
+                    <motion.div
+                      key={product._id}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Card className="h-full flex flex-col border border-gray-200 hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1">
+                        <CardHeader>
+                          <CardTitle className="text-main">
+                            {product.title}
+                          </CardTitle>
+                          <CardDescription className="line-clamp-3">
+                            {product.description}
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent className="h-48">
+                          <Swiper
+                            navigation={false}
+                            autoplay={
+                              product.images.length > 1
+                                ? { delay: 3000, disableOnInteraction: false }
+                                : false
+                            }
+                            loop={product.images.length > 1}
+                            modules={[Autoplay]}
+                            className="rounded-lg h-full"
+                          >
+                            {product.images.map((image, index) => (
+                              <SwiperSlide key={index}>
+                                <div
+                                  className="h-full w-full bg-center bg-cover"
+                                  style={{
+                                    backgroundImage: `url(${image})`,
+                                  }}
+                                ></div>
+                              </SwiperSlide>
+                            ))}
+                          </Swiper>
+                        </CardContent>
+                        <CardFooter>
+                          <Button
+                            className="bg-main hover:bg-black text-white"
+                            onClick={() => handleLearnMoreClick(product._id)}
+                          >
+                            Learn More
+                          </Button>
+                        </CardFooter>
+                      </Card>
+                    </motion.div>
+                  ))}
               </div>
             )
         )}

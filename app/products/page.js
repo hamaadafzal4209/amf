@@ -12,7 +12,7 @@ const page = () => {
         backgroundImage={"/assets/products-banner.jpg"}
       />
       <div className="py-12">
-        <ProductShowcase />
+        <ProductShowcase showSearchBar={true} />
       </div>
     </MainLayout>
   );
