@@ -2,6 +2,7 @@
 
 import { Fade } from "react-awesome-reveal";
 import Image from "next/image";
+import { CheckCircle } from "lucide-react";
 
 const ABOUT_LIST = [
   "Certified partner of Schneider Electric, excelling in manufacturing.",
@@ -72,13 +73,14 @@ export default function AboutUs() {
                 <ul className="list-none space-y-2 mt-4">
                   {ABOUT_LIST.map((item, index) => (
                     <li key={index} className="flex items-center gap-3">
-                      <Image
+                      {/* <Image
                         src="/assets/bullet.png"
                         alt="Bullet"
                         width={16}
                         height={16}
                         className="w-4 h-4 object-contain flex-shrink-0"
-                      />
+                      /> */}
+                      <CheckCircle className="text-main"/>
                       <p className="text-sm text-gray-600 leading-relaxed">
                         {item}
                       </p>

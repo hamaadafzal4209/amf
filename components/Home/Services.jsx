@@ -53,7 +53,7 @@ const specializations = [
 
 export default function Services() {
   return (
-    <section className="py-12 pt-0 text-gray-900 bg-white">
+    <section className="py-12 pt-0 text-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-20">
         <div className="text-center mb-16">
           <Badge

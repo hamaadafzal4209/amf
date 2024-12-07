@@ -1,59 +1,84 @@
-import HeroBanner from "@/components/HeroBanner";
-import MainLayout from "@/components/Layout/MainLayout";
-import Image from "next/image";
-import React from "react";
+'use client'
 
-const certificates = [
-  { src: "/assets/certificates/c1.jpg", alt: "Certificate 1" },
-  { src: "/assets/certificates/c2.png", alt: "Certificate 2" },
-  { src: "/assets/certificates/c3.png", alt: "Certificate 3" },
-  { src: "/assets/certificates/c4.png", alt: "Certificate 4" },
-  { src: "/assets/certificates/c5.png", alt: "Certificate 5" },
-  { src: "/assets/certificates/c6.png", alt: "Certificate 6" },
-  { src: "/assets/certificates/c7.png", alt: "Certificate 7" },
-  { src: "/assets/certificates/c8.png", alt: "Certificate 8" },
-  { src: "/assets/certificates/c9.png", alt: "Certificate 9" },
-  { src: "/assets/certificates/c10.jpg", alt: "Certificate 10" },
-];
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import HeroBanner from "@/components/HeroBanner"
+import MainLayout from "@/components/Layout/MainLayout"
+import { CertificateGallery } from "@/components/CertificateGallery"
 
-const Page = () => {
+const certificateCategories = {
+  ISO: [
+    { src: "/assets/certificates/iso-1.jpg", alt: "ISO Certificate 1" },
+    { src: "/assets/certificates/iso-2.jpg", alt: "ISO Certificate 2" },
+    { src: "/assets/certificates/iso-3.jpg", alt: "ISO Certificate 3" },
+  ],
+  ASO: [
+    { src: "/assets/certificates/aso-1.jpg", alt: "ASO Certificate 1" },
+    { src: "/assets/certificates/aso-2.jpg", alt: "ASO Certificate 2" },
+    { src: "/assets/certificates/aso-3.jpg", alt: "ASO Certificate 3" },
+    { src: "/assets/certificates/aso-4.jpg", alt: "ASO Certificate 4" },
+  ],
+}
+
+export default function CertificationPage() {
+  const [activeTab, setActiveTab] = useState("ISO")
+
   return (
     <MainLayout>
       <HeroBanner
-        title={"Certification"}
-        backgroundImage={"/assets/certification-banner.jpg"}
-        subtitle={"certification"}
+        title="Certification"
+        backgroundImage="/assets/certification-banner.jpg"
+        subtitle="Our Commitment to Excellence"
       />
-      <div className="container mx-auto px-4 md:px-8 lg:px-12 py-16">
-        <h2
-          className="text-4xl font-semibold text-center uppercase tracking-tight text-gray-800 mb-4
-      "
+      <section className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+        <motion.h2 
+          className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-4"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
           Our Certifications
-        </h2>
-        <p className="max-w-3xl mx-auto text-gray-7900 text-center text-balance mb-12">
-          Almaram Alfaneyah has been certified from Schneider Electric, ABB,
-          Rittal, Rolaco, L&T, EPLAN.
-        </p>
-        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
-          {certificates.map((cert, index) => (
-            <div
-              key={index}
-              className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transform transition-transform duration-300"
+        </motion.h2>
+        <motion.p 
+          className="max-w-3xl mx-auto text-lg text-gray-600 text-center leading-relaxed mb-12"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Almaram Alfaneyah is proud to hold certifications from industry leaders including Schneider Electric, ABB, Rittal, Rolaco, L&T, and EPLAN.
+        </motion.p>
+
+        <div className="flex justify-center space-x-4 mb-12">
+          {Object.keys(certificateCategories).map((category) => (
+            <motion.button
+              key={category}
+              className={`px-6 py-2 text-lg font-medium rounded-full transition-all duration-200 ${
+                activeTab === category
+                  ? "bg-main text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+              onClick={() => setActiveTab(category)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <Image
-                src={cert.src}
-                alt={cert.alt}
-                width={500}
-                height={500}
-                className="w-full h-auto object-cover rounded-lg"
-              />
-            </div>
+              {category}
+            </motion.button>
           ))}
         </div>
-      </div>
-    </MainLayout>
-  );
-};
 
-export default Page;
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+          >
+            <CertificateGallery certificates={certificateCategories[activeTab]} />
+          </motion.div>
+        </AnimatePresence>
+      </section>
+    </MainLayout>
+  )
+}
+

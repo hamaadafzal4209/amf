@@ -5,6 +5,7 @@ import useEmblaCarousel, { EmblaOptionsType } from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { TestimonialCard } from "./testimonial-card";
+import Image from "next/image";
 
 const testimonials = [
   {
@@ -100,8 +101,42 @@ export function Testimonial() {
   }, [emblaApi, onSelect]);
 
   return (
-    <section className="py-12 bg-gray-50 overflow-hidden">
+    <section
+      className="relative py-12 md:py-20 overflow-hidden"
+      style={{
+        backgroundImage: "url('/assets/why-choose-one-bg.png')",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="absolute top-0 left-0">
+        <Image
+          src="/assets/top-left-shape.png"
+          alt="Top Left Decorative Shape"
+          width={300}
+          height={300}
+        />
+      </div>
+
+      <div className="absolute bottom-0 right-0">
+        <Image
+          src="/assets/bottom-right-shape.png"
+          alt="Bottom Right Decorative Shape"
+          width={300}
+          height={300}
+        />
+      </div>
       <div className="container mx-auto px-4">
+        <div className="flex justify-center">
+          <Image
+            src={"/assets/energy.png"}
+            alt="Bullet"
+            width={1000}
+            height={1000}
+            className="w-8 mb-4 object-contain"
+          />
+        </div>
         <h2 className="text-3xl font-bold text-center mb-8 dark:text-white">
           What Our Customers Say
         </h2>

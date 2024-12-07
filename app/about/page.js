@@ -4,102 +4,159 @@ import HeroBanner from "@/components/HeroBanner";
 import MainLayout from "@/components/Layout/MainLayout";
 import React from "react";
 import { Fade } from "react-awesome-reveal";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Globe, Settings, MapPin } from "lucide-react";
 import Image from "next/image";
+import { FaLightbulb, FaUsers, FaCogs } from "react-icons/fa";
+import { Sponser } from "@/components/Home/Sponsers";
 
-const page = () => {
-  const ABOUT_CARDS = [
-    {
-      icon: <Settings className="mr-2 text-main" />,
-      title: "Manufacturing Excellence",
-      description:
-        "Almaram Alfaneyah ManufacturingCo. is a certified channel partner of Schneider Electric, specializing in the manufacturing of LV switchgear panels in the Kingdom of Saudi Arabia. Adhering to IEC and ISO 9001 standards, we maintain the highest quality in all operations.",
-    },
-    {
-      icon: <MapPin className="mr-2 text-main" />,
-      title: "Expanding Reach",
-      description:
-        "With our head office in Jeddah, Almaram Alfaneyah envisions a network of branches across major Saudi cities, ensuring widespread access to our innovative LV switchgear solutions.",
-    },
-    {
-      icon: <Globe className="mr-2 text-main" />,
-      title: "Global Standards",
-      description:
-        "All products are designed and manufactured in state-of-the-art facilities and undergo stringent quality checks, reflecting our dedication to quality, safety, and performance.",
-    },
-  ];
-  
+const AboutPage = () => {
   return (
     <MainLayout>
+      {/* Hero Banner */}
       <HeroBanner
-        title={"About"}
-        subtitle={"about us"}
-        backgroundImage={"/assets/about-banner.jpg"}
-      />
-    <Image
-        src="/assets/about-one-shape-1.png"
-        alt="Circles"
-        width={500}
-        height={500}
-        className="absolute w-80"
-        style={{
-          filter: "sepia(1) saturate(3000%) hue-rotate(-10deg) brightness(0.9)",
-          mixBlendMode: "multiply",
-        }}
+        title="About Us"
+        subtitle="Who We Are"
+        backgroundImage="/assets/about-banner.jpg"
       />
 
-      <div className="container mx-auto px-4 md:px-8 lg:px-12 pt-16 pb-4">
+      {/* Introduction Section */}
+      <section className="py-16 bg-gray-50 relative overflow-hidden">
         <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
-          <header className="text-center mb-12">
-            <h1 className="text-3xl font-bold mb-4 text-main">
-              About Almaram Alfaneyah ManufacturingCo.
+          <header className="text-center mb-12 px-4">
+            <h1 className="text-4xl font-extrabold mb-6 text-main">
+              About Almaram Alfaneyah Manufacturing Co.
             </h1>
-            <p className="max-w-3xl mx-auto text-muted-foreground text-lg">
+            <p className="max-w-3xl mx-auto text-lg text-gray-600 leading-relaxed">
               We specialize in designing and manufacturing high-quality
               electrical panel boards tailored to meet diverse industrial and
               commercial needs. Our commitment to precision, safety, and
-              reliability ensures optimal performance and efficiency
-              in every product.
+              reliability ensures optimal performance and efficiency in every
+              product.
             </p>
           </header>
         </Fade>
+        <div
+          className="absolute inset-0 z-[-1] bg-cover bg-center opacity-10"
+          style={{ backgroundImage: "url('/assets/mission-bg.jpg')" }}
+        ></div>
+      </section>
 
-        <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
+      {/* Manufacturing Excellence Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 md:px-8 lg:px-16">
           <Fade triggerOnce direction="up" cascade damping={0.3}>
-            {ABOUT_CARDS.map((item, index) => (
-              <Card
-                key={index}
-                className="h-full flex flex-col shadow-md border border-gray-200 rounded-lg bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 hover:shadow-lg transition-shadow duration-300"
-              >
-                <CardHeader>
-                  <CardTitle className="flex items-center text-2xl font-semibold pb-0 text-main">
-                    {item.icon}
-                    <p className="sm:truncate">{item.title}</p>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-600 text-lg">
-                  {item.description}
-                </CardContent>
-              </Card>
-            ))}
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl font-bold text-main mb-6">
+                  Manufacturing Excellence
+                </h2>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Almaram Alfaneyah Manufacturing Co. is a certified channel
+                  partner of Schneider Electric, specializing in the
+                  manufacturing of LV switchgear panels in the Kingdom of Saudi
+                  Arabia. Adhering to IEC and ISO 9001 standards, we maintain
+                  the highest quality in all operations.
+                </p>
+              </div>
+              <Image
+                src="/assets/about-1.jpg"
+                alt="Manufacturing Excellence"
+                width={800}
+                height={600}
+                className="rounded-lg shadow-md object-cover w-full"
+              />
+            </div>
           </Fade>
-        </section>
+        </div>
+      </section>
 
-        <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
-          <section className="text-center mt-12 pb-8">
-            <h2 className="text-3xl font-bold mb-4 text-main">Our Vision</h2>
-            <p className="max-w-2xl mx-auto text-lg text-muted-foreground">
-              To remain committed to our customers by providing complete
-              solutions with an innovative approach, utilizing the latest
-              technology, and building a skilled workforce dedicated to
-              exploring and advancing in the field of power distribution.
-            </p>
-          </section>
+      {/* Expanding Reach Section */}
+      <section className="py-16 bg-gray-50 relative">
+        <Fade triggerOnce direction="up" cascade damping={0.3}>
+          <div className="container mx-auto px-4 md:px-8 lg:px-16">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <Image
+                src="/assets/about-2.jpg"
+                alt="Expanding Reach"
+                width={800}
+                height={600}
+                className="rounded-lg shadow-md object-cover w-full"
+              />
+              <div>
+                <h2 className="text-3xl font-bold text-main mb-6">
+                  Expanding Reach
+                </h2>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  With our head office in Jeddah, Almaram Alfaneyah envisions a
+                  network of branches across major Saudi cities, ensuring
+                  widespread access to our innovative LV switchgear solutions.
+                </p>
+              </div>
+            </div>
+          </div>
         </Fade>
-      </div>
+      </section>
+
+      {/* Global Standards Section */}
+      <section className="py-16 bg-gradient-to-b from-gray-200 to-gray-300">
+        <Fade triggerOnce direction="up" cascade damping={0.3}>
+          <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center">
+            <h2 className="text-3xl font-bold text-main mb-6">
+              Global Standards
+            </h2>
+            <p className="text-lg text-gray-600 leading-relaxed max-w-4xl mx-auto">
+              All products are designed and manufactured in state-of-the-art
+              facilities and undergo stringent quality checks, reflecting our
+              dedication to quality, safety, and performance.
+            </p>
+          </div>
+        </Fade>
+      </section>
+
+      {/* Vision Section */}
+      <section className="py-16 bg-white relative overflow-hidden">
+        <Fade triggerOnce direction="up" cascade damping={0.3}>
+          <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center">
+            <h2 className="text-3xl font-bold text-main mb-6">Our Vision</h2>
+            <div className="grid md:grid-cols-3 gap-8 mt-8">
+              <div className="text-center">
+                <div className="text-main text-5xl mb-4 flex justify-center">
+                  <FaLightbulb />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Innovation</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Utilize the latest technology to provide cutting-edge
+                  solutions.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="text-main text-5xl mb-4 flex justify-center">
+                  <FaUsers />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Collaboration</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Build a skilled workforce dedicated to excellence.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="text-main text-5xl mb-4 flex justify-center">
+                  <FaCogs />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Efficiency</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Deliver complete and efficient solutions tailored to our
+                  clients' needs.
+                </p>
+              </div>
+            </div>
+          </div>
+        </Fade>
+      </section>
+
+<div className="bg-gray-50">
+      <Sponser/>
+</div>
     </MainLayout>
   );
 };
 
-export default page;
+export default AboutPage;

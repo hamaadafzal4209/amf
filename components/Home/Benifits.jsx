@@ -1,116 +1,125 @@
-'use client'
+import React from "react";
+import { Shield, Zap, Clock, CheckCircle } from "lucide-react";
+import ScrollReveal from "react-awesome-reveal";
+import { keyframes } from "@emotion/react";
+import { motion } from "framer-motion";
 
-import { motion } from 'framer-motion'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Shield, Zap, Clock, CheckCircle } from 'lucide-react'
+const fadeUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 const features = [
   {
-    icon: Shield,
-    title: 'Advanced Safety Standards',
-    description: 'Engineered to ensure safety for critical electrical systems and personnel.',
-    benefits: [
-      'Arc flash protection technology',
-      'Isolated bus compartments',
-      'Automatic safety interlocks',
-      'Remote operation in hazardous settings',
-    ],
+    icon: <Shield className="w-8 h-8 text-main group-hover:text-white" />,
+    title: "Advanced Safety Standards",
+    description:
+      "Our products meet the highest safety standards, ensuring peace of mind.",
+    benefits: ["Enhanced protection", "Certified compliance", "Peace of mind"],
   },
   {
-    icon: Zap,
-    title: 'Optimized Efficiency',
-    description: 'Our switchgear is designed to maximize power distribution and energy efficiency.',
-    benefits: [
-      'Low-loss components reduce waste',
-      'Real-time monitoring for optimized load balance',
-      'Integrated power factor correction',
-      'Compact, space-saving designs',
-    ],
+    icon: <Zap className="w-8 h-8 text-main group-hover:text-white" />,
+    title: "Optimized Efficiency",
+    description: "Designed for superior performance, reducing energy wastage.",
+    benefits: ["Energy savings", "Improved performance", "Cost-effectiveness"],
   },
   {
-    icon: Clock,
-    title: 'Built for Longevity',
-    description: 'Reliable, high-quality materials ensure durability and extended equipment life.',
+    icon: <Clock className="w-8 h-8 text-main group-hover:text-white" />,
+    title: "Built for Longevity",
+    description: "Engineered to last, ensuring long-term reliability.",
     benefits: [
-      'Corrosion-resistant enclosures',
-      'Effective thermal management systems',
-      'High mechanical resilience for intense usage',
-      'Minimal maintenance with high uptime',
+      "Durable materials",
+      "Reduced downtime",
+      "Sustainable performance",
     ],
   },
-]
+];
 
-export default function KeyFeaturesAndBenefits() {
+const qualities = [
+  "Reliable",
+  "Efficient",
+  "Safe",
+  "Innovative",
+  "Sustainable",
+  "Affordable",
+];
+
+const KeyFeaturesAndBenefits = () => {
   return (
-    <div className="container mx-auto px-6 md:px-12 pb-16">
-      <motion.h2 
-        className="text-4xl font-extrabold mb-8 text-center text-main"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Key Features & Benefits
-      </motion.h2>
-      <motion.p 
-        className="max-w-2xl mx-auto text-center text-gray-700 mb-12 leading-relaxed"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        Discover unmatched quality, safety, and efficiency with our switchgear solutions designed for excellence.
-      </motion.p>
+    <section className="py-16 bg-gray-100 mb-12">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16">
+        <ScrollReveal keyframes={fadeUp} duration={500} triggerOnce>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-main mb-4">
+              Key Features & Benefits
+            </h2>
+            <p className="text-lg text-gray-600">
+              Explore the features that make our products stand out.
+            </p>
+          </div>
+        </ScrollReveal>
 
-      <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {features.map((feature, index) => (
-          <motion.div
-            key={feature.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.15 }}
-          >
-            <Card className="h-full flex flex-col shadow-md border border-gray-200 rounded-xl bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 hover:shadow-xl transform transition-transform duration-300">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-lg font-semibold text-main">
-                  <feature.icon className="h-7 w-7 text-main" />
-                  {feature.title}
-                </CardTitle>
-                <CardDescription className="text-gray-600 mt-2 leading-relaxed">
-                  {feature.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <ul className="space-y-3 mt-4 text-gray-600">
-                  {feature.benefits.map((benefit, benefitIndex) => (
-                    <li key={benefitIndex} className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-main mr-3 flex-shrink-0" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <ScrollReveal
+              keyframes={fadeUp}
+              duration={500}
+              delay={index * 200}
+              triggerOnce
+              key={index}
+            >
+              <div className="bg-white text-black p-6 rounded-lg shadow-lg hover:shadow-2xl transform transition-all duration-300 hover:bg-main hover:text-white group">
+                <div className="flex items-center mb-4">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-sm mb-4">{feature.description}</p>
+                <ul className="space-y-2">
+                  {feature.benefits.map((benefit, idx) => (
+                    <li key={idx} className="flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5 text-green-400 group-hover:text-white" />
                       <span>{benefit}</span>
                     </li>
                   ))}
                 </ul>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
-
-      <motion.div 
-        className="mt-16 text-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.8 }}
-      >
-        <h3 className="text-3xl font-bold text-gray-800 mb-6">Why Industry Leaders Choose Us</h3>
-        <div className="flex flex-wrap justify-center gap-6">
-          {['Reliable', 'Efficient', 'Safe', 'Durable', 'Compliant', 'Innovative'].map((item, index) => (
-            <motion.div
-              key={index}
-              className="px-6 py-3 bg-gray-100 border border-gray-300 rounded-full text-main font-semibold shadow-md hover:bg-main hover:text-white hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
-            >
-              {item}
-            </motion.div>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
-      </motion.div>
-    </div>
-  )
-}
+
+        <ScrollReveal keyframes={fadeUp} duration={500} delay={600} triggerOnce>
+          <div className="text-center mt-16">
+            <h3 className="text-2xl font-bold text-main mb-6">
+              Why Industry Leaders Choose Us
+            </h3>
+            <div className="flex flex-wrap justify-center gap-6">
+              {[
+                "Reliable",
+                "Efficient",
+                "Safe",
+                "Durable",
+                "Compliant",
+                "Innovative",
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="px-6 py-3 bg-white border border-gray-300 rounded-full text-main font-semibold shadow-md hover:bg-main hover:text-white hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+                >
+                  {item}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  );
+};
+
+export default KeyFeaturesAndBenefits;
