@@ -20,7 +20,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-export default function ProductShowcase({ slice = false, showSearchBar = false }) {
+export default function ProductShowcase({
+  slice = false,
+  showSearchBar = false,
+}) {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -61,9 +64,10 @@ export default function ProductShowcase({ slice = false, showSearchBar = false }
   useEffect(() => {
     if (searchTerm) {
       const lowercasedSearchTerm = searchTerm.toLowerCase();
-      const filtered = products.filter((product) =>
-        product.title.toLowerCase().includes(lowercasedSearchTerm) ||
-        product.description.toLowerCase().includes(lowercasedSearchTerm)
+      const filtered = products.filter(
+        (product) =>
+          product.title.toLowerCase().includes(lowercasedSearchTerm) ||
+          product.description.toLowerCase().includes(lowercasedSearchTerm)
       );
       setFilteredProducts(filtered);
     } else {
@@ -143,13 +147,8 @@ export default function ProductShowcase({ slice = false, showSearchBar = false }
                 key={category.id}
                 className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
               >
-                {(slice
-                  ? category.products.slice(0, 3)
-                  : category.products
-                )
-                  .filter((product) =>
-                    filteredProducts.includes(product)
-                  )
+                {(slice ? category.products.slice(0, 3) : category.products)
+                  .filter((product) => filteredProducts.includes(product))
                   .map((product) => (
                     <motion.div
                       key={product._id}
@@ -205,6 +204,13 @@ export default function ProductShowcase({ slice = false, showSearchBar = false }
             )
         )}
       </div>
+
+      {/* Message when no products are found */}
+      {filteredProducts.length === 0 && searchTerm && (
+        <div className="text-center text-gray-500 py-8">
+          No products found for <q>{searchTerm}</q>
+        </div>
+      )}
     </div>
   );
 }
