@@ -17,10 +17,10 @@ export default function TargetedMarkets() {
 
   return (
     <div className="bg-slate-900 relative text-gray-100 py-16 mb-12">
-      <div className="absolute top-0 left-0 rotate-90">
+      <div className="absolute -top-2 -left-2 rotate-90">
         <Image src={'/assets/sqaure-shape.png'} alt="shape" width={200} height={200}/>
       </div>
-      <div className="absolute bottom-0 right-0 rotate-180">
+      <div className="absolute -bottom-2 right-0 rotate-180">
         <Image src={'/assets/sqaure-shape.png'} alt="shape" width={200} height={200}/>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
