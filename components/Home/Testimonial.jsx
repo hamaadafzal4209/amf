@@ -3,11 +3,12 @@
 import * as React from "react";
 import useEmblaCarousel, { EmblaOptionsType } from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { TestimonialCard } from "./testimonial-card";
 import Image from "next/image";
 import { testimonials } from "@/constants/testimonialData";
 import DotPattern from "../ui/dot-pattern";
+import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 
 const options = {
   loop: true,
@@ -80,10 +81,10 @@ export function Testimonial() {
             className="w-8 mb-4 object-contain"
           />
         </div>
-        <h2 className="text-3xl font-bold text-center mb-8 dark:text-white">
+        <h2 className="text-3xl font-bold text-center mb-8">
           What Our Customers Say
         </h2>
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative container mx-auto">
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex -ml-2">
               {testimonials.map((testimonial, index) => (
@@ -96,22 +97,21 @@ export function Testimonial() {
               ))}
             </div>
           </div>
-          <button
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full bg-white dark:bg-gray-800 p-2 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed hidden lg:block"
-            onClick={scrollPrev}
-            disabled={prevBtnDisabled}
-            aria-label="Previous slide"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <button
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full bg-white dark:bg-gray-800 p-2 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed hidden lg:block"
-            onClick={scrollNext}
-            disabled={nextBtnDisabled}
-            aria-label="Next slide"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
+
+          <div className="flex justify-center mt-8 gap-4">
+            <div
+              onClick={scrollPrev}
+              className="flex items-center justify-center cursor-pointer"
+            >
+              <ArrowLeft className="w-6 h-6 text-gray-600 hover:text-main" />
+            </div>
+            <div
+              onClick={scrollNext}
+              className="flex items-center justify-center cursor-pointer"
+            >
+              <ArrowRight className="w-6 h-6 text-gray-600 hover:text-main" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
