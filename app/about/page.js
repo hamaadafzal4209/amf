@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import HeroBanner from "@/components/HeroBanner";
 import MainLayout from "@/components/Layout/MainLayout";
@@ -144,7 +144,7 @@ const AboutPage = () => {
                 <h3 className="text-xl font-semibold mb-2">Efficiency</h3>
                 <p className="text-gray-600 leading-relaxed">
                   Deliver complete and efficient solutions tailored to our
-                  clients' needs.
+                  clients needs.
                 </p>
               </div>
             </div>
@@ -152,9 +152,9 @@ const AboutPage = () => {
         </Fade>
       </section>
 
-<div className="bg-gray-50">
-      <Sponser/>
-</div>
+      <div className="bg-gray-50">
+        <Sponser />
+      </div>
     </MainLayout>
   );
 };

@@ -3,6 +3,7 @@
 import { Fade } from "react-awesome-reveal";
 import Image from "next/image";
 import { CheckCircle } from "lucide-react";
+import DotPattern from "../ui/dot-pattern";
 
 const ABOUT_LIST = [
   "Certified partner of Schneider Electric, excelling in manufacturing.",
@@ -12,19 +13,11 @@ const ABOUT_LIST = [
 
 export default function AboutUs() {
   return (
-    <>
-      <Image
-        src="/assets/about-one-shape-1.png"
-        alt="Circles"
-        width={500}
-        height={500}
-        className="absolute w-80"
-        style={{
-          filter: "sepia(1) saturate(3000%) hue-rotate(-10deg) brightness(0.9)",
-          mixBlendMode: "multiply",
-        }}
-      />
-      <div className="relative">
+    <div className="relative">
+      <DotPattern className="absolute inset-0 opacity-40 z-0" />
+
+      {/* Content Area */}
+      <div className="relative z-10">
         <Image
           src="/assets/about-one-shape-1.png"
           alt="Decorative Shape"
@@ -73,14 +66,7 @@ export default function AboutUs() {
                 <ul className="list-none space-y-2 mt-4">
                   {ABOUT_LIST.map((item, index) => (
                     <li key={index} className="flex items-center gap-3">
-                      {/* <Image
-                        src="/assets/bullet.png"
-                        alt="Bullet"
-                        width={16}
-                        height={16}
-                        className="w-4 h-4 object-contain flex-shrink-0"
-                      /> */}
-                      <CheckCircle className="text-main"/>
+                      <CheckCircle className="text-main" />
                       <p className="text-sm text-gray-600 leading-relaxed">
                         {item}
                       </p>
@@ -119,6 +105,6 @@ export default function AboutUs() {
           </Fade>
         </div>
       </div>
-    </>
+    </div>
   );
 }

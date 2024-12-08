@@ -10,6 +10,7 @@ const Slider = () => {
   const textRefs = useRef([]);
   const descRefs = useRef([]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const images = [
     "url('/assets/banner-3.jpg')",
     "url('/assets/banner-1.jpg')",
@@ -35,6 +36,7 @@ const Slider = () => {
   const [isTweening, setIsTweening] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const slideDirections = ["left", "right", "top", "bottom"];
 
   const gotoNextSlide = useCallback(() => {
