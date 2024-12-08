@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 
 export default function TargetedMarkets() {
   const [angle, setAngle] = useState(0);
+  const [showAll, setShowAll] = useState(false);
+  const [displayedIndustries, setDisplayedIndustries] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -15,13 +17,37 @@ export default function TargetedMarkets() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const itemsToShow = showAll
+      ? industries.length
+      : window.innerWidth < 768
+      ? 6 
+      : 9;
+
+    setDisplayedIndustries(industries.slice(0, itemsToShow));
+  }, [showAll]);
+
+  const handleShowMore = () => {
+    setShowAll((prevShowAll) => !prevShowAll);
+  };
+
   return (
     <div className="bg-slate-900 relative text-gray-100 py-16 mb-12">
       <div className="absolute -top-2 -left-2 rotate-90">
-        <Image src={'/assets/sqaure-shape.png'} alt="shape" width={200} height={200}/>
+        <Image
+          src={"/assets/sqaure-shape.png"}
+          alt="shape"
+          width={200}
+          height={200}
+        />
       </div>
       <div className="absolute -bottom-2 right-0 rotate-180">
-        <Image src={'/assets/sqaure-shape.png'} alt="shape" width={200} height={200}/>
+        <Image
+          src={"/assets/sqaure-shape.png"}
+          alt="shape"
+          width={200}
+          height={200}
+        />
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold text-center text-main mb-8">
@@ -33,7 +59,7 @@ export default function TargetedMarkets() {
         </p>
       </div>
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {industries.map((industry, index) => (
+        {displayedIndustries.map((industry, index) => (
           <div
             key={index}
             className="relative overflow-hidden rounded-2xl group border border-transparent transition-transform duration-300"
@@ -58,6 +84,14 @@ export default function TargetedMarkets() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="flex justify-center mt-8">
+        <button
+          onClick={handleShowMore}
+          className="bg-main hover:bg-main-dark text-white font-bold py-2 px-4 rounded transition"
+        >
+          {showAll ? "Show Less" : "Show More"}
+        </button>
       </div>
     </div>
   );

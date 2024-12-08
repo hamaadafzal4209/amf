@@ -71,7 +71,7 @@ export function Testimonial() {
 
       <DotPattern className="absolute inset-0 opacity-40 z-0" />
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <div className="flex justify-center">
           <Image
             src={"/assets/energy.png"}

@@ -109,7 +109,6 @@ export default function ProductShowcase({
         Our Switchgear Products
       </motion.h2>
 
-      {/* Conditionally Render Search Bar */}
       {showSearchBar && (
         <div className="mb-8">
           <input

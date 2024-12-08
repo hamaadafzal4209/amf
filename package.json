@@ -36,7 +36,6 @@
     "gsap": "^3.12.5",
     "i": "^0.3.7",
     "lucide-react": "^0.454.0",
-    "mini-svg-data-uri": "^1.4.4",
     "mongodb": "^6.10.0",
     "mongoose": "^8.8.2",
     "next": "14.2.18",
