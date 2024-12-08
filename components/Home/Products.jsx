@@ -156,7 +156,7 @@ export default function ProductShowcase({
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <Card className="h-full flex flex-col border border-gray-200 hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1">
+                      <Card className="h-full flex flex-col border border-gray-200 hover:shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-1 hover:border-b-8 hover:border-b-main">
                         <CardHeader>
                           <CardTitle className="text-main">
                             {product.title}

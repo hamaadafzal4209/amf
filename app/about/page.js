@@ -90,6 +90,13 @@ const AboutPage = () => {
                 className="rounded-lg shadow-md object-cover w-full"
               />
               <div>
+                <Image
+                  src={"/assets/energy.png"}
+                  alt="Bullet"
+                  width={1000}
+                  height={1000}
+                  className="w-6 mb-6 object-contain"
+                />
                 <h2 className="text-3xl font-bold text-main mb-6">
                   Expanding Reach
                 </h2>
@@ -106,23 +113,22 @@ const AboutPage = () => {
 
       {/* Global Standards Section */}
       <div className="relative">
-      <DotPattern className="absolute inset-0 opacity-40 z-0" />
-      <section className="py-16 bg-gradient-to-b from-gray-200 to-gray-300">
-        <Fade triggerOnce direction="up" cascade damping={0.3}>
-          <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center">
-            <h2 className="text-3xl font-bold text-main mb-6">
-              Global Standards
-            </h2>
-            <p className="text-lg text-gray-600 leading-relaxed max-w-4xl mx-auto">
-              All products are designed and manufactured in state-of-the-art
-              facilities and undergo stringent quality checks, reflecting our
-              dedication to quality, safety, and performance.
-            </p>
-          </div>
-        </Fade>
-      </section>
+        <DotPattern className="absolute inset-0 opacity-40 z-0" />
+        <section className="py-16 bg-gradient-to-b from-gray-200 to-gray-300">
+          <Fade triggerOnce direction="up" cascade damping={0.3}>
+            <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center">
+              <h2 className="text-3xl font-bold text-main mb-6">
+                Global Standards
+              </h2>
+              <p className="text-lg text-gray-600 leading-relaxed max-w-4xl mx-auto">
+                All products are designed and manufactured in state-of-the-art
+                facilities and undergo stringent quality checks, reflecting our
+                dedication to quality, safety, and performance.
+              </p>
+            </div>
+          </Fade>
+        </section>
       </div>
-
 
       {/* Vision Section */}
       <section className="py-16 bg-white relative overflow-hidden">

@@ -6,59 +6,8 @@ import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { TestimonialCard } from "./testimonial-card";
 import Image from "next/image";
-
-const testimonials = [
-  {
-    content:
-      "This product has completely transformed our workflow. It's intuitive, powerful, and a joy to use every day.",
-    author: "Alex Johnson",
-    role: "Product Manager",
-    avatarSrc:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces",
-    backgroundImage:
-      "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop",
-  },
-  {
-    content:
-      "I can't imagine running my business without this tool. It's been a game-changer for our team's productivity.",
-    author: "Samantha Lee",
-    role: "CEO, TechStart",
-    avatarSrc:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=faces",
-    backgroundImage:
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop",
-  },
-  {
-    content:
-      "The customer support is outstanding. They've gone above and beyond to ensure our success with the platform.",
-    author: "Michael Chen",
-    role: "IT Director",
-    avatarSrc:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces",
-    backgroundImage:
-      "https://images.unsplash.com/photo-1551641506-ee5bf4cb45f1?w=800&h=600&fit=crop",
-  },
-  {
-    content:
-      "We've seen a 40% increase in efficiency since implementing this solution. It's been worth every penny.",
-    author: "Emily Rodriguez",
-    role: "Operations Manager",
-    avatarSrc:
-      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=150&h=150&fit=crop&crop=faces",
-    backgroundImage:
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop",
-  },
-  {
-    content:
-      "The level of customization available is impressive. It feels like the software was built specifically for our needs.",
-    author: "David Patel",
-    role: "Software Engineer",
-    avatarSrc:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=faces",
-    backgroundImage:
-      "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop",
-  },
-];
+import { testimonials } from "@/constants/testimonialData";
+import DotPattern from "../ui/dot-pattern";
 
 const options = {
   loop: true,
@@ -101,15 +50,7 @@ export function Testimonial() {
   }, [emblaApi, onSelect]);
 
   return (
-    <section
-      className="relative py-12 md:py-20 overflow-hidden"
-      style={{
-        backgroundImage: "url('/assets/why-choose-one-bg.png')",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-      }}
-    >
+    <section className="relative py-12 md:py-20 overflow-hidden bg-gray-50">
       <div className="absolute top-0 left-0">
         <Image
           src="/assets/top-left-shape.png"
@@ -118,7 +59,6 @@ export function Testimonial() {
           height={300}
         />
       </div>
-
       <div className="absolute bottom-0 right-0">
         <Image
           src="/assets/bottom-right-shape.png"
@@ -127,6 +67,9 @@ export function Testimonial() {
           height={300}
         />
       </div>
+
+      <DotPattern className="absolute inset-0 opacity-40 z-0" />
+
       <div className="container mx-auto px-4">
         <div className="flex justify-center">
           <Image
