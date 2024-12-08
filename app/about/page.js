@@ -7,6 +7,7 @@ import { Fade } from "react-awesome-reveal";
 import Image from "next/image";
 import { FaLightbulb, FaUsers, FaCogs } from "react-icons/fa";
 import { Sponser } from "@/components/Home/Sponsers";
+import DotPattern from "@/components/ui/dot-pattern";
 
 const AboutPage = () => {
   return (
@@ -46,6 +47,13 @@ const AboutPage = () => {
           <Fade triggerOnce direction="up" cascade damping={0.3}>
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
+                <Image
+                  src={"/assets/energy.png"}
+                  alt="Bullet"
+                  width={1000}
+                  height={1000}
+                  className="w-6 mb-6 object-contain"
+                />
                 <h2 className="text-3xl font-bold text-main mb-6">
                   Manufacturing Excellence
                 </h2>
@@ -97,6 +105,8 @@ const AboutPage = () => {
       </section>
 
       {/* Global Standards Section */}
+      <div className="relative">
+      <DotPattern className="absolute inset-0 opacity-40 z-0" />
       <section className="py-16 bg-gradient-to-b from-gray-200 to-gray-300">
         <Fade triggerOnce direction="up" cascade damping={0.3}>
           <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center">
@@ -111,6 +121,8 @@ const AboutPage = () => {
           </div>
         </Fade>
       </section>
+      </div>
+
 
       {/* Vision Section */}
       <section className="py-16 bg-white relative overflow-hidden">
