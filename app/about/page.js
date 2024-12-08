@@ -113,7 +113,7 @@ const AboutPage = () => {
 
       {/* Global Standards Section */}
       <div className="relative">
-        <DotPattern className="absolute inset-0 opacity-40 z-0" />
+        <DotPattern className="absolute inset-0 opacity-50 z-0" />
         <section className="py-16 bg-gradient-to-b from-gray-200 to-gray-300">
           <Fade triggerOnce direction="up" cascade damping={0.3}>
             <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center">

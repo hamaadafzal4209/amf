@@ -11,8 +11,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Fade } from "react-awesome-reveal";
@@ -76,15 +74,14 @@ export default function ContactUs() {
     <MainLayout>
       <HeroBanner
         title={"Contact Us"}
-        subtitle={"contact"}
         backgroundImage={"/assets/contact-banner.jpg"}
       />
       <div className="container mx-auto px-4 md:px-8 lg:px-12 py-12">
-        <Fade triggerOnce direction="up" duration={800}>
+        {/* <Fade triggerOnce direction="up" duration={800}>
           <h1 className="text-3xl font-bold mb-12 text-main text-center">
             Contact Us
           </h1>
-        </Fade>
+        </Fade> */}
 
         {/* Contact Info Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
