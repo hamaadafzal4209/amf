@@ -1,67 +1,64 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { CheckCircle } from 'lucide-react';
-import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
+import { industries } from "@/constants/targetMarketers";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 
-const TargetedMarkets = () => {
-  const markets = [
-    "General Contractors",
-    "MEP Contractors",
-    "Industry",
-    "Genset Rental Companies",
-    "Large Structure Buildings",
-    "Residential Complexes",
-    "Residential Compounds",
-    "Hospitals",
-    "Pump Dealers",
-    "Operations & Maintenance Companies",
-    "Steel Structure & Steel Construction Companies",
-    "Infrastructure Works Companies",
-    "Low Current Systems Companies",
-    "Building Management Companies",
-    "Hatcheries & Food Production Companies",
-    "Agriculture & Aqua Groups",
-    "System Integrators",
-  ];
+export default function TargetedMarkets() {
+  const [angle, setAngle] = useState(0);
 
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAngle((prevAngle) => (prevAngle + 2) % 360);
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div ref={ref} className="container mx-auto px-6 md:px-12 py-16">
-      <motion.h2
-        className="text-4xl font-extrabold text-center text-main mb-8"
-        initial={{ opacity: 0, y: -20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5 }}
-      >
-        Targeted Markets
-      </motion.h2>
-      <motion.p
-        className="max-w-2xl mx-auto text-center text-gray-700 mb-12 leading-relaxed"
-        initial={{ opacity: 0, y: -20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        Our solutions cater to a diverse range of industries, providing reliable and efficient services tailored to their specific needs.
-      </motion.p>
-      <div className="flex flex-wrap justify-center gap-6">
-        {markets.map((market, index) => (
-          <motion.div
+    <div className="bg-slate-900 relative text-gray-100 py-16 mb-12">
+      <div className="absolute top-0 left-0 rotate-90">
+        <Image src={'/assets/sqaure-shape.png'} alt="shape" width={200} height={200}/>
+      </div>
+      <div className="absolute bottom-0 right-0 rotate-180">
+        <Image src={'/assets/sqaure-shape.png'} alt="shape" width={200} height={200}/>
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-extrabold text-center text-main mb-8">
+          Our Target Markets
+        </h2>
+        <p className="text-xl text-gray-300 text-center mb-12 max-w-3xl mx-auto">
+          Our solutions cater to a diverse range of industries, providing
+          reliable and efficient services tailored to their specific needs.
+        </p>
+      </div>
+      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {industries.map((industry, index) => (
+          <div
             key={index}
-            className="flex items-center gap-3 px-6 py-4 bg-gray-100 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 w-full sm:w-auto"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
+            className="relative overflow-hidden rounded-2xl group border border-transparent transition-transform duration-300"
+            style={{
+              background: `linear-gradient(45deg, #172033, #172033 50%, #172033) padding-box, 
+                          conic-gradient(from ${angle}deg, rgba(31, 41, 55, 0.48) 80%, #E66F3D 86%, rgba(99, 102, 241, 0.4) 90%, #E66F3D 94%, rgba(31, 41, 55, 0.48) 98%) border-box`,
+            }}
           >
-            <CheckCircle className="h-6 w-6 text-main flex-shrink-0" />
-            <span className="text-gray-800 font-medium">{market}</span>
-          </motion.div>
+            <figure className="imageSHineEffect">
+              <Image
+                src={industry.image}
+                alt={industry.name}
+                width={400}
+                height={300}
+                className="w-full h-48 object-cover rounded-t-lg"
+              />
+            </figure>
+            <div className="p-6 flex flex-col items-center">
+              <h3 className="text-lg font-bold text-main text-center">
+                {industry.name}
+              </h3>
+            </div>
+          </div>
         ))}
       </div>
     </div>
   );
-};
-
-export default TargetedMarkets;
+}

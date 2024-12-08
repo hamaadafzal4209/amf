@@ -198,3 +198,9 @@ body {
     left: 125%;
   }
 }
+
+@property --border-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: '<angle>';
+}        

@@ -194,6 +194,15 @@ const Navbar = () => {
                 >
                   Home
                 </Link>
+                <Link
+                  href="/about"
+                  className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
+                    isActiveLink("/about") ? "text-main" : ""
+                  }`}
+                  onClick={handleLinkClick}
+                >
+                  About Us
+                </Link>
                 <Accordion className="m-0 p-0" type="single" collapsible>
                   <AccordionItem
                     className="m-0 p-0 border-none"
@@ -249,15 +258,6 @@ const Navbar = () => {
                   onClick={handleLinkClick}
                 >
                   Services
-                </Link>
-                <Link
-                  href="/about"
-                  className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
-                    isActiveLink("/about") ? "text-main" : ""
-                  }`}
-                  onClick={handleLinkClick}
-                >
-                  About Us
                 </Link>
                 <Link
                   href="/contact"
