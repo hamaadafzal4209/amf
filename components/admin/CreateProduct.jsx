@@ -83,9 +83,9 @@ export default function CreateProduct() {
 
         if (response.ok) {
           toast.success("Product created successfully!");
-          formik.resetForm(); // Reset all formik fields
-          setPreviewImages([]); // Clear image previews
-          setFeatures([]); // Clear features list
+          formik.resetForm(); 
+          setPreviewImages([]);
+          setFeatures([]); 
         } else {
           const error = await response.json();
           toast.error("Failed to create product: " + error.message);
@@ -151,7 +151,7 @@ export default function CreateProduct() {
   };
 
   return (
-    <ScrollArea className="w-full p-6 sm:p-8 max-w-2xl mx-auto bg-white shadow-lg rounded-lg max-h-[80vh] overflow-y-auto custom-scrollbar">
+    <ScrollArea className="w-full p-4 sm:p-8 max-w-2xl mx-auto bg-white shadow-lg rounded-lg max-h-[80vh] overflow-y-auto custom-scrollbar">
       <div>
         <h2 className="text-2xl pb-4 font-semibold text-main">
           Create New Product

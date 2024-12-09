@@ -96,7 +96,7 @@ export default function ProductManagement() {
   };
 
   return (
-    <div className="container mx-auto p-4 space-y-4">
+    <div className="container mx-auto space-y-4">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <input
           type="search"
@@ -134,91 +134,85 @@ export default function ProductManagement() {
           </p>
         </div>
       ) : (
-        <div className="bg-white shadow-md rounded-lg overflow-hidden max-h-[80vh] overflow-y-auto custom-scrollbar">
-          <div className="overflow-hidden rounded-lg shadow-lg bg-white">
-            <div className="overflow-x-auto custom-scrollbar">
-              <table className="min-w-full divide-y divide-gray-200">
-                {/* Table Header */}
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+        <div className="overflow-hidden rounded-lg shadow-lg bg-white">
+          <div className="overflow-x-auto custom-scrollbar">
+            <table className="min-w-full divide-y divide-gray-200 table-auto">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Name
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Category
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Image
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {currentProducts.map((product) => (
+                  <tr key={product._id} className="hover:bg-gray-50">
+                    <td
+                      onClick={() => handleLearnMoreClick(product._id)}
+                      className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer"
                     >
-                      Name
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      {product.title}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-main">
+                        {product.category}
+                      </span>
+                    </td>
+                    <td
+                      onClick={() => handleLearnMoreClick(product._id)}
+                      className="px-6 py-4 whitespace-nowrap flex-shrink-0 cursor-pointer"
                     >
-                      Category
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Image
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Actions
-                    </th>
+                      <div className="flex items-center flex-shrink-0">
+                        <Image
+                          width={500}
+                          height={500}
+                          src={product.images[0]}
+                          alt={product.title}
+                          className="min-w-16 max-w-16 w-full h-16 object-cover flex-shrink-0 rounded-md shadow-sm"
+                        />
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <button
+                        onClick={() => handleEdit(product._id)}
+                        className="text-green-600 hover:text-green-900  transition-all"
+                      >
+                        <Pencil className="w-5 h-5" />
+                        <span className="sr-only">Edit</span>
+                      </button>
+                      <button
+                        onClick={() => handleDelete(product._id)}
+                        className="ml-3 text-red-600 hover:text-red-900 transition-all"
+                      >
+                        <Trash2 className="w-5 h-5" />
+                        <span className="sr-only">Delete</span>
+                      </button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {currentProducts.map((product) => (
-                    <tr key={product._id} className="hover:bg-gray-50">
-                      <td
-                        onClick={() => handleLearnMoreClick(product._id)}
-                        className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer"
-                      >
-                        {product.title}
-                      </td>
-
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-main">
-                          {product.category}
-                        </span>
-                      </td>
-
-                      <td
-                        onClick={() => handleLearnMoreClick(product._id)}
-                        className="px-6 py-4 whitespace-nowrap flex-shrink-0 cursor-pointer"
-                      >
-                        <div className="flex items-center flex-shrink-0">
-                          <Image
-                            width={500}
-                            height={500}
-                            src={product.images[0]}
-                            alt={product.title}
-                            className="min-w-16 max-w-16 w-full h-16 object-cover flex-shrink-0 rounded-md shadow-sm"
-                          />
-                        </div>
-                      </td>
-
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <button
-                          onClick={() => handleEdit(product._id)}
-                          className="text-green-600 hover:text-green-900  transition-all"
-                        >
-                          <Pencil className="w-5 h-5" />
-                          <span className="sr-only">Edit</span>
-                        </button>
-                        <button
-                          onClick={() => handleDelete(product._id)}
-                          className="ml-3 text-red-600 hover:text-red-900 transition-all"
-                        >
-                          <Trash2 className="w-5 h-5" />
-                          <span className="sr-only">Delete</span>
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       )}

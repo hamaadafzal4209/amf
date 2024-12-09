@@ -21,7 +21,7 @@ export default function TargetedMarkets() {
     const itemsToShow = showAll
       ? industries.length
       : window.innerWidth < 768
-      ? 6 
+      ? 6
       : 9;
 
     setDisplayedIndustries(industries.slice(0, itemsToShow));
@@ -51,7 +51,7 @@ export default function TargetedMarkets() {
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold text-center text-main mb-8">
-          Our Target Markets
+          Our Targeted Markets
         </h2>
         <p className="text-xl text-gray-300 text-center mb-12 max-w-3xl mx-auto">
           Our solutions cater to a diverse range of industries, providing
