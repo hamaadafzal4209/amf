@@ -11,53 +11,11 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { projects } from "@/constants/projectsData";
 import Image from "next/image";
 import { Fade } from "react-awesome-reveal";
 
-const products = [
-  {
-    id: 1,
-    title: "AL NAHDI WAREHOUSE",
-    image: "/assets/projects/project1.jpg",
-  },
-  {
-    id: 2,
-    title: "MAKKAH HOSPITAL",
-    image: "/assets/projects/project2.jpg",
-  },
-  {
-    id: 3,
-    title: "ZAHID BUSINESS PARK",
-    image: "/assets/projects/project3.jpg",
-  },
-  {
-    id: 4,
-    title: "JAMJOOM PHARMACEUTICALS CO.",
-    image: "/assets/projects/project4.jpg",
-  },
-  {
-    id: 5,
-    title: "NAJRAN TEACHING HOSPITAL",
-    image: "/assets/projects/project5.jpg",
-  },
-  {
-    id: 6,
-    title: "LULU HYPERMARKET",
-    image: "/assets/projects/project6.jpg",
-  },
-  {
-    id: 7,
-    title: "AL-SERAFI CITY",
-    image: "/assets/projects/project7.jpg",
-  },
-  {
-    id: 8,
-    title: "AL-RAIDAH DIGITAL CITY",
-    image: "/assets/projects/project8.jpg",
-  },
-];
-
-export default function ProductShowcase() {
+export default function Projectshowcase() {
   return (
     <MainLayout>
       <HeroBanner
@@ -66,7 +24,7 @@ export default function ProductShowcase() {
       />
       <div className="container mx-auto px-4 md:px-8 lg:px-12 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {products.map((product, index) => (
+          {projects.map((product, index) => (
             <Fade
               key={product.id}
               direction="up"
@@ -94,20 +52,22 @@ export default function ProductShowcase() {
                   </Card>
                 </DialogTrigger>
 
-                <DialogContent className="rounded-xl p-6 max-w-md mx-auto bg-white">
+                <DialogContent className="rounded-xl p-6 max-w-full md:max-w-lg lg:max-w-xl max-h-[90vh] overflow-y-auto mx-auto bg-white shadow-lg">
                   <DialogHeader>
-                    <DialogTitle className="text-xl font-bold">
+                    <DialogTitle className="text-xl font-bold text-gray-800">
                       {product.title}
                     </DialogTitle>
                   </DialogHeader>
-                  <Image
-                    width={1000}
-                    height={600}
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                  <DialogDescription className="text-gray-700">
+                  <div className="relative mb-4">
+                    <Image
+                      width={1000}
+                      height={300}
+                      src={product.image}
+                      alt={product.title}
+                      className="w-full h-60 md:h-72 object-cover rounded-lg"
+                    />
+                  </div>
+                  <DialogDescription className="text-gray-700 text-sm md:text-base leading-relaxed">
                     {product.description}
                   </DialogDescription>
                 </DialogContent>
