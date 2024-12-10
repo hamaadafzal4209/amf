@@ -86,11 +86,11 @@ export function Testimonial() {
         </h2>
         <div className="relative container mx-auto">
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex -ml-2">
+            <div className="flex">
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="flex-[0_0_100%] min-w-0 pl-4 sm:flex-[0_0_50%] lg:flex-[0_0_33.33%]"
+                  className="flex-[0_0_100%] min-w-0 sm:pl-4 sm:flex-[0_0_50%] lg:flex-[0_0_33.33%]"
                 >
                   <TestimonialCard {...testimonial} />
                 </div>
