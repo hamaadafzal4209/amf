@@ -1,38 +1,37 @@
-import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-const user = process.env.EMAIL;
-const pass = process.env.PASSWORD; 
+export default async function handler(req, res) {
+  if (req.method === "POST") {
+    const { name, email, message } = req.body;
 
-export async function POST(request) {
-  try {
-    const { name, email, message } = await request.json();
-
+    // Create Nodemailer transporter using your webmail SMTP credentials
     const transporter = nodemailer.createTransport({
-      host: "mail.doteasy.com", 
-      port: 465, 
-      secure: true, 
+      host: "smtp.yourwebmailprovider.com", // E.g., "smtp.gmail.com" for Gmail
+      port: 587, // TLS Port
+      secure: false, // use TLS
       auth: {
-        user,
-        pass,
+        user: process.env.EMAIL, // Your webmail email address
+        pass: process.env.EMAIL_PASSWORD, // Your email password or App password
       },
     });
 
+    // Prepare email options
     const mailOptions = {
-      from: user,
-      to: "the-email-you-want-to-receive-the-message",
-      subject: "New message from your website",
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      from: email, // Sender's email address
+      to: "info@amf-sa.com", // Your destination email address
+      subject: `New message from ${name}`,
+      text: `You have a new message from ${name} (${email}):\n\n${message}`,
+      html: `<p>You have a new message from ${name} (${email}):</p><p>${message}</p>`,
     };
 
-    await transporter.sendMail(mailOptions);
-
-    return NextResponse.json(
-      { message: "Message sent successfully" },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error("Error sending email:", error);
-    return new NextResponse("Failed to send message.", { status: 500 });
+    try {
+      await transporter.sendMail(mailOptions);
+      return res.status(200).json({ message: "Email sent successfully" });
+    } catch (error) {
+      console.error("Error sending email:", error);
+      return res.status(500).json({ error: "Failed to send email" });
+    }
+  } else {
+    return res.status(405).json({ error: "Method Not Allowed" });
   }
 }

@@ -36,37 +36,28 @@ export default function ContactUs() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-      if (response.ok) {
-        toast({
-          title: "Message Sent",
-          description:
-            "We've received your message and will get back to you soon.",
-        });
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        const errorData = await response.json();
-        toast({
-          title: "Error",
-          description: `Failed to send message: ${errorData.message}`,
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
+    const result = await response.json();
+
+    if (response.ok) {
       toast({
-        title: "Error",
-        description: "Something went wrong. Please try again later.",
+        title: "Message sent successfully!",
+        description: "We will get back to you soon.",
+      });
+      setFormData({ name: "", email: "", message: "" });
+    } else {
+      toast({
+        title: "Error sending message",
+        description: result.error || "Please try again later.",
         variant: "destructive",
       });
-      console.error("Failed to send message:", error);
     }
   };
 
@@ -200,7 +191,6 @@ export default function ContactUs() {
               <CardFooter className="text-right">
                 <Button
                   type="submit"
-                  onClick={handleSubmit}
                   className="bg-main text-white hover:bg-black transition-all duration-300"
                 >
                   Send Message
