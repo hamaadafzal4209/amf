@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { industries } from "@/constants/targetMarketers";
@@ -9,6 +10,13 @@ export default function TargetedMarkets() {
   const [showAll, setShowAll] = useState(false);
   const [displayedIndustries, setDisplayedIndustries] = useState([]);
 
+  const getItemsToShow = (width) => {
+    if (showAll) {
+      return industries.length;
+    }
+    return width < 768 ? 6 : 9;
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setAngle((prevAngle) => (prevAngle + 2) % 360);
@@ -18,13 +26,20 @@ export default function TargetedMarkets() {
   }, []);
 
   useEffect(() => {
-    const itemsToShow = showAll
-      ? industries.length
-      : window.innerWidth < 768
-      ? 6
-      : 9;
+    const handleResize = () => {
+      const itemsToShow = getItemsToShow(window.innerWidth);
+      setDisplayedIndustries(industries.slice(0, itemsToShow));
+    };
 
-    setDisplayedIndustries(industries.slice(0, itemsToShow));
+    // Initial calculation
+    handleResize();
+
+    // Set up resize event listener for responsiveness
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, [showAll]);
 
   const handleShowMore = () => {
