@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -68,14 +68,7 @@ export default function ContactUs() {
         backgroundImage={"/assets/contact-banner.jpg"}
       />
       <div className="container mx-auto px-4 md:px-8 lg:px-12 py-12">
-        {/* <Fade triggerOnce direction="up" duration={800}>
-          <h1 className="text-3xl font-bold mb-12 text-main text-center">
-            Contact Us
-          </h1>
-        </Fade> */}
-
-        {/* Contact Info Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <Fade triggerOnce direction="up" cascade damping={0.1}>
             <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
               <CardHeader className="flex flex-col items-center py-6">
@@ -85,7 +78,10 @@ export default function ContactUs() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-center text-main">
-                <p>108930, Jeddah 21351, K.S.A</p>
+                <p className="truncate">
+                  AL-MARAM AL-FANEYAH 3760 الأخطل, JJMA3760، 7766, حي المحجر,
+                  Jeddah 22511 SAUDI ARABIA
+                </p>
               </CardContent>
             </Card>
 
@@ -115,10 +111,29 @@ export default function ContactUs() {
               </CardHeader>
               <CardContent className="text-center text-gray-600">
                 <a
-                  href="tel:+966569105617"
+                  href="tel:+966569105621"
                   className="text-lg text-main hover:underline"
                 >
-                  +966 56 910 5617
+                  +966 56 910 5621
+                </a>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
+              <CardHeader className="flex flex-col items-center py-6">
+                <MessageCircle className="h-12 w-12 text-main mb-4" />
+                <CardTitle className="text-xl font-semibold text-center text-gray-900">
+                  WhatsApp Us
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-center text-gray-600">
+                <a
+                  href="https://wa.me/966569105781"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg text-main hover:underline"
+                >
+                  +966 56 910 5781
                 </a>
               </CardContent>
             </Card>
@@ -208,21 +223,25 @@ export default function ContactUs() {
                 <div className="space-y-4">
                   <div className="flex items-center space-x-2 text-gray-600">
                     <MapPin className="h-5 w-5 text-main" />
-                    <span>123 Switchgear Avenue, Power City, PC 12345</span>
+                    <span>AL-MARAM AL-FANEYAH, حي المحجر, Jeddah 22511</span>
                   </div>
                   <div className="flex items-center space-x-2 text-gray-600">
                     <Phone className="h-5 w-5 text-main" />
-                    <span>+1 (555) 123-4567</span>
+                    <span>+966 56 910 5621</span>
                   </div>
                   <div className="flex items-center space-x-2 text-gray-600">
                     <Mail className="h-5 w-5 text-main" />
                     <span> info@amf-sa.com</span>
                   </div>
+                  <div className="flex items-center space-x-2 text-gray-600">
+                    <MessageCircle className="h-5 w-5 text-main" />
+                    <span>WhatsApp: +966 56 910 5781</span>
+                  </div>
 
                   <div className="mt-6">
                     <iframe
                       title="Company Location"
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095919576!2d-74.00425528459415!3d40.74076797932818!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c1654f3%3A0xc80f9cfce5383d5d!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1621436591560!5m2!1sen!2sus"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3714.0160869557562!2d39.18492307388917!3d21.428612673927788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3c8e5327c464b%3A0x4143e81285adbd42!2zSkpNQTM3NjDYjCAzNzYwINin2YTYo9iu2LfZhNiMIDc3NjbYjCDYrdmKINin2YTZhdit2KzYsSwgSmVkZGFoIDIyNTExLCBTYXVkaSBBcmFiaWE!5e0!3m2!1sen!2s!4v1734176258791!5m2!1sen!2s"
                       width="100%"
                       height="300"
                       style={{ border: 0 }}
