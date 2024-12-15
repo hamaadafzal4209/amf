@@ -11,7 +11,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Fade } from "react-awesome-reveal";
 import HeroBanner from "@/components/HeroBanner";
@@ -24,6 +23,7 @@ export default function ContactUs() {
     email: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false); // Add loading state
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -35,6 +35,17 @@ export default function ContactUs() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading state to true when submission starts
+
+    console.log("Form submission triggered");
+    console.log("Contact API hit");
+
+    console.log("SMTP_HOST:", process.env.SMTP_HOST);
+    console.log("SMTP_PORT:", process.env.SMTP_PORT);
+    console.log("EMAIL:", process.env.EMAIL);
+    console.log("EMAIL_PASSWORD:", process.env.EMAIL_PASSWORD);
+
+    console.log("Form submitted with data:", formData);
 
     const response = await fetch("/api/contact", {
       method: "POST",
@@ -45,6 +56,9 @@ export default function ContactUs() {
     });
 
     const result = await response.json();
+    console.log("API Response:", result);
+
+    setLoading(false); // Set loading state to false when response is received
 
     if (response.ok) {
       toast({
@@ -147,9 +161,8 @@ export default function ContactUs() {
               <CardHeader>
                 <CardTitle>Send Us a Message</CardTitle>
                 <CardDescription>
-                  {
-                    "Fill out the form below and we'll get back to you as soon as possible."
-                  }
+                  Fill out the form below and well get back to you as soon as
+                  possible.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -205,12 +218,14 @@ export default function ContactUs() {
                 </form>
               </CardContent>
               <CardFooter className="text-right">
-                <Button
+                <button
                   type="submit"
-                  className="bg-main text-white hover:bg-black transition-all duration-300"
+                  onClick={handleSubmit}
+                  className="px-4 py-2 rounded-md bg-main text-white hover:bg-black transition-all duration-300 disabled:opacity-75 disabled:hover:bg-main disabled:cursor-not-allowed"
+                  disabled={loading}
                 >
-                  Send Message
-                </Button>
+                  {loading ? <span>Sending...</span> : "Send Message"}
+                </button>
               </CardFooter>
             </Card>
             <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
