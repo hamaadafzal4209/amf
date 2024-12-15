@@ -131,7 +131,7 @@ body {
   width: 50px;
   aspect-ratio: 1;
   display: grid;
-  --webkit-mask: conic-gradient(from 15deg, #0000, #000);
+  -webkit-mask: conic-gradient(from 15deg, #0000, #000);
   animation: l26 1s infinite steps(12);
 }
 .loader,
