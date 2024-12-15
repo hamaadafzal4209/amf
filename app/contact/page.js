@@ -68,7 +68,7 @@ export default function ContactUs() {
         backgroundImage={"/assets/contact-banner.jpg"}
       />
       <div className="container mx-auto px-4 md:px-8 lg:px-12 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2  gap-8 mb-12">
           <Fade triggerOnce direction="up" cascade damping={0.1}>
             <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
               <CardHeader className="flex flex-col items-center py-6">
@@ -78,8 +78,9 @@ export default function ContactUs() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-center text-main">
-                <p className="truncate">
-                  AL-MARAM AL-FANEYAH 3760 الأخطل, JJMA3760، 7766, حي المحجر,
+                <p>
+                  AL-MARAM AL-FANEYAH <br /> 3760 الأخطل, JJMA3760، 7766, حي
+                  المحجر, <br />
                   Jeddah 22511 SAUDI ARABIA
                 </p>
               </CardContent>
