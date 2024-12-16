@@ -65,13 +65,15 @@ const AboutPage = () => {
                   the highest quality in all operations.
                 </p>
               </div>
-              <Image
-                src="/assets/about-1.jpg"
-                alt="Manufacturing Excellence"
-                width={800}
-                height={600}
-                className="rounded-lg shadow-md object-cover w-full"
-              />
+              <figure className="imageSHineEffect">
+                <Image
+                  src="/assets/about-1.jpg"
+                  alt="Expanding Reach"
+                  width={800}
+                  height={600}
+                  className="rounded-lg shadow-md object-cover w-full"
+                />
+              </figure>
             </div>
           </Fade>
         </div>
@@ -82,13 +84,15 @@ const AboutPage = () => {
         <Fade triggerOnce direction="up" cascade damping={0.3}>
           <div className="container mx-auto px-4 md:px-8 lg:px-16">
             <div className="grid md:grid-cols-2 gap-12 items-center">
-              <Image
-                src="/assets/about-2.jpg"
-                alt="Expanding Reach"
-                width={800}
-                height={600}
-                className="rounded-lg shadow-md object-cover w-full"
-              />
+              <figure className="imageSHineEffect">
+                <Image
+                  src="/assets/about-2.jpg"
+                  alt="Expanding Reach"
+                  width={800}
+                  height={600}
+                  className="rounded-lg shadow-md object-cover w-full"
+                />
+              </figure>
               <div>
                 <Image
                   src={"/assets/energy.png"}

@@ -80,7 +80,7 @@ export default function AboutUs() {
           <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
             <section className="flex flex-col md:flex-row items-center justify-between gap-12 mt-16 pb-8">
               <div className="flex-1">
-                <Disc2 size={32} className="text-main mb-4"/>
+                <Disc2 size={32} className="text-main mb-4" />
                 <h2 className="text-3xl font-semibold mb-6 text-main">
                   Our Vision
                 </h2>
