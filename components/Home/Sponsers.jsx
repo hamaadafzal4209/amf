@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Marquee from "../ui/marquee";
 
@@ -24,7 +23,7 @@ const secondRow = partners.slice(partners.length / 2);
 const PartnerCard = ({ logo, name }) => {
   return (
     <figure className="relative mx-4 lg:mx-6 flex-shrink-0">
-      <div className="relative w-24 h-24 overflow-hidden">
+      <div className="relative w-32 h-32 overflow-hidden">
         <Image
           width={500}
           height={500}
@@ -57,7 +56,7 @@ export function Sponser() {
       <Marquee
         reverse
         pauseOnHover
-        className="[--duration:20s] !-mt-6 flex gap-4"
+        className="[--duration:20s] !-mt-12 flex gap-4"
       >
         {secondRow.map((partner) => (
           <PartnerCard key={partner.name} {...partner} />
