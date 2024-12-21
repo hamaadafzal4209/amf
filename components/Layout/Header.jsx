@@ -175,34 +175,40 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="hidden md:flex md:items-center gap-4 text-gray-600 font-medium">
-          <a href="tel:+966569105621">
+        <div className="hidden md:flex flex-col md:items-start gap-1 text-gray-600 font-medium">
+          <a
+            href="tel:+966569105621"
+            className="flex items-center hover:text-main text-sm transition-colors gap-2"
+          >
             <Image
-              className="w-8 flex-shrink-0"
               src="/assets/phone-call.png"
-              alt="image"
-              width={500}
-              height={500}
+              alt="Phone Icon"
+              width={16}
+              height={16}
+              className="w-4 h-4"
             />
+            +966 569 105 621
           </a>
           <a
             href="https://wa.me/966569105781"
             target="_blank"
             rel="noopener noreferrer"
+            className="flex items-center hover:text-main text-sm transition-colors gap-2"
           >
             <Image
-              className="w-8 flex-shrink-0"
               src="/assets/whatsapp.png"
-              alt="image"
-              width={500}
-              height={500}
+              alt="WhatsApp Icon"
+              width={16}
+              height={16}
+              className="w-4 h-4"
             />
+            +966 569 105 781
           </a>
         </div>
 
         {/* Mobile Menu */}
         <div className="lg:hidden flex items-center gap-4">
-        <a href="tel:+966569105621">
+          <a href="tel:+966569105621">
             <Image
               className="w-8"
               src="/assets/phone-call.png"
