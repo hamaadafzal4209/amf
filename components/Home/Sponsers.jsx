@@ -14,7 +14,6 @@ const partners = [
   { name: "Oscorp Industries", logo: "/assets/brand10.png" },
   { name: "Wayne Enterprises", logo: "/assets/brand11.png" },
   { name: "Stark Industries", logo: "/assets/brand12.png" },
-  { name: "LexCorp", logo: "/assets/brand13.png" },
 ];
 
 const firstRow = partners.slice(0, partners.length / 2);

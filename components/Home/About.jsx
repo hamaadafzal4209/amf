@@ -79,7 +79,7 @@ export default function AboutUs() {
                   exploring and advancing in the field of power distribution.
                 </p>
               </div>
-              <div className="flex-1">
+              <div className="flex-1 w-full">
                 <figure className="imageSHineEffect">
                   <Image
                     src="/assets/about-2.jpg"
