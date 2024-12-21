@@ -13,11 +13,11 @@ const ABOUT_LIST = [
 
 export default function AboutUs() {
   return (
-  <div className="">
-      <DotPattern className="absolute inset-0 opacity-40 z-0" />
+  <div className="relative">
+      <DotPattern className="absolute inset-0 w-full h-full fill-white/20 z-0" />
 
       {/* Content Area */}
-      <div className="relative z-10 bg-main">
+      <div className="bg-main">
         <div className="container mx-auto px-4 md:px-8 lg:px-12 pt-16 pb-4">
           <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
             <div className="flex flex-col md:flex-row items-center md:items-stretch justify-between gap-12">
@@ -66,7 +66,7 @@ export default function AboutUs() {
           </Fade>
 
           <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
-            <section className="flex flex-col md:flex-row items-center justify-between gap-12 mt-16 pb-8">
+            <section className="flex flex-col-reverse md:flex-row items-center justify-between gap-12 mt-16 pb-8">
               <div className="flex-1">
                 <Disc2 size={32} className="text-white mb-4" />
                 <h2 className="text-3xl font-semibold mb-6 text-white">
@@ -79,7 +79,7 @@ export default function AboutUs() {
                   exploring and advancing in the field of power distribution.
                 </p>
               </div>
-              <div className="flex-1">
+              <div className="flex-1 w-full">
                 <figure className="imageSHineEffect">
                   <Image
                     src="/assets/about-2.jpg"
