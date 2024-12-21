@@ -20,6 +20,7 @@ export default function Home() {
     <div>
       <MainLayout>
         <Slider />
+        {/* <Hero/> */}
         <AboutUs />
         <TargetedMarkets />
         <ProductShowcase slice={true} />

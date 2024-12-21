@@ -63,8 +63,8 @@ const Navbar = () => {
             height={500}
             className={`${
               isScrolled
-                ? "w-40 transition duration-300"
-                : "w-48 transition duration-300"
+                ? "w-32 sm:w-40 transition duration-300"
+                : "w-40 sm:w-48 transition duration-300"
             }`}
           />
         </Link>
@@ -207,10 +207,25 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu */}
-        <div className="lg:hidden flex items-center gap-4">
+        <div className="lg:hidden flex items-center gap-2">
+          {/* <a
+            href="https://wa.me/966569105781"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center hover:text-main text-sm transition-colors gap-2"
+          >
+            <Image
+              src="/assets/whatsapp.png"
+              alt="WhatsApp Icon"
+              width={16}
+              height={16}
+              className="w-4 h-4"
+            />
+            +966 569 105 781
+          </a> */}
           <a href="tel:+966569105621">
             <Image
-              className="w-8"
+              className="w-6"
               src="/assets/phone-call.png"
               alt="image"
               width={500}
@@ -223,7 +238,7 @@ const Navbar = () => {
             rel="noopener noreferrer"
           >
             <Image
-              className="w-8"
+              className="w-6"
               src="/assets/whatsapp.png"
               alt="image"
               width={500}
