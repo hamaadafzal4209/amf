@@ -31,8 +31,8 @@ export default function ProductShowcase({
 
   const [categories, setCategories] = useState([]);
   const [selectedTab, setSelectedTab] = useState("");
-  const [searchTerm, setSearchTerm] = useState(""); // State for search term
-  const [filteredProducts, setFilteredProducts] = useState(products); // Filtered products state
+  const [searchTerm, setSearchTerm] = useState(""); 
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -71,7 +71,7 @@ export default function ProductShowcase({
       );
       setFilteredProducts(filtered);
     } else {
-      setFilteredProducts(products); // Show all products when search is cleared
+      setFilteredProducts(products);
     }
   }, [searchTerm, products]);
 

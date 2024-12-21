@@ -244,7 +244,6 @@ export default function CreateProduct() {
                 <SelectItem value="Motor Control Centers">
                   Motor Control Centers
                 </SelectItem>
-                <SelectItem value="Panel Boards">Panel Boards</SelectItem>
               </SelectContent>
             </Select>
 

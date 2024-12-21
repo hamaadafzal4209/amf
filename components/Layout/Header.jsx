@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu } from "lucide-react";
+import { ChevronDown, Menu, Phone, WhatsApp } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -50,10 +50,11 @@ const Navbar = () => {
         ${
           isScrolled
             ? "shadow-md py-3 px-4 lg:px-8 bg-gradient-to-r from-gray-100 to-white"
-            : "shadow py-3 px-4 lg:px-12 bg-gradient-to-r from-gray-100 to-white "
+            : "shadow py-3 px-4 lg:px-12 bg-gradient-to-r from-gray-100 to-white"
         }  ${isLoaded ? "animate-navbar" : "opacity-0"}`}
     >
       <div className="flex items-center justify-between">
+        {/* Logo */}
         <Link href="/">
           <Image
             src="/assets/logo.png"
@@ -67,7 +68,9 @@ const Navbar = () => {
             }`}
           />
         </Link>
-        <div className="hidden md:flex md:items-center gap-6 font-semibold text-gray-700">
+
+        {/* Navigation Links */}
+        <div className="hidden lg:flex md:items-center gap-6 font-semibold text-gray-700">
           <Link
             href="/"
             className={`relative group hover:text-main transition-colors duration-200 ${
@@ -172,7 +175,55 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="md:hidden">
+        <div className="hidden md:flex md:items-center gap-4 text-gray-600 font-medium">
+          <a href="tel:+966569105621">
+            <Image
+              className="w-8 flex-shrink-0"
+              src="/assets/phone-call.png"
+              alt="image"
+              width={500}
+              height={500}
+            />
+          </a>
+          <a
+            href="https://wa.me/966569105781"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              className="w-8 flex-shrink-0"
+              src="/assets/whatsapp.png"
+              alt="image"
+              width={500}
+              height={500}
+            />
+          </a>
+        </div>
+
+        {/* Mobile Menu */}
+        <div className="lg:hidden flex items-center gap-4">
+        <a href="tel:+966569105621">
+            <Image
+              className="w-8"
+              src="/assets/phone-call.png"
+              alt="image"
+              width={500}
+              height={500}
+            />
+          </a>
+          <a
+            href="https://wa.me/966569105781"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              className="w-8"
+              src="/assets/whatsapp.png"
+              alt="image"
+              width={500}
+              height={500}
+            />
+          </a>
           <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">
