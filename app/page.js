@@ -4,10 +4,10 @@ import AboutUs from "@/components/Home/About";
 import Slider from "@/components/Home/AnimatedHero";
 import KeyFeaturesAndBenefits from "@/components/Home/Benifits";
 import ProductShowcase from "@/components/Home/Products";
+import Projects from "@/components/Home/Projects";
 import Services from "@/components/Home/Services";
 import { Sponser } from "@/components/Home/Sponsers";
 import TargetedMarkets from "@/components/Home/TargetedMarkets";
-import { Testimonial } from "@/components/Home/Testimonial";
 import MainLayout from "@/components/Layout/MainLayout";
 import { useEffect } from "react";
 
@@ -21,11 +21,11 @@ export default function Home() {
       <MainLayout>
         <Slider />
         <AboutUs />
-        <TargetedMarkets/>
+        <TargetedMarkets />
         <ProductShowcase slice={true} />
-        <KeyFeaturesAndBenefits />
         <Services />
-        <Testimonial/>
+        <Projects />
+        <KeyFeaturesAndBenefits />
         <Sponser />
       </MainLayout>
     </div>

@@ -11,7 +11,7 @@ const page = () => {
         subtitle={"Services"}
         backgroundImage={"/assets/service-banner.jpg"}
       />
-      <div className="py-12">
+      <div>
         <Services />
       </div>
     </MainLayout>

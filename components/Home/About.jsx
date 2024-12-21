@@ -14,22 +14,10 @@ const ABOUT_LIST = [
 export default function AboutUs() {
   return (
     <div className="relative">
-      <DotPattern className="absolute inset-0 opacity-40 z-0" />
+      <DotPattern className="absolute inset-0 z-0 fill-neutral-400/80" />
 
       {/* Content Area */}
-      <div className="relative z-10">
-        <Image
-          src="/assets/about-one-shape-1.png"
-          alt="Decorative Shape"
-          width={500}
-          height={500}
-          className="absolute top-0 right-0 w-60 opacity-20"
-          style={{
-            filter:
-              "sepia(1) saturate(3000%) hue-rotate(-10deg) brightness(0.9)",
-            mixBlendMode: "multiply",
-          }}
-        />
+      <div className="relative z-10 bg-gray-100">
         <div className="container mx-auto px-4 md:px-8 lg:px-12 pt-16 pb-4">
           <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
             <div className="flex flex-col md:flex-row items-center md:items-stretch justify-between gap-12">

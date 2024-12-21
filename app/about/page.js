@@ -42,7 +42,7 @@ const AboutPage = () => {
       </section>
 
       {/* Manufacturing Excellence Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-main">
         <div className="container mx-auto px-4 md:px-8 lg:px-16">
           <Fade triggerOnce direction="up" cascade damping={0.3}>
             <div className="grid md:grid-cols-2 gap-12 items-center">

@@ -52,7 +52,7 @@ const qualities = [
 
 const KeyFeaturesAndBenefits = () => {
   return (
-    <section className="py-16 bg-slate-100 mb-12">
+    <section className="py-16 bg-gray-100 mb-12">
       <div className="container mx-auto px-4 md:px-8 lg:px-16">
         <ScrollReveal keyframes={fadeUp} duration={500} triggerOnce>
           <div className="text-center mb-12">

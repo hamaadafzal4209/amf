@@ -49,7 +49,8 @@ module.exports = {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			},
-  			main: '#E66F3D'
+  			main: '#E66F3D',
+			mainHover: '#cc5e32'
   		},
   		fontFamily: {
   			poppins: ["var(--font-poppins)", "sans-serif"],

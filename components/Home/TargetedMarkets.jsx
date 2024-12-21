@@ -4,6 +4,7 @@
 import { industries } from "@/constants/targetMarketers";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { Button } from "../ui/button";
 
 export default function TargetedMarkets() {
   const [angle, setAngle] = useState(0);
@@ -56,7 +57,7 @@ export default function TargetedMarkets() {
           height={200}
         />
       </div>
-      <div className="absolute -bottom-2 right-0 rotate-180">
+      <div className="absolute -bottom-2 right-4 -rotate-90">
         <Image
           src={"/assets/sqaure-shape.png"}
           alt="shape"
@@ -100,13 +101,14 @@ export default function TargetedMarkets() {
           </div>
         ))}
       </div>
-      <div className="flex justify-center mt-8">
-        <button
+      <div className="container flex justify-center mt-8">
+        <Button
           onClick={handleShowMore}
-          className="bg-main hover:bg-main-dark text-white font-bold py-2 px-4 rounded transition"
+          varient="outline"
+          className="w-full inline-block sm:w-auto bg-main text-white hover:bg-mainHover hover:text-white"
         >
           {showAll ? "Show Less" : "Show More"}
-        </button>
+        </Button>
       </div>
     </div>
   );
