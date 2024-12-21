@@ -101,7 +101,7 @@ export default function TargetedMarkets() {
           </div>
         ))}
       </div>
-      <div className="container flex justify-center mt-8">
+      <div className="container mx-auto flex justify-center mt-8">
         <Button
           onClick={handleShowMore}
           varient="outline"
