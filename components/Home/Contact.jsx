@@ -72,7 +72,7 @@ export default function ContactSection() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={label}
-                        className="flex items-center justify-center w-12 h-12 bg-main hover:bg-[#da3a16] rounded-full text-white shadow-md transition-colors duration-300"
+                        className="flex items-center justify-center w-12 h-12 bg-main hover:bg-mainHover rounded-full text-white shadow-md transition-colors duration-300"
                       >
                         <Icon className="text-2xl" />
                       </a>

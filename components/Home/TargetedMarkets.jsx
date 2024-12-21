@@ -13,9 +13,14 @@ export default function TargetedMarkets() {
 
   const getItemsToShow = (width) => {
     if (showAll) {
-      return industries.length;
+      return industries.length; // Show all items when toggled
     }
-    return width < 768 ? 6 : 9;
+    return width < 768 ? 6 : 9; // Limit items based on screen width
+  };
+
+  const updateDisplayedIndustries = () => {
+    const itemsToShow = getItemsToShow(window.innerWidth);
+    setDisplayedIndustries(industries.slice(0, itemsToShow));
   };
 
   useEffect(() => {
@@ -27,15 +32,10 @@ export default function TargetedMarkets() {
   }, []);
 
   useEffect(() => {
-    const handleResize = () => {
-      const itemsToShow = getItemsToShow(window.innerWidth);
-      setDisplayedIndustries(industries.slice(0, itemsToShow));
-    };
+    // Update displayed industries on resize and when `showAll` changes
+    updateDisplayedIndustries();
 
-    // Initial calculation
-    handleResize();
-
-    // Set up resize event listener for responsiveness
+    const handleResize = () => updateDisplayedIndustries();
     window.addEventListener("resize", handleResize);
 
     return () => {
@@ -57,7 +57,7 @@ export default function TargetedMarkets() {
           height={200}
         />
       </div>
-      <div className="absolute -bottom-2 right-4 -rotate-90">
+      <div className="absolute z-0 -bottom-2 right-4 -rotate-90">
         <Image
           src={"/assets/sqaure-shape.png"}
           alt="shape"
@@ -105,7 +105,7 @@ export default function TargetedMarkets() {
         <Button
           onClick={handleShowMore}
           varient="outline"
-          className="w-full inline-block sm:w-auto bg-main text-white hover:bg-mainHover hover:text-white"
+          className="w-full z-10 inline-block sm:w-auto bg-main text-white hover:bg-mainHover hover:text-white"
         >
           {showAll ? "Show Less" : "Show More"}
         </Button>

@@ -48,16 +48,16 @@ const AboutPage = () => {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <Image
-                  src={"/assets/energy.png"}
+                  src={"/assets/whiteEnergy.png"}
                   alt="Bullet"
                   width={1000}
                   height={1000}
                   className="w-6 mb-6 object-contain"
                 />
-                <h2 className="text-3xl font-bold text-main mb-6">
+                <h2 className="text-3xl font-bold text-white mb-6">
                   Manufacturing Excellence
                 </h2>
-                <p className="text-lg text-gray-600 leading-relaxed">
+                <p className="text-lg text-gray-100 leading-relaxed">
                   Almaram Alfaneyah Manufacturing Co. is a certified channel
                   partner of Schneider Electric, specializing in the
                   manufacturing of LV switchgear panels in the Kingdom of Saudi
