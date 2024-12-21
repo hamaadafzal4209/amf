@@ -175,7 +175,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="hidden md:flex flex-col md:items-start gap-1 text-gray-600 font-medium">
+        <div className="hidden lg:flex flex-col md:items-start gap-1 text-gray-600 font-medium">
           <a
             href="tel:+966569105621"
             className="flex items-center hover:text-main text-sm transition-colors gap-2"
