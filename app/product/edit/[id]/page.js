@@ -283,15 +283,13 @@ export default function EditProduct() {
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent className="bg-white">
-                  <SelectItem value="Main Distribution Boards">
+                  <SelectItem value="Distribution Boards">
                     Distribution Boards
                   </SelectItem>
-                  <SelectItem value="Motor Control Centers">
+                  <SelectItem value="Transfer Switching Panel">
                     Transfer Switching Panel
                   </SelectItem>
-                  <SelectItem value="Motor Control Centers">
-                    Control Panel
-                  </SelectItem>
+                  <SelectItem value="Control Panel">Control Panel</SelectItem>
                 </SelectContent>
               </Select>
 

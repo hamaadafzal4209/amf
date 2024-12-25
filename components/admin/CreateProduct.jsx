@@ -83,9 +83,9 @@ export default function CreateProduct() {
 
         if (response.ok) {
           toast.success("Product created successfully!");
-          formik.resetForm(); 
+          formik.resetForm();
           setPreviewImages([]);
-          setFeatures([]); 
+          setFeatures([]);
         } else {
           const error = await response.json();
           toast.error("Failed to create product: " + error.message);
@@ -238,15 +238,13 @@ export default function CreateProduct() {
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
               <SelectContent className="bg-white">
-                <SelectItem value="Main Distribution Boards">
+                <SelectItem value="Distribution Boards">
                   Distribution Boards
                 </SelectItem>
-                <SelectItem value="Motor Control Centers">
-                Transfer Switching Panel
+                <SelectItem value="Transfer Switching Panel">
+                  Transfer Switching Panel
                 </SelectItem>
-                <SelectItem value="Motor Control Centers">
-                Control Panel
-                </SelectItem>
+                <SelectItem value="Control Panel">Control Panel</SelectItem>
               </SelectContent>
             </Select>
 
@@ -392,7 +390,6 @@ export default function CreateProduct() {
                 className="w-full text-white font-medium bg-main hover:bg-main"
                 disabled={loading}
               >
-                {" "}
                 Create Product
               </Button>
             )}

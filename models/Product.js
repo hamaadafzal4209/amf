@@ -19,11 +19,6 @@ const productSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: [
-        "Main Distribution Boards",
-        "Motor Control Centers",
-        "Panel Boards",
-      ],
     },
     features: {
       type: [String],
