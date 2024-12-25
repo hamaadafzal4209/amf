@@ -4,21 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, Phone, WhatsApp } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Button } from "../ui/button";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -63,8 +51,8 @@ const Navbar = () => {
             height={500}
             className={`${
               isScrolled
-                ? "w-32 sm:w-40 transition duration-300"
-                : "w-40 sm:w-48 transition duration-300"
+                ? "w-40 transition duration-300"
+                : "w-44 sm:w-48 transition duration-300"
             }`}
           />
         </Link>
@@ -97,30 +85,19 @@ const Navbar = () => {
               }`}
             ></span>
           </Link>
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center py-2 hover:text-main transition-colors duration-200">
-              Company
-              <ChevronDown className="ml-1 h-4 w-4 text-gray-700" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="mt-2 bg-white text-gray-800 rounded-lg shadow-lg border border-gray-200">
-              <DropdownMenuItem>
-                <Link
-                  href="/quality-control"
-                  className="w-full text-sm hover:text-main transition-colors duration-200"
-                >
-                  Quality Control
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link
-                  href="/certification"
-                  className="w-full text-sm hover:text-main transition-colors duration-200"
-                >
-                  Certification
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Link
+            href="/certification"
+            className={`relative group hover:text-main transition-colors duration-200 ${
+              isActiveLink("/certification") ? "text-main" : ""
+            }`}
+          >
+            Certification
+            <span
+              className={`absolute left-0 -bottom-1 h-1 rounded-md bg-main block w-0 group-hover:w-3/4 transition-all duration-300 ${
+                isActiveLink("/certification") ? "w-3/4" : ""
+              }`}
+            ></span>
+          </Link>
           <Link
             href="/products"
             className={`relative group hover:text-main transition-colors duration-200 ${
@@ -208,21 +185,6 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <div className="lg:hidden flex items-center gap-2">
-          {/* <a
-            href="https://wa.me/966569105781"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center hover:text-main text-sm transition-colors gap-2"
-          >
-            <Image
-              src="/assets/whatsapp.png"
-              alt="WhatsApp Icon"
-              width={16}
-              height={16}
-              className="w-4 h-4"
-            />
-            +966 569 105 781
-          </a> */}
           <a href="tel:+966569105621">
             <Image
               className="w-6"
@@ -275,35 +237,15 @@ const Navbar = () => {
                 >
                   About Us
                 </Link>
-                <Accordion className="m-0 p-0" type="single" collapsible>
-                  <AccordionItem
-                    className="m-0 p-0 border-none"
-                    value="company"
-                  >
-                    <AccordionTrigger className="text-base font-semibold hover:text-main transition-colors duration-200 m-0 p-0">
-                      Company
-                    </AccordionTrigger>
-                    <AccordionContent className="m-0 p-0">
-                      <div className="flex flex-col m-0 p-0">
-                        <Link
-                          href="/quality-control"
-                          className="block px-3 py-1.5 hover:text-main transition-colors duration-200"
-                          onClick={handleLinkClick}
-                        >
-                          Quality Control
-                        </Link>
-                        <Link
-                          href="/certification"
-                          className="block px-3 py-1.5 hover:text-main transition-colors duration-200"
-                          onClick={handleLinkClick}
-                        >
-                          Certification
-                        </Link>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-
+                <Link
+                  href="/certification"
+                  className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${
+                    isActiveLink("/certification") ? "text-main" : ""
+                  }`}
+                  onClick={handleLinkClick}
+                >
+                  Certification
+                </Link>
                 <Link
                   href="/projects"
                   className={`block text-base font-semibold hover:text-main transition-colors duration-200 ${

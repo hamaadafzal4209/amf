@@ -23,7 +23,7 @@ export default function ContactUs() {
     email: "",
     message: "",
   });
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +35,7 @@ export default function ContactUs() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading state to true when submission starts
+    setLoading(true);
 
     console.log("Form submission triggered");
     console.log("Contact API hit");
@@ -82,77 +82,68 @@ export default function ContactUs() {
         backgroundImage={"/assets/contact-banner.jpg"}
       />
       <div className="container mx-auto px-4 md:px-8 lg:px-12 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2  gap-8 mb-12">
-          <Fade triggerOnce direction="up" cascade damping={0.1}>
-            <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
-              <CardHeader className="flex flex-col items-center py-6">
-                <MapPin className="h-12 w-12 text-main mb-4" />
-                <CardTitle className="text-xl font-semibold text-center text-gray-900">
-                  Our Location
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-center text-main">
-                <p>
-                  AL-MARAM AL-FANEYAH <br /> 3760 الأخطل, JJMA3760، 7766, حي
-                  المحجر, <br />
-                  Jeddah 22511 SAUDI ARABIA
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
-              <CardHeader className="flex flex-col items-center py-6">
-                <Mail className="h-12 w-12 text-main mb-4" />
-                <CardTitle className="text-xl font-semibold text-center text-gray-900">
-                  Email Us
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-center text-gray-600">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {[
+            {
+              icon: MapPin,
+              title: "Our Location",
+              content:
+                "AL-MARAM AL-FANEYAH, حي المحجر, Jeddah 22511, SAUDI ARABIA",
+            },
+            {
+              icon: Mail,
+              title: "Email Us",
+              content: (
                 <a
                   href="mailto:info@amf-sa.com"
-                  className="text-lg text-main hover:underline"
+                  className="text-main hover:underline"
                 >
                   info@amf-sa.com
                 </a>
-              </CardContent>
-            </Card>
-
-            <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
-              <CardHeader className="flex flex-col items-center py-6">
-                <Phone className="h-12 w-12 text-main mb-4" />
-                <CardTitle className="text-xl font-semibold text-center text-gray-900">
-                  Call Us
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-center text-gray-600">
+              ),
+            },
+            {
+              icon: Phone,
+              title: "Call Us",
+              content: (
                 <a
                   href="tel:+966569105621"
-                  className="text-lg text-main hover:underline"
+                  className="text-main hover:underline"
                 >
                   +966 56 910 5621
                 </a>
-              </CardContent>
-            </Card>
-
-            <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
-              <CardHeader className="flex flex-col items-center py-6">
-                <MessageCircle className="h-12 w-12 text-main mb-4" />
-                <CardTitle className="text-xl font-semibold text-center text-gray-900">
-                  WhatsApp Us
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-center text-gray-600">
+              ),
+            },
+            {
+              icon: MessageCircle,
+              title: "WhatsApp Us",
+              content: (
                 <a
                   href="https://wa.me/966569105781"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-lg text-main hover:underline"
+                  className="text-main hover:underline"
                 >
                   +966 56 910 5781
                 </a>
+              ),
+            },
+          ].map(({ icon: Icon, title, content }, index) => (
+            <Card
+              key={index}
+              className="shadow-md rounded-lg border border-gray-200 bg-white"
+            >
+              <CardHeader className="flex flex-col items-center py-6">
+                <Icon className="h-12 w-12 text-main mb-4" />
+                <CardTitle className="text-xl font-semibold text-center text-gray-900">
+                  {title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-center text-gray-600">
+                {content}
               </CardContent>
             </Card>
-          </Fade>
+          ))}
         </div>
 
         <Fade direction="up" triggerOnce delay={0.2}>

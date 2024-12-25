@@ -54,7 +54,7 @@ export default function Projectshowcase() {
 
                 <DialogContent className="rounded-xl p-6 max-w-full md:max-w-lg lg:max-w-xl max-h-[90vh] overflow-y-auto mx-auto bg-white shadow-lg">
                   <DialogHeader>
-                    <DialogTitle className="text-xl font-bold text-gray-800">
+                    <DialogTitle className="text-xl font-bold text-main">
                       {product.title}
                     </DialogTitle>
                   </DialogHeader>
