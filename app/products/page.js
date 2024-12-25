@@ -11,7 +11,7 @@ const page = () => {
         subtitle={"products"}
         backgroundImage={"/assets/products-banner.jpg"}
       />
-      <div className="py-12">
+      <div>
         <ProductShowcase showSearchBar={true} />
       </div>
     </MainLayout>

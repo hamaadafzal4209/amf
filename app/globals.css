@@ -202,5 +202,21 @@ body {
 @property --border-angle {
   inherits: false;
   initial-value: 0deg;
-  syntax: '<angle>';
-}        
+  syntax: "<angle>";
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-40px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animated-bg {
+  animation: floating 5s ease-in-out infinite;
+}

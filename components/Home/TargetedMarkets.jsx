@@ -13,9 +13,9 @@ export default function TargetedMarkets() {
 
   const getItemsToShow = (width) => {
     if (showAll) {
-      return industries.length; // Show all items when toggled
+      return industries.length; 
     }
-    return width < 768 ? 6 : 9; // Limit items based on screen width
+    return width < 768 ? 6 : 9;
   };
 
   const updateDisplayedIndustries = () => {
@@ -32,7 +32,6 @@ export default function TargetedMarkets() {
   }, []);
 
   useEffect(() => {
-    // Update displayed industries on resize and when `showAll` changes
     updateDisplayedIndustries();
 
     const handleResize = () => updateDisplayedIndustries();
@@ -48,7 +47,7 @@ export default function TargetedMarkets() {
   };
 
   return (
-    <div className="bg-slate-900 relative text-gray-100 py-16 mb-12">
+    <div className="bg-slate-900 relative text-gray-100 py-16">
       <div className="absolute -top-2 -left-2 rotate-90">
         <Image
           src={"/assets/sqaure-shape.png"}
