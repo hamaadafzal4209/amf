@@ -30,9 +30,9 @@ const HeroBanner = ({ title, subtitle, backgroundImage }) => {
         <Image
           src={backgroundImage}
           alt={`${title} Background`}
-          layout="fill"
-          objectFit="cover"
-          className="opacity-75"
+          width={1000}
+          height={1000}
+          className="opacity-75 w-fullh-full object-cover"
         />
       </div>
 

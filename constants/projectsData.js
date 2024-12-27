@@ -54,4 +54,9 @@ export const projects = [
     title: "SWCC Yanbu Power Plant",
     image: "/assets/projects/project12.jpg",
   },
+  {
+    id: 13,
+    title: "Aqua Raffles Towers",
+    image: "/assets/projects/project13.png",
+  },
 ];

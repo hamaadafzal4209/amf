@@ -57,7 +57,12 @@ export default function ProductShowcase({
       );
 
       setCategories(categoryArray);
-      setSelectedTab(categoryArray[0]?.id || "");
+
+      // Automatically set "Distribution Boards" as the active tab if it exists
+      const defaultCategory = categoryArray.find(
+        (category) => category.name === "Distribution Boards"
+      );
+      setSelectedTab(defaultCategory?.id || categoryArray[0]?.id || "");
     }
   }, [products]);
 
@@ -144,21 +149,29 @@ export default function ProductShowcase({
           </div>
         )}
 
-        {/* Category Tabs */}
         <div className="flex space-x-4 mb-8 overflow-x-auto no-scrollbar">
-          {categories.map((category) => (
-            <Button
-              key={category.id}
-              onClick={() => handleTabClick(category.id)}
-              className={`px-4 py-2 text-base font-semibold rounded-lg transition-all duration-300 hover:bg-black hover:text-white ${
-                selectedTab === category.id
-                  ? "bg-main text-white"
-                  : "bg-gray-100 text-gray-800"
-              }`}
-            >
-              {category.name}
-            </Button>
-          ))}
+          {categories
+            .sort((a, b) => {
+              const order = [
+                "Distribution Boards",
+                "Transfer Switching Panel",
+                "Control Panel",
+              ];
+              return order.indexOf(a.name) - order.indexOf(b.name);
+            })
+            .map((category) => (
+              <Button
+                key={category.id}
+                onClick={() => handleTabClick(category.id)}
+                className={`px-4 py-2 text-base font-semibold rounded-lg transition-all duration-300 hover:bg-black hover:text-white ${
+                  selectedTab === category.id
+                    ? "bg-main text-white"
+                    : "bg-gray-100 text-gray-800"
+                }`}
+              >
+                {category.name}
+              </Button>
+            ))}
         </div>
 
         <div>
@@ -227,7 +240,7 @@ export default function ProductShowcase({
           )}
         </div>
 
-        {filteredProducts.length === 0 && searchTerm && (
+        {filteredProducts?.length === 0 && searchTerm && (
           <div className="text-center text-gray-500 py-8">
             No products found for <q>{searchTerm}</q>
           </div>
