@@ -18,7 +18,7 @@ import { Fade } from "react-awesome-reveal";
 export default function Projectshowcase() {
   return (
     <MainLayout>
-      <HeroBanner
+      <HeroBanner 
         title={"Our Projects"}
         backgroundImage={"/assets/projects-banner.jpg"}
       />

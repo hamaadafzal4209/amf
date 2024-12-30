@@ -12,14 +12,12 @@ import DotPattern from "@/components/ui/dot-pattern";
 const AboutPage = () => {
   return (
     <MainLayout>
-      {/* Hero Banner */}
       <HeroBanner
         title="About Us"
         subtitle="Who We Are"
         backgroundImage="/assets/about-banner.jpg"
       />
 
-      {/* Introduction Section */}
       <section className="py-16 bg-gray-50 relative overflow-hidden">
         <Fade triggerOnce direction="up" duration={800} cascade damping={0.2}>
           <header className="text-center mb-12 px-4">
@@ -41,7 +39,6 @@ const AboutPage = () => {
         ></div>
       </section>
 
-      {/* Manufacturing Excellence Section */}
       <section className="py-16 bg-main">
         <div className="container mx-auto px-4 md:px-8 lg:px-16">
           <Fade triggerOnce direction="up" cascade damping={0.3}>
@@ -79,7 +76,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Expanding Reach Section */}
       <section className="py-16 bg-gray-50 relative">
         <Fade triggerOnce direction="up" cascade damping={0.3}>
           <div className="container mx-auto px-4 md:px-8 lg:px-16">
@@ -115,7 +111,6 @@ const AboutPage = () => {
         </Fade>
       </section>
 
-      {/* Global Standards Section */}
       <div className="relative">
         <DotPattern className="absolute inset-0 opacity-50 z-0" />
         <section className="py-16 bg-gradient-to-b from-gray-200 to-gray-300">
@@ -134,7 +129,6 @@ const AboutPage = () => {
         </section>
       </div>
 
-      {/* Vision Section */}
       <section className="py-16 bg-white relative overflow-hidden">
         <Fade triggerOnce direction="up" cascade damping={0.3}>
           <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center">
