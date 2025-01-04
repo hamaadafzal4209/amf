@@ -7,13 +7,6 @@ import { AlertCircle, Upload, X, Plus, Loader2 } from "lucide-react";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { useParams, useRouter } from "next/navigation";
 
@@ -24,6 +17,12 @@ export default function EditProduct() {
   const [features, setFeatures] = useState([]);
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState(null);
+  const [open, setOpen] = useState(false);
+
+  const handleOptionClick = (option) => {
+    onChange(option);
+    setOpen(false);
+  };
 
   useEffect(() => {
     if (id) {
@@ -34,7 +33,6 @@ export default function EditProduct() {
           });
           if (response.ok) {
             const data = await response.json();
-            console.log("Fetched product:", data);
             setProduct(data.product);
             setFeatures(data.product.features);
             setPreviewImages(data.product.images);
@@ -74,12 +72,13 @@ export default function EditProduct() {
 
   const formik = useFormik({
     initialValues: {
-      title: product ? product.title : "",
-      description: product ? product.description : "",
-      images: product ? product.images : [],
-      features: product ? product.features : [],
-      category: product ? product.category : "",
+      title: product?.title || "",
+      description: product?.description || "",
+      images: product?.images || [],
+      features: product?.features || [],
+      category: product?.category || "",
     },
+    enableReinitialize: true,
     validationSchema: Yup.object({
       title: Yup.string()
         .required("Title is required")
@@ -87,15 +86,12 @@ export default function EditProduct() {
       description: Yup.string()
         .required("Description is required")
         .max(1000, "Description must be 1000 characters or less"),
-      images: Yup.array()
-        .of(Yup.mixed())
-        .required("At least one image is required"),
+      images: Yup.array().min(1, "At least one image is required"),
       features: Yup.array()
         .of(Yup.string().required("Feature cannot be empty"))
         .min(1, "At least one feature is required"),
       category: Yup.string().required("Category is required"),
     }),
-    enableReinitialize: true,
     onSubmit: async (values) => {
       setLoading(true);
       try {
@@ -265,33 +261,60 @@ export default function EditProduct() {
               >
                 Product Category
               </label>
-              <Select
-                value={formik.values.category}
-                onValueChange={(value) =>
-                  formik.setFieldValue("category", value)
-                }
-              >
-                <SelectTrigger
-                  className={`w-full mt-1 ${
-                    formik.touched.category && formik.errors.category
-                      ? "border-red-500"
-                      : "border-gray-300"
-                  }`}
+              <div className="relative mt-0">
+                <div
+                  className="relative w-full"
+                  onClick={() => setOpen(!open)}
+                  onBlur={() => setOpen(false)}
+                  tabIndex={0}
                 >
-                  <SelectValue placeholder="Select a category">
-                    {formik.values.category || "Select a category"}
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectItem value="Distribution Boards">
-                    Distribution Boards
-                  </SelectItem>
-                  <SelectItem value="Transfer Switching Panel">
-                    Transfer Switching Panel
-                  </SelectItem>
-                  <SelectItem value="Control Panel">Control Panel</SelectItem>
-                </SelectContent>
-              </Select>
+                  <button
+                    type="button"
+                    className={`flex w-full items-center justify-between p-2 rounded border ${
+                      formik.touched.category && formik.errors.category
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    } bg-white focus:outline-none`}
+                  >
+                    <span
+                      className={
+                        formik.values.category ? "text-black" : "text-gray-400"
+                      }
+                    >
+                      {formik.values.category || "Select a category"}
+                    </span>
+                    <i
+                      className={`fas fa-chevron-down text-xl transition-transform ${
+                        open ? "rotate-180" : ""
+                      }`}
+                    ></i>
+                  </button>
+
+                  {open && (
+                    <ul className="absolute mt-1 w-full rounded bg-gray-50 border border-gray-300 shadow-md z-10">
+                      {[
+                        "Distribution Boards",
+                        "Transfer Switching Panel",
+                        "Control Panel",
+                      ].map((option, index) => (
+                        <li
+                          key={index}
+                          className="cursor-pointer select-none p-2 hover:bg-gray-200"
+                          onClick={() => handleOptionClick(option)}
+                        >
+                          {option}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
+                {formik.touched.category && formik.errors.category && (
+                  <p className="mt-2 text-sm text-red-600">
+                    {formik.errors.category}
+                  </p>
+                )}
+              </div>
 
               {formik.touched.category && formik.errors.category && (
                 <p className="mt-2 text-sm text-red-600 flex items-center gap-1">

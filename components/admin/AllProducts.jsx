@@ -10,14 +10,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -30,7 +22,6 @@ import {
 import Image from "next/image";
 import { deleteProduct, fetchProducts } from "@/lib/productsSlice";
 import { useRouter } from "next/navigation";
-import { Badge } from "../ui/badge";
 
 export default function ProductManagement() {
   const dispatch = useDispatch();
@@ -96,8 +87,8 @@ export default function ProductManagement() {
   };
 
   return (
-    <div className="overflow-x-hidden">
-      <div className="container mx-auto space-y-4">
+    <div className="container mx-auto">
+      <div className="space-y-4">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <input
             type="search"
@@ -140,28 +131,16 @@ export default function ProductManagement() {
               <table className="min-w-full divide-y divide-gray-200 table-auto">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                       Name
                     </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                       Category
                     </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                       Image
                     </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">
                       Actions
                     </th>
                   </tr>
@@ -176,38 +155,31 @@ export default function ProductManagement() {
                         {product.title}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-main">
+                        <span className="px-3 py-1 inline-flex text-xs font-semibold rounded-full bg-gray-100">
                           {product.category}
                         </span>
                       </td>
-                      <td
-                        onClick={() => handleLearnMoreClick(product._id)}
-                        className="px-6 py-4 whitespace-nowrap flex-shrink-0 cursor-pointer"
-                      >
-                        <div className="flex items-center flex-shrink-0">
-                          <Image
-                            width={500}
-                            height={500}
-                            src={product.images[0]}
-                            alt={product.title}
-                            className="min-w-16 max-w-16 w-full h-16 object-cover flex-shrink-0 rounded-md shadow-sm"
-                          />
-                        </div>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <Image
+                          width={500}
+                          height={500}
+                          src={product.images[0]}
+                          alt={product.title}
+                          className="w-16 h-16 object-cover rounded-md"
+                        />
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button
                           onClick={() => handleEdit(product._id)}
-                          className="text-green-600 hover:text-green-900  transition-all"
+                          className="text-green-600 hover:text-green-900 transition-all"
                         >
                           <Pencil className="w-5 h-5" />
-                          <span className="sr-only">Edit</span>
                         </button>
                         <button
                           onClick={() => handleDelete(product._id)}
                           className="ml-3 text-red-600 hover:text-red-900 transition-all"
                         >
                           <Trash2 className="w-5 h-5" />
-                          <span className="sr-only">Delete</span>
                         </button>
                       </td>
                     </tr>
@@ -220,9 +192,9 @@ export default function ProductManagement() {
 
         <div className="flex justify-between items-center mt-4">
           <Button
-            className="bg-main text-white hover:bg-[#da3a16]"
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
+            className="bg-main text-white hover:bg-[#da3a16]"
           >
             Previous
           </Button>
@@ -230,9 +202,9 @@ export default function ProductManagement() {
             Page {currentPage} of {totalPages}
           </span>
           <Button
-            className="bg-main text-white hover:bg-[#da3a16]"
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
+            className="bg-main text-white hover:bg-[#da3a16]"
           >
             Next
           </Button>
@@ -242,7 +214,7 @@ export default function ProductManagement() {
           open={deleteProductId !== null}
           onOpenChange={() => setDeleteProductId(null)}
         >
-          <AlertDialogContent className="bg-white">
+          <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>
                 Are you sure you want to delete this product?

@@ -45,7 +45,6 @@ const Page = () => {
   };
 
   useEffect(() => {
-    // Check if the password is already stored in localStorage
     const savedPassword = localStorage.getItem("adminPassword");
     if (savedPassword === correctPassword) {
       setIsModalOpen(false);
@@ -54,7 +53,7 @@ const Page = () => {
     }
 
     const handleResize = () => {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth < 1024) {
         setIsMobile(true);
         setSidebarOpen(false);
       } else {
