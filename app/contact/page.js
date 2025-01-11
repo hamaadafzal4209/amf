@@ -15,64 +15,28 @@ import { useToast } from "@/hooks/use-toast";
 import { Fade } from "react-awesome-reveal";
 import HeroBanner from "@/components/HeroBanner";
 import MainLayout from "@/components/Layout/MainLayout";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { object, string } from "yup";
 
 export default function ContactUs() {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({
+  const [loading, setLoading] = useState(false);
+
+  const initialValues = {
     name: "",
     email: "",
     message: "",
-  });
-  const [loading, setLoading] = useState(false);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  const validationSchema = object({
+    name: string().required("Name is required"),
+    email: string().email("Invalid email format").required("Email is required"),
+    message: string().required("Message is required"),
+  });
 
-    console.log("Form submission triggered");
-    console.log("Contact API hit");
+  const handleSubmit = async (values, { resetForm }) => {
+    // setLoading(true);
 
-    console.log("SMTP_HOST:", process.env.SMTP_HOST);
-    console.log("SMTP_PORT:", process.env.SMTP_PORT);
-    console.log("EMAIL:", process.env.EMAIL);
-    console.log("EMAIL_PASSWORD:", process.env.EMAIL_PASSWORD);
-
-    console.log("Form submitted with data:", formData);
-
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-
-    const result = await response.json();
-    console.log("API Response:", result);
-
-    setLoading(false); // Set loading state to false when response is received
-
-    if (response.ok) {
-      toast({
-        title: "Message sent successfully!",
-        description: "We will get back to you soon.",
-      });
-      setFormData({ name: "", email: "", message: "" });
-    } else {
-      toast({
-        title: "Error sending message",
-        description: result.error || "Please try again later.",
-        variant: "destructive",
-      });
-    }
   };
 
   return (
@@ -151,74 +115,81 @@ export default function ContactUs() {
             <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
               <CardHeader>
                 <CardTitle>Send Us a Message</CardTitle>
-                <CardDescription>
-                  Fill out the form below and well get back to you as soon as
-                  possible.
-                </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit}>
-                  <div className="grid gap-6">
-                    <div className="flex flex-col">
-                      <Label htmlFor="name" className="text-gray-600 mb-2">
-                        Your Name
-                      </Label>
-                      <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        placeholder="Enter your name"
-                        required
-                        className="border-gray-300 w-full px-3 py-1.5 border rounded-md shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none"
-                      />
-                    </div>
-
-                    <div className="flex flex-col">
-                      <Label htmlFor="email" className="text-gray-600 mb-2">
-                        Your Email
-                      </Label>
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        placeholder="Enter your email"
-                        required
-                        className="border-gray-300 w-full mt-1 px-3 py-1.5 border rounded-md shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none"
-                      />
-                    </div>
-
-                    <div className="flex flex-col">
-                      <Label htmlFor="message" className="text-gray-600 mb-2">
-                        Your Message
-                      </Label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        placeholder="Write your message"
-                        required
-                        className="border-gray-300 min-h-40 w-full mt-1 px-3 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none"
-                      />
-                    </div>
-                  </div>
-                </form>
-              </CardContent>
-              <CardFooter className="text-right">
-                <button
-                  type="submit"
-                  onClick={handleSubmit}
-                  className="px-4 py-2 rounded-md bg-main text-white hover:bg-black transition-all duration-300 disabled:opacity-75 disabled:hover:bg-main disabled:cursor-not-allowed"
-                  disabled={loading}
+                <Formik
+                  initialValues={initialValues}
+                  validationSchema={validationSchema}
+                  onSubmit={handleSubmit}
                 >
-                  {loading ? <span>Sending...</span> : "Send Message"}
-                </button>
-              </CardFooter>
+                  <Form>
+                    <div className="grid gap-6">
+                      <div className="flex flex-col">
+                        <Label htmlFor="name" className="text-gray-600 mb-2">
+                          Your Name
+                        </Label>
+                        <Field
+                          id="name"
+                          name="name"
+                          type="text"
+                          placeholder="Enter your name"
+                          className="border-gray-300 w-full px-3 py-1.5 border rounded-md shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none"
+                        />
+                        <ErrorMessage
+                          name="name"
+                          component="div"
+                          className="text-red-500 text-sm"
+                        />
+                      </div>
+
+                      <div className="flex flex-col">
+                        <Label htmlFor="email" className="text-gray-600 mb-2">
+                          Your Email
+                        </Label>
+                        <Field
+                          id="email"
+                          name="email"
+                          type="email"
+                          placeholder="Enter your email"
+                          className="border-gray-300 w-full mt-1 px-3 py-1.5 border rounded-md shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none"
+                        />
+                        <ErrorMessage
+                          name="email"
+                          component="div"
+                          className="text-red-500 text-sm"
+                        />
+                      </div>
+
+                      <div className="flex flex-col">
+                        <Label htmlFor="message" className="text-gray-600 mb-2">
+                          Your Message
+                        </Label>
+                        <Field
+                          as="textarea"
+                          id="message"
+                          name="message"
+                          placeholder="Write your message"
+                          className="border-gray-300 min-h-40 w-full mt-1 px-3 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-[#E66F3D] focus:outline-none"
+                        />
+                        <ErrorMessage
+                          name="message"
+                          component="div"
+                          className="text-red-500 text-sm"
+                        />
+                      </div>
+                    </div>
+                      <button
+                        type="submit"
+                        className="px-4 py-2 mt-6 rounded-md bg-main text-white hover:bg-black transition-all duration-300 disabled:opacity-75 disabled:hover:bg-main disabled:cursor-not-allowed"
+                        disabled={loading}
+                      >
+                        {loading ? <span>Sending...</span> : "Send Message"}
+                      </button>
+                  </Form>
+                </Formik>
+              </CardContent>
             </Card>
+
             <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
               <CardHeader>
                 <CardTitle>Our Contact Information</CardTitle>

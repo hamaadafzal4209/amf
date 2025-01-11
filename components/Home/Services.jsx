@@ -44,7 +44,7 @@ export default function Services() {
                         </h3>
                       </div>
                     </div>
-                    <p className="mt-4 text-base text-gray-600 group-hover:text-gray-100 sm:line-clamp-4">
+                    <p className="mt-4 text-base text-gray-600 group-hover:text-gray-100">
                       {spec.description}
                     </p>
                   </CardContent>

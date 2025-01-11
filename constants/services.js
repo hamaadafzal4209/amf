@@ -1,47 +1,47 @@
 import {
-  CircleIcon,
-  CableIcon,
-  WrenchIcon,
+  ServerIcon,
+  PlugIcon,
+  PackageCheckIcon,
   TestTubeIcon,
-  TruckIcon,
-  ShieldCheckIcon,
+  WrenchIcon,
+  AlertTriangleIcon,
 } from "lucide-react";
 
 export const specializations = [
-    {
-      icon: CircleIcon,
-      title: "Turnkey Electrical Solutions",
-      description:
-        "Providing complete turnkey solutions for electrical installations, covering design, procurement, installation, and commissioning for various industries.",
-    },
-    {
-      icon: CableIcon,
-      title: "Electrical Panel Manufacturing",
-      description:
-        "Manufacturing high-quality electrical panels with advanced technology to meet the diverse needs of commercial and industrial applications.",
-    },
-    {
-      icon: WrenchIcon,
-      title: "Project Management and Execution",
-      description:
-        "Delivering projects on time and within budget with professional project management, ensuring seamless integration of all electrical systems.",
-    },
-    {
-      icon: TestTubeIcon,
-      title: "Testing and Quality Assurance",
-      description:
-        "Comprehensive testing and quality assurance services, ensuring the safety and efficiency of all installed electrical systems.",
-    },
-    {
-      icon: TruckIcon,
-      title: "Maintenance and Support",
-      description:
-        "Offering ongoing maintenance and support services to ensure the longevity and optimal performance of electrical systems.",
-    },
-    {
-      icon: ShieldCheckIcon,
-      title: "Compliance and Safety Standards",
-      description:
-        "Ensuring that all installations meet local and international safety and compliance standards for a secure and reliable electrical infrastructure.",
-    },
-  ];
+  {
+    icon: ServerIcon,
+    title: "Manufacturing of Panel Boards",
+    description:
+      "We manufacture high-quality panel boards with advanced technology, ensuring durability, reliability, and performance for various industrial applications.",
+  },
+  {
+    icon: PlugIcon,
+    title: "Complete Wiring and Cable Terminations",
+    description:
+      "Our services include complete wiring, precise cable terminations, secure connections, clear indications, and accurate labeling for optimal panel functionality.",
+  },
+  {
+    icon: PackageCheckIcon,
+    title: "Supply and Installation of Panel Boards",
+    description:
+      "We offer comprehensive supply and installation services, delivering reliable panel boards and ensuring seamless integration with existing electrical systems.",
+  },
+  {
+    icon: TestTubeIcon,
+    title: "Testing and Commissioning",
+    description:
+      "Our team conducts thorough testing and commissioning to guarantee that all electrical installations are safe, efficient, and ready for operational use.",
+  },
+  {
+    icon: WrenchIcon,
+    title: "Predictive and Preventive Maintenance",
+    description:
+      "We provide predictive and preventive maintenance services to enhance panel longevity, reduce downtime, and ensure continuous optimal performance.",
+  },
+  {
+    icon: AlertTriangleIcon,
+    title: "Solving Technical Issues in Installed Panels",
+    description:
+      "Our experts resolve technical issues in installed panels promptly, minimizing disruptions and maintaining the overall efficiency and safety of electrical systems.",
+  },
+];

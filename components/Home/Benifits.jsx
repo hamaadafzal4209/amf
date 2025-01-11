@@ -1,8 +1,9 @@
 import React from "react";
-import { Shield, Zap, Clock, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import ScrollReveal from "react-awesome-reveal";
 import { keyframes } from "@emotion/react";
 import { motion } from "framer-motion";
+import { features } from "@/constants/benefits";
 
 const fadeUp = keyframes`
   from {
@@ -14,32 +15,6 @@ const fadeUp = keyframes`
     transform: translateY(0);
   }
 `;
-
-const features = [
-  {
-    icon: <Shield className="w-8 h-8 text-main group-hover:text-white" />,
-    title: "Advanced Safety Standards",
-    description:
-      "Our products meet the highest safety standards, ensuring peace of mind.",
-    benefits: ["Enhanced protection", "Certified compliance", "Peace of mind"],
-  },
-  {
-    icon: <Zap className="w-8 h-8 text-main group-hover:text-white" />,
-    title: "Optimized Efficiency",
-    description: "Designed for superior performance, reducing energy wastage.",
-    benefits: ["Energy savings", "Improved performance", "Cost-effectiveness"],
-  },
-  {
-    icon: <Clock className="w-8 h-8 text-main group-hover:text-white" />,
-    title: "Built for Longevity",
-    description: "Engineered to last, ensuring long-term reliability.",
-    benefits: [
-      "Durable materials",
-      "Reduced downtime",
-      "Sustainable performance",
-    ],
-  },
-];
 
 const qualities = [
   "Reliable",
@@ -75,9 +50,7 @@ const KeyFeaturesAndBenefits = () => {
               key={index}
             >
               <div className="bg-white text-black p-6 rounded-lg shadow-lg hover:shadow-2xl transform transition-all duration-300 hover:bg-main hover:text-white group">
-                <div className="flex items-center mb-4">
-                  {feature.icon}
-                </div>
+                <div className="flex items-center mb-4">{feature.icon}</div>
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-sm mb-4">{feature.description}</p>
                 <ul className="space-y-2">
