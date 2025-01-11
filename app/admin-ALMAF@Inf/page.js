@@ -22,7 +22,7 @@ const Page = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const correctPassword = "admin123";
+  const correctPassword = "Inf@2025Inf";
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -35,6 +35,7 @@ const Page = () => {
     }
   };
 
+  console.log(correctPassword)
   const handlePasswordSubmit = () => {
     if (password === correctPassword) {
       localStorage.setItem("adminPassword", password);
