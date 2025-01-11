@@ -32,9 +32,12 @@ export default function ContactUs() {
     email: string().email("Invalid email format").required("Email is required"),
     message: string().required("Message is required"),
   });
-  const handleSubmit = async (values, { setSubmitting }) => {
+
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     setSubmitting(true);
     setLoading(true);
+
+    const dataToSend = { ...values };
 
     try {
       const response = await fetch("/api/send-email", {
@@ -42,16 +45,18 @@ export default function ContactUs() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(dataToSend),
       });
 
       if (response.ok) {
         toast.success("Email sent successfully!");
+        resetForm(); // Reset the form after successful submission
       } else {
         const error = await response.json();
         toast.error(`Failed to send email: ${error.message}`);
       }
     } catch (err) {
+      console.error("Error during form submission:", err);
       toast.error("An error occurred. Please try again.");
     } finally {
       setSubmitting(false);
@@ -66,6 +71,7 @@ export default function ContactUs() {
         backgroundImage={"/assets/contact-banner.jpg"}
       />
       <div className="container mx-auto px-4 md:px-8 lg:px-12 py-12">
+        {/* Contact Information Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {[
             {
@@ -130,6 +136,7 @@ export default function ContactUs() {
           ))}
         </div>
 
+        {/* Contact Form */}
         <Fade direction="up" triggerOnce delay={0.2}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
@@ -210,6 +217,7 @@ export default function ContactUs() {
               </CardContent>
             </Card>
 
+            {/* Contact Information */}
             <Card className="shadow-md rounded-lg border border-gray-200 bg-white">
               <CardHeader>
                 <CardTitle>Our Contact Information</CardTitle>
@@ -239,7 +247,7 @@ export default function ContactUs() {
                   <div className="mt-6">
                     <iframe
                       title="Company Location"
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3714.0160869557562!2d39.18492307388917!3d21.428612673927788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3c8e5327c464b%3A0x4143e81285adbd42!2zSkpNQTM3NjDYjCAzNzYwINin2YTYo9iu2LfZhNiMIDc3NjbYjCDYrdmKINin2YTZhdit2KzYsSwgSmVkZGFoIDIyNTExLCBTYXVkaSBBcmFiaWE!5e0!3m2!1sen!2s!4v1734176258791!5m2!1sen!2s"
+                      src="https://www.google.com/maps/embed?pb=..."
                       width="100%"
                       height="300"
                       style={{ border: 0 }}
