@@ -6,7 +6,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -17,9 +16,9 @@ import HeroBanner from "@/components/HeroBanner";
 import MainLayout from "@/components/Layout/MainLayout";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { object, string } from "yup";
+import toast from "react-hot-toast";
 
 export default function ContactUs() {
-  const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
   const initialValues = {
@@ -33,10 +32,31 @@ export default function ContactUs() {
     email: string().email("Invalid email format").required("Email is required"),
     message: string().required("Message is required"),
   });
+  const handleSubmit = async (values, { setSubmitting }) => {
+    setSubmitting(true);
+    setLoading(true);
 
-  const handleSubmit = async (values, { resetForm }) => {
-    // setLoading(true);
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
 
+      if (response.ok) {
+        toast.success("Email sent successfully!");
+      } else {
+        const error = await response.json();
+        toast.error(`Failed to send email: ${error.message}`);
+      }
+    } catch (err) {
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setSubmitting(false);
+      setLoading(false);
+    }
   };
 
   return (
@@ -178,13 +198,13 @@ export default function ContactUs() {
                         />
                       </div>
                     </div>
-                      <button
-                        type="submit"
-                        className="px-4 py-2 mt-6 rounded-md bg-main text-white hover:bg-black transition-all duration-300 disabled:opacity-75 disabled:hover:bg-main disabled:cursor-not-allowed"
-                        disabled={loading}
-                      >
-                        {loading ? <span>Sending...</span> : "Send Message"}
-                      </button>
+                    <button
+                      type="submit"
+                      className="px-4 py-2 mt-6 rounded-md bg-main text-white hover:bg-black transition-all duration-300 disabled:opacity-75 disabled:hover:bg-main disabled:cursor-not-allowed"
+                      disabled={loading}
+                    >
+                      {loading ? <span>Sending...</span> : "Send Message"}
+                    </button>
                   </Form>
                 </Formik>
               </CardContent>
