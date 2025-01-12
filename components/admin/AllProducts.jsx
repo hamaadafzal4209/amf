@@ -214,7 +214,7 @@ export default function ProductManagement() {
           open={deleteProductId !== null}
           onOpenChange={() => setDeleteProductId(null)}
         >
-          <AlertDialogContent>
+          <AlertDialogContent className="bg-white">
             <AlertDialogHeader>
               <AlertDialogTitle>
                 Are you sure you want to delete this product?
