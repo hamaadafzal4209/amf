@@ -37,8 +37,8 @@ export default async function handler(req, res) {
 
   const mailOptions = {
     from: `AMF <${process.env.SMTP_MAIL}>`,
-    // to: "info@amf-sa.com",
-    to: "hamaadafzal516@gmail.com",
+    to: "info@amf-sa.com",
+    // to: "hamaadafzal516@gmail.com",
     subject: `Message from ${name}`,
     html: htmlContent,
   };
