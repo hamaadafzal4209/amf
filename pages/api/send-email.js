@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     host: process.env.SMTP_HOST,
     port: parseInt(process.env.SMTP_PORT || "587"),
     service: process.env.SMTP_SERVICE,
-    secure: process.env.SMTP_PORT === "465", // true for 465, false for other ports
+    secure: process.env.SMTP_PORT === "465",
     auth: {
       user: process.env.SMTP_MAIL,
       pass: process.env.SMTP_PASSWORD,
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
 
   const mailOptions = {
     from: `AMF <${process.env.SMTP_MAIL}>`,
-    to: "hamaadafzal516@gmail.com",
+    to: "info@amf-sa.com",
     subject: `Message from ${name}`,
     html: htmlContent,
   };
